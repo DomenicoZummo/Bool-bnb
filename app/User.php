@@ -36,4 +36,11 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+     // Gestione relazione con tabella Apartment
+
+    public function apartments(){
+        return $this->hasMany('App\Apartment');
+    }
+    
 }

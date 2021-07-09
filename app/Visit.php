@@ -6,5 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Visit extends Model
 {
-    //
+    // Gestione relazione con tabella Apartments
+
+    public function apartment(){
+        return $this->belongsTo('App\Apartment');
+    }
 }

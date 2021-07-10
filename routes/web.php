@@ -22,4 +22,18 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/admin', 'HomeController@index')->name('home');
+
+Route::prefix('admin')
+    ->namespace('Admin')
+    ->middleware('auth')
+    ->name('admin.')
+    ->group(function(){
+        // Rotta Admin Home
+        Route::get('/', 'HomeController@index')->name('home');
+    });
+
+// Front-Office
+// Route::get('{any?}', function () {
+//     return view('guest/home');
+// })->where("any", ".*");

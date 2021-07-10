@@ -31,6 +31,8 @@ Route::prefix('admin')
     ->group(function(){
         // Rotta Admin Home
         Route::get('/', 'HomeController@index')->name('home');
+
+        Route::resource('/apartments', 'ApartmentController');
     });
 
 // Front-Office

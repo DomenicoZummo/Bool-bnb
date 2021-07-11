@@ -6,15 +6,24 @@ use Illuminate\Database\Eloquent\Model;
 
 class Apartment extends Model
 {
-    // protected $fillable = [
-    //     'title',
-    //     'address',
-    //     'user_id',
-    //     'longitude',
-    //     'address',
-    //     'latitude'
+    protected $fillable = [
+        'title',
+        'slug',
+        'address',
+        'user_id',
+        'longitude',
+        'address',
+        'latitude',
+        'description',
+        'floor',
+        'rooms',
+        'beds',
+        'bathrooms',
+        'square_meters',
+        'img_path',
+        'visibility'
         
-    // ];
+    ];
 
    
     // Gestione relazione con tabella Users

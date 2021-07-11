@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Apartment;
+use App\Service;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class ApartmentController extends Controller
 {
@@ -33,9 +35,10 @@ class ApartmentController extends Controller
      */
     public function create()
     {
-        
+        $services = Service::all();
 
-        return view('admin.apartments.create');
+
+        return view('admin.apartments.create' , compact('services'));
     }
 
     /**
@@ -46,7 +49,24 @@ class ApartmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $user = Auth::user();
+
+
+        $data['user_id'] = $user['id'];
+
+        $data['slug'] = Str::slug($data['title'] , '-');
+
+        $new_apartment = new Apartment();
+
+        $new_apartment->fill($data);
+        $new_apartment->save();
+
+        if(array_key_exists('services',$data)){
+            $new_apartment->services()->attach($data['services']);       // Aggiunge nuovi record in pivot
+        }
+
+        return redirect()->route('admin.apartments.show' , $new_apartment->id);
     }
 
     /**

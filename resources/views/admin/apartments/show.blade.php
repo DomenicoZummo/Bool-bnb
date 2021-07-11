@@ -16,6 +16,12 @@
             <h2>Bathrooms : {{ $apartment->bathrooms }}</h2>
             <h2>Square meters : {{ $apartment->square_meters }}</h2>
 
+            @if(count($apartment->services) > 0)
+            @foreach ($apartment->services as $service)
+                <span class="badge badge-primary p-2 my-2">{{$service->name}}</span>
+            @endforeach
+        @endif
+
             <div class="d-flex action-show">
                 <a class="btn btn-success mt-5 mr-5" href="{{ route('admin.apartments.index') }}">Back</a>
                 <a class="btn btn-warning mt-5 mr-5" href="{{ route('admin.apartments.edit', $apartment->id) }}">EDIT</a>

@@ -9,8 +9,24 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+     <!-- Scripts -->
+     <script src="{{ asset('js/app.js') }}" defer></script>
+     <script src="{{ asset('js/tomtom.js') }}" defer></script>
+ 
+    <!-- MAP -->
+    <link
+    rel="stylesheet"
+    type="text/css"
+    href="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.14.0/maps/maps.css"
+ />
+ 
+ <!-- SEARCH-BAR -->
+ <link
+    rel="stylesheet"
+    type="text/css"
+    href="https://api.tomtom.com/maps-sdk-for-web/cdn/plugins/SearchBox/3.1.3-public-preview.0/SearchBox.css"
+ />
+     
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">

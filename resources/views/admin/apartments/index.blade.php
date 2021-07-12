@@ -46,7 +46,7 @@
                     </td>
 
                     <td>
-                        <form action="{{ route('admin.apartments.destroy', $apartament->id) }}" method="POST">
+                        <form class="delete-apartment-form" action="{{ route('admin.apartments.destroy', $apartament->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
                             <button class="btn btn-danger" type="submit">

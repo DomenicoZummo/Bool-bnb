@@ -126,7 +126,15 @@ class ApartmentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        dd($request->all());
+        $data =  $request->all();
+
+        $this_apartment = Apartment::find($id);
+
+        $data['slug'] = Str::slug($data['title'], '-');
+
+        $this_apartment->update($data);
+
+        return redirect()->route('admin.apartments.show', $this_apartment->id);
     }
 
     /**
@@ -137,6 +145,10 @@ class ApartmentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this_apartment = Apartment::find($id);
+
+        $this_apartment->delete();
+
+        return redirect()->route('admin.apartments.index')->with('deleted', $this_apartment->title);
     }
 }

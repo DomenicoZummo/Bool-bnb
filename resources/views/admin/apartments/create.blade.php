@@ -10,54 +10,78 @@
             @method('POST')
 
             {{-- Title --}}
+        
         <div class="mt-3">
-            <label class="form-label" for="title">Name</label>
-            <input class="form-control " type="text" id="title" name="title">
+            <label class="form-label" for="title">Name  *</label>
+            <input class="form-control @error('title') is-invalid @enderror" required type="text"  id="title" name="title">
+            @error('title')
+            <span class="invalid-feedback">{{ $message  }}</span>
+            @enderror
         </div>
+
 
         {{-- Description --}}
         <div class="mt-3">
-            <label class="form-label" for="description">Description</label>
-            <textarea name="description" id="description" cols="50" rows="10"></textarea>
+            <label class="form-label" for="description">Description  *</label>
+            <textarea name="description" class=" @error('description') is-invalid @enderror" required id="description" cols="50" rows="10"></textarea>
+            @error('description')
+            <span class="invalid-feedback">{{ $message  }}</span>
+            @enderror
         </div>
 
         <div class="d-flex">
+
             {{-- Floor --}}
         <div class="mt-3 mr-3">
             <label class="form-label" for="floor">Floor</label>
-            <input id="floor" name="floor" min="1" max="10" type="number">
+            <input id="floor" class=" @error('floor') is-invalid @enderror" min="1" max="10" name="floor" type="number">
+            @error('floor')
+            <span class="invalid-feedback">{{ $message  }}</span>
+            @enderror
         </div>
 
 
         {{-- Rooms --}}
         <div class="mt-3 mr-3">
-            <label class="form-label" for="rooms">Rooms</label>
-            <input id="rooms" name="rooms" min="1" max="20" type="number">
+            <label class="form-label" for="rooms">Rooms  *</label>
+            <input id="rooms" name="rooms"  class="@error('rooms') is-invalid @enderror" required min="1" max="20" type="number">
+            @error('rooms')
+            <span class="invalid-feedback">{{ $message  }}</span>
+            @enderror
         </div>
 
 
         {{-- Beds --}}
         <div class="mt-3 mr-3">
-            <label class="form-label" for="beds">Beds</label>
-            <input id="beds" name="beds" min="1" max="20" type="number">
+            <label class="form-label" for="beds">Beds  *</label>
+            <input id="beds" name="beds" class=" @error('beds') is-invalid @enderror" min="1"  max="20" required type="number">
+            @error('beds')
+            <span class="invalid-feedback">{{ $message  }}</span>
+            @enderror
         </div>
 
 
         {{-- Bathrooms --}}
         <div class="mt-3 mr-3">
-            <label class="form-label" for="beds">Bathrooms</label>
-            <input id="bathrooms" name="bathrooms" min="1" max="10" type="number">
+            <label class="form-label" for="beds">Bathrooms  *</label>
+            <input id="bathrooms" name="bathrooms" class="@error('bathrooms') is-invalid @enderror" min="1" max="20" required type="number">
+            @error('bathrooms')
+            <span class="invalid-feedback">{{ $message  }}</span>
+            @enderror
         </div>
 
 
         {{-- Square_meters --}}
         <div class="mt-3">
             <label class="form-label" for="beds">Square_meters</label>
-            <input id="square_meters" name="square_meters" min="30" max="300" type="number">
+            <input id="square_meters" name="square_meters" class=" @error('square_meters') is-invalid @enderror " min="30" max="300" required type="number">
+            @error('square_meters')
+            <span class="invalid-feedback">{{ $message  }}</span>
+            @enderror
         </div>
     </div>
 
-    {{-- services --}}
+    {{-- Services --}}
 
     <h4 class="my-3">Services</h4>
     <div class="mb-3">
@@ -84,8 +108,11 @@
         {{-- Img path --}}
 
         <div class="mt-3">
-            <label class="form-label" for="img_path">Image</label>
-            <input class="form-control " type="text" id="img_path" name="img_path">
+            <label class="form-label" for="img_path">Image  *</label>
+            <input class="form-control @error('img_path') is-invalid @enderror"type="text" required id="img_path" name="img_path">
+            @error('img_path')
+            <span class="invalid-feedback">{{ $message  }}</span>
+            @enderror
         </div>
 
 

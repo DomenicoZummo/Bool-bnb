@@ -98,12 +98,17 @@ class ApartmentController extends Controller
 
         $user_id = $user_log ['id'];
 
-        if ($apartment['user_id'] == $user_id) {
+
+
+        if($apartment == null){
+            return abort(404);
+
+        }elseif ($apartment != null && $apartment['user_id'] == $user_id){
             return view('admin.apartments.show',compact('apartment'));
         }
-
+          
         abort(404);
-
+        
     }
 
     /**
@@ -122,12 +127,13 @@ class ApartmentController extends Controller
         $user_id = $user_log ['id'];
 
         
-        if ($apartment && $apartment['user_id'] == $user_id) {
+        if($apartment == null){
+            return abort(404);
 
-         return view('admin.apartments.edit' , compact('services','apartment'));
-       
+        }elseif ($apartment != null && $apartment['user_id'] == $user_id){
+            return view('admin.apartments.edit',compact('services','apartment'));
         }
-
+          
         abort(404);
 
     }
@@ -141,15 +147,34 @@ class ApartmentController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+        $request->validate([
+            'title' => 'required|max:100',
+            'description' => 'required',
+            'floor' => 'nullable|numeric|integer|between:1,10',
+            'rooms' => 'required|numeric|integer|between:1,20',
+            'beds' => 'required|numeric|integer|between:1,20',
+            'bathrooms' => 'required|numeric|integer|between:1,10',
+            'square_meters' => 'required|numeric|integer|between:30,300',
+            'img_path'=>'required'
+        ],[
+
+        ]);
+
+
         $data =  $request->all();
-
-        $this_apartment = Apartment::find($id);
-
+        $apartment = Apartment::find($id);
         $data['slug'] = Str::slug($data['title'], '-');
+        $apartment->update($data);
 
-        $this_apartment->update($data);
 
-        return redirect()->route('admin.apartments.show', $this_apartment->id);
+        if(array_key_exists('services', $data)) {
+            $apartment->services()->sync($data['services']);
+        } else {
+            $apartment->services()->detach();
+        }
+
+        return redirect()->route('admin.apartments.show', $apartment->id);
     }
 
     /**
@@ -160,10 +185,12 @@ class ApartmentController extends Controller
      */
     public function destroy($id)
     {
-        $this_apartment = Apartment::find($id);
+        $apartment = Apartment::find($id);
 
-        $this_apartment->delete();
+          // Pulizia orfani
+          $apartment->services()->detach();
+          $apartment->delete();
 
-        return redirect()->route('admin.apartments.index')->with('deleted', $this_apartment->title);
+        return redirect()->route('admin.apartments.index')->with('deleted', $apartment->title);
     }
 }

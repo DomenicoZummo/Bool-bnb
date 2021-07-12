@@ -1,6 +1,9 @@
+
 @extends('layouts.app')
 
+
 @section('content')
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -51,7 +54,7 @@
                             <label for="birth_date" class="col-md-4 col-form-label text-md-right">{{ __('Birth date') }}</label>
 
                             <div class="col-md-6">
-                                <input id="birth_date" type="date" class="form-control @error('birth_date') is-invalid @enderror" name="birth_date" value="{{ old('birth_date') }}"  autocomplete="birth_date" autofocus>
+                                <input id="birth_date" min="1900-01-01"  type="date" class="form-control @error('birth_date') is-invalid @enderror" name="birth_date" value="{{ old('birth_date') }}"  autocomplete="birth_date" autofocus>
 
                                 @error('birth_date')
                                     <span class="invalid-feedback" role="alert">

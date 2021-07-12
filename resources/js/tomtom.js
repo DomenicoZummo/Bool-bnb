@@ -168,14 +168,19 @@ tt.setProductInfo("BoolBnB", "1.0");
 var map = tt.map({
     key: "gKIZzIyagJPsNGDOLL9WGenkQlFeapDb",
     container: "map",
-    center: [13, 42],
-    zoom: 3,
+    center: [12, 41],
+    zoom: 4,
 });
 // var ttSearchBox = new tt.plugins.SearchBox(tt.services, options);
 const ttSearchBox = new SearchBox(services, options);
 var searchBoxHTML = ttSearchBox.getSearchBoxHTML();
-document.getElementById('searchbox').prepend(searchBoxHTML);
+document.getElementById('searchbox').prepend(searchBoxHTML) ;
+// var inputSearchBox = document.querySelector('.tt-search-box-input');
+// inputSearchBox.value = `via stazione`;
+// console.log(inputSearchBox.value);
 var searchMarkersManager = new SearchMarkersManager(map);
 ttSearchBox.on("tomtom.searchbox.resultselected", handleResultSelection); // CHIAMATA ON CLICK  
 ttSearchBox.on("tomtom.searchbox.resultscleared", handleResultClearing);
-                    
+
+
+ 

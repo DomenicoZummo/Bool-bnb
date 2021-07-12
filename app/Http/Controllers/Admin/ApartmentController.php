@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Apartment;
 use App\Service;
+use App\Sponsorship;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
@@ -78,8 +79,16 @@ class ApartmentController extends Controller
     public function show($id)
     {
         $apartment = Apartment::find($id);
+        $user_log = Auth::user();
 
-        return view('admin.apartments.show',compact('apartment'));
+        $user_id = $user_log ['id'];
+
+        if ($apartment['user_id'] == $user_id) {
+            return view('admin.apartments.show',compact('apartment'));
+        }
+
+        abort(404);
+
     }
 
     /**
@@ -88,9 +97,24 @@ class ApartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Apartment $apartment)
     {
-        //
+        // $apartment = Apartment::find($id);
+        $services = Service::all();
+
+        $user_log = Auth::user();
+
+        $user_id = $user_log ['id'];
+
+        
+        if ($apartment && $apartment['user_id'] == $user_id) {
+
+         return view('admin.apartments.edit' , compact('services','apartment'));
+       
+        }
+
+        abort(404);
+
     }
 
     /**
@@ -102,7 +126,7 @@ class ApartmentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        dd($request->all());
     }
 
     /**

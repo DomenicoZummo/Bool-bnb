@@ -10952,3 +10952,7 @@ form label {
   display: block;
 }
 
+.box-img img {
+  max-width: 100%;
+}
+

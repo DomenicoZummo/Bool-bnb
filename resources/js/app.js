@@ -1,16 +1,16 @@
 require("./bootstrap");
 
 window.Vue = require("vue");
-window.axios = require("axios");
+// window.axios = require("axios");
 
 // Vue main instance
 import App from "./App.vue";
 
 // Router
-// import router from "./routes";
+import router from "./routes";
 
 const root = new Vue({
     el: "#root",
-    // router,
+     router,
     render: h => h(App)
 });

@@ -63,7 +63,7 @@
 
         {{-- Bathrooms --}}
         <div class="mt-3 mr-3">
-            <label class="form-label" for="beds">Bathrooms  *</label>
+            <label class="form-label" for="bathrooms">Bathrooms  *</label>
             <input id="bathrooms" name="bathrooms" class="@error('bathrooms') is-invalid @enderror" min="1" max="20" required type="number">
             @error('bathrooms')
             <span class="invalid-feedback">{{ $message  }}</span>
@@ -73,7 +73,7 @@
 
         {{-- Square_meters --}}
         <div class="mt-3">
-            <label class="form-label" for="beds">Square_meters</label>
+            <label class="form-label" for="square_meters">Square_meters</label>
             <input id="square_meters" name="square_meters" class=" @error('square_meters') is-invalid @enderror " min="30" max="300" required type="number">
             @error('square_meters')
             <span class="invalid-feedback">{{ $message  }}</span>

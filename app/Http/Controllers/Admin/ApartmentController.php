@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Apartment;
 use App\Service;
 use App\Sponsorship;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
@@ -59,9 +60,8 @@ class ApartmentController extends Controller
             'beds' => 'required|numeric|integer|between:1,20',
             'bathrooms' => 'required|numeric|integer|between:1,10',
             'square_meters' => 'nullable|numeric|integer|between:30,300',
-            'img_path'=>'required'
-        ],[
-
+            'img_path'=>'required|mimes:png,jpg,jpeg,bmp,svg',
+            'address' => 'required'
         ]);
 
 
@@ -70,8 +70,14 @@ class ApartmentController extends Controller
 
 
         $data['user_id'] = $user['id'];
-
         $data['slug'] = Str::slug($data['title'] , '-');
+
+        if (array_key_exists('img_path',$data)) {
+
+            // $img_path = Storage::put('image-apartment', $data['img_path']);
+            // $data['img_path'] =  $img_path;
+            $data['img_path'] = Storage::put('image-apartment', $data['img_path']);
+        }
 
         $new_apartment = new Apartment();
 
@@ -156,7 +162,7 @@ class ApartmentController extends Controller
             'beds' => 'required|numeric|integer|between:1,20',
             'bathrooms' => 'required|numeric|integer|between:1,10',
             'square_meters' => 'nullable|numeric|integer|between:30,300',
-            'img_path'=>'required'
+            'img_path'=>'required|mimes:png,jpg,jpeg,bmp,svg'
         ],[
 
         ]);
@@ -165,8 +171,19 @@ class ApartmentController extends Controller
         $data =  $request->all();
         $apartment = Apartment::find($id);
         $data['slug'] = Str::slug($data['title'], '-');
-        $apartment->update($data);
 
+
+        if (array_key_exists('img_path',$data)) {
+            
+            if ($apartment->img_path) {
+               Storage::delete($apartment->img_path);
+            }
+
+            $data['img_path'] = Storage::put('image-apartment', $data['img_path']);
+
+        }
+
+        $apartment->update($data);
 
         if(array_key_exists('services', $data)) {
             $apartment->services()->sync($data['services']);
@@ -186,11 +203,12 @@ class ApartmentController extends Controller
     public function destroy($id)
     {
         $apartment = Apartment::find($id);
-
           // Pulizia orfani
           $apartment->services()->detach();
           $apartment->delete();
-
+          if ($apartment->img_path) {
+            Storage::delete($apartment->img_path);
+          }
         return redirect()->route('admin.apartments.index')->with('deleted', $apartment->title);
     }
 }

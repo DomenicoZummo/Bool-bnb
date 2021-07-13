@@ -6,12 +6,13 @@
     <div class="container d-flex">
        
         <div class="box-img col-xs-12 col-md-6">
-            <img src="{{ $apartment->img_path }}" alt="{{ $apartment->title }}">
+            <img src="{{ asset('storage/' . $apartment->img_path) }}" alt="{{ $apartment->title }}">
         </div>
    
         <div class="text-img col-xs-12 col-md-6">
             <h1>Titolo :  {{ $apartment->title }}</h1>
             <h2>Descrizione : {{ $apartment->description }}</h2>
+            <h2>Address : {{ $apartment->address }}</h2>
             <h2>Floor : {{ $apartment->floor }}</h2>
             <h2>Rooms : {{ $apartment->rooms }}</h2>
             <h2>Beds : {{ $apartment->beds }}</h2>

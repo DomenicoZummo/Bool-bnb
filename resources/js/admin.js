@@ -6,7 +6,7 @@ delForm.forEach(form => {
 
     form.addEventListener('submit', function(e){
 
-        const resp = confirm('Sei sicuro di volerlo cancellare?');
+        const resp = confirm('Are you sure you want to delete it?');
         if(!resp){
             e.preventDefault();
         }

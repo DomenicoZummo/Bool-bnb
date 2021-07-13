@@ -86,10 +86,12 @@
     </div>
 
         {{-- Img path --}}
-
         <div class="mt-3">
             <label class="form-label" for="img_path">Image  *</label>
-            <input value="{{ old('img_path',$apartment->img_path) }}" class="form-control" required type="text" id="img_path" name="img_path">
+            <input class="form-control-file @error('img_path') is-invalid @enderror"  type="file" required id="img_path" name="img_path">
+            @error('img_path')
+            <span class="invalid-feedback">{{ $message  }}</span>
+            @enderror
         </div>
 
 

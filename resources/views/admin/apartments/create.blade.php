@@ -5,7 +5,7 @@
 @section('content')
 <div class="container">
     <h1>Create</h1>
-    <form action="{{ route('admin.apartments.store') }}" method="POST">
+    <form action="{{ route('admin.apartments.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('POST')
 
@@ -74,7 +74,7 @@
         {{-- Square_meters --}}
         <div class="mt-3">
             <label class="form-label" for="square_meters">Square_meters</label>
-            <input id="square_meters" name="square_meters" class=" @error('square_meters') is-invalid @enderror " min="30" max="300" required type="number">
+            <input id="square_meters" name="square_meters" class=" @error('square_meters') is-invalid @enderror " min="30" max="300"  type="number">
             @error('square_meters')
             <span class="invalid-feedback">{{ $message  }}</span>
             @enderror
@@ -109,7 +109,7 @@
 
         <div class="mt-3">
             <label class="form-label" for="img_path">Image  *</label>
-            <input class="form-control @error('img_path') is-invalid @enderror"type="text" required id="img_path" name="img_path">
+            <input class="form-control-file @error('img_path') is-invalid @enderror"  type="file" required id="img_path" name="img_path">
             @error('img_path')
             <span class="invalid-feedback">{{ $message  }}</span>
             @enderror
@@ -120,15 +120,14 @@
 
 
         <div class="form-group">
-            <label class="form-label" for="address">Address</label>
-            <input type="hidden" id="address" name="address" class="form-control" value="">
-            @error('address')
-            <span class="alert alert-danger"></span>
-            @enderror
+            <label class="form-label mt-3" for="address">Address  *</label>
             <input type="hidden" id="lat" name="longitude" class="form-control" value="">
             <input type="hidden" id="lng" name="latitude" class="form-control" value="">
-            
-            <div id="searchbox"></div>
+            <div id="searchbox" class="mb-3"></div>
+            <input type="hidden" id="address" name="address" required class="form-control" value="">
+            @error('address')
+            <span class="alert alert-danger my-3 p-2">{{ $message }}</span>
+            @enderror
             <div id="map" class="map"></div>
 
 

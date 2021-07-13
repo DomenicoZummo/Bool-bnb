@@ -16,13 +16,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('guest.welcome');
-});
 
 Auth::routes();
-
-// Route::get('/admin', 'HomeController@index')->name('home');
 
 Route::prefix('admin')
     ->namespace('Admin')
@@ -31,11 +26,10 @@ Route::prefix('admin')
     ->group(function(){
         // Rotta Admin Home
         Route::get('/', 'HomeController@index')->name('home');
-
         Route::resource('/apartments', 'ApartmentController');
     });
 
 // Front-Office
-// Route::get('{any?}', function () {
-//     return view('guest/home');
-// })->where("any", ".*");
+Route::get('{any?}', function () {
+    return view('guest/home');
+})->where("any", ".*");

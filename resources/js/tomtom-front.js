@@ -3,10 +3,11 @@ import tt from '@tomtom-international/web-sdk-maps';
 import { services } from '@tomtom-international/web-sdk-services';
 import SearchBox from '@tomtom-international/web-sdk-plugin-searchbox';
 
+console.log(document);
 
-        var lat = '';
-        var lng = '';
-        var address = '';
+         window.lat = '';
+         window.lng = '';
+        window.address = '';
 
 function handleResultsFound(event) {
     var results = event.data.results.fuzzySearch.results;
@@ -182,5 +183,3 @@ ttSearchBox.on("tomtom.searchbox.resultscleared", handleResultClearing);
 console.log(lat);
 console.log(lng);
 console.log(address);
-
-console.log(document);

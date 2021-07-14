@@ -1,16 +1,16 @@
 <template>
   <div class="container">
       <h1>SearchBox</h1> 
+      <input class="form-control" type="text">
   </div>
 </template>
 
 <script>
-import {tomtom} from '../tomtom-front';
+ import * as tomtom from '../tomtom-front';
 export default { 
   name: 'SearchBox', 
   data(){
       return {
-       data:tomtom,
       }
   },
 }

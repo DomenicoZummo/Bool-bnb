@@ -45,36 +45,19 @@ import Footer from './components/Footer.vue';
 
 
 export default {
-    name:'App',
-    components:{
+    name: "App",
+    components: {
         Header,
-        Footer,
+        Footer
     },
-    data(){
-        return {
-            apartments:[],
-        }
+    data() {
+        return {};
     },
-   
-    methods:{
-         getPoint(){
-        //  axios.get(`https://api.tomtom.com/search/2/search/${window.address}.json?/?lat=${window.lat}&lon=${window.lng}&ountrySet=IT&radius=100000&key=gKIZzIyagJPsNGDOLL9WGenkQlFeapDb`)
-        axios.get('http://127.0.0.1:8000/api/apartments')
-             .then( result => {
-                 this.apartments = result.data;
-             })
-             .catch( error => {
-                 console.log(error);
-             })
 
-
-        }
-    }
-}
+    methods: {}
+};
 </script>
 
 <style lang="scss">
-@import'~bootstrap/dist/css/bootstrap.css';
-
-
+@import "~bootstrap/dist/css/bootstrap.css";
 </style>

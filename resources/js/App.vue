@@ -1,67 +1,37 @@
 <template>
-  <div class="container">
+    <div class="container">
+        <!-- Header -->
+        <Header />
 
-      <!-- Header -->
-      <Header />
+        <!-- Main -->
+        <main>
+            <router-view></router-view>
+        </main>
 
-
-      <!-- Main -->
-      <main>
-          <SearchBox />
-          <router-view>
-          </router-view>
-      </main>
-
-
-      <input @click="getPoint" type="button" value="Cerca">
-      <!-- Footer -->
-      <Footer />
-      
-  </div>
-
-
+        <!-- Footer -->
+        <Footer />
+    </div>
 </template>
 
 <script>
-import axios from 'axios';
-import Header from './components/Header.vue';
-import Footer from './components/Footer.vue';
-import SearchBox from './components/SearchBox.vue';
+import axios from "axios";
+import Header from "./components/Header.vue";
+import Footer from "./components/Footer.vue";
 
 export default {
-    name:'App',
-    components:{
+    name: "App",
+    components: {
         Header,
-        Footer,
-        SearchBox,
+        Footer
     },
-    data(){
-        return {
-           lat:'',
-           lng:'',
-           address:'',
-        }
+    data() {
+        return {};
     },
-   
-    methods:{
-         getPoint(){
 
-         axios.get(`https://api.tomtom.com/search/2/search/${window.address}.json?/?lat=${window.lat}&lon=${window.lng}&ountrySet=IT&radius=100000&key=gKIZzIyagJPsNGDOLL9WGenkQlFeapDb`)
-             .then( result => {
-                 console.log(result.data);
-             })
-             .catch( error => {
-                 console.log(error);
-             })
-
-
-        }
-    }
-}
+    methods: {}
+};
 </script>
 
 <style lang="scss">
-@import'~bootstrap/dist/css/bootstrap.css';
-
-
+@import "~bootstrap/dist/css/bootstrap.css";
 </style>

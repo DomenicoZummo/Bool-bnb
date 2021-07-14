@@ -80,8 +80,6 @@ class ApartmentController extends Controller
         }
 
         $new_apartment = new Apartment();
-        dd($data);
-
         $new_apartment->fill($data);
         $new_apartment->save();
 

@@ -7,10 +7,26 @@
 
       <!-- Main -->
       <main>
-          <SearchBox />
+       
           <router-view>
           </router-view>
+
       </main>
+
+
+      <ul>
+              <li class="my-5" v-for="apartment in apartments" :key="apartment.id">
+                  <h1>Title : {{ apartment.title }}</h1>
+                  <h4>Address : {{ apartment.address }}</h4>
+                  <h2>Creato da {{ apartment.user.name }}  {{ apartment.user.surname }}</h2>
+                 <ul>
+                     <h2>Servizi</h2>
+                     <li v-for="(service , key) in apartment.services" :key="key">
+                         <h5>{{service.name}}</h5>
+                     </li>
+                 </ul>
+              </li>
+          </ul>
 
 
       <input @click="getPoint" type="button" value="Cerca">
@@ -26,29 +42,26 @@
 import axios from 'axios';
 import Header from './components/Header.vue';
 import Footer from './components/Footer.vue';
-import SearchBox from './components/SearchBox.vue';
+
 
 export default {
     name:'App',
     components:{
         Header,
         Footer,
-        SearchBox,
     },
     data(){
         return {
-           lat:'',
-           lng:'',
-           address:'',
+            apartments:[],
         }
     },
    
     methods:{
          getPoint(){
-
-         axios.get(`https://api.tomtom.com/search/2/search/${window.address}.json?/?lat=${window.lat}&lon=${window.lng}&ountrySet=IT&radius=100000&key=gKIZzIyagJPsNGDOLL9WGenkQlFeapDb`)
+        //  axios.get(`https://api.tomtom.com/search/2/search/${window.address}.json?/?lat=${window.lat}&lon=${window.lng}&ountrySet=IT&radius=100000&key=gKIZzIyagJPsNGDOLL9WGenkQlFeapDb`)
+        axios.get('http://127.0.0.1:8000/api/apartments')
              .then( result => {
-                 console.log(result.data);
+                 this.apartments = result.data;
              })
              .catch( error => {
                  console.log(error);

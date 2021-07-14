@@ -8,6 +8,7 @@ let lat = document.getElementById('lat');
 let lng = document.getElementById('lng');
 let address = document.getElementById('address');
 
+
 function handleResultsFound(event) {
     var results = event.data.results.fuzzySearch.results;
 
@@ -47,6 +48,8 @@ function fitToViewport(markerData) {
 function getBounds(data) {
     var btmRight;
     var topLeft;
+
+    console.log(data);
 
     lat.value  = data.position.lat;
     lng.value = data.position.lng;
@@ -181,6 +184,8 @@ document.getElementById('searchbox-back').prepend(searchBoxHTML) ;
 var searchMarkersManager = new SearchMarkersManager(map);
 ttSearchBox.on("tomtom.searchbox.resultselected", handleResultSelection); // CHIAMATA ON CLICK  
 ttSearchBox.on("tomtom.searchbox.resultscleared", handleResultClearing);
+
+
 
 
  

@@ -1,7 +1,7 @@
 <template>
 
   <header class="text-center">
-      <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-primary ">
         <div class="container">
            <a class="navbar-brand" href="#">Boolbnb</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

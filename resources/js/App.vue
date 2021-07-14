@@ -6,8 +6,9 @@
 
 
       <!-- Main -->
-
       <main>
+          <SearchBox />
+
           <router-view>
 
           </router-view>
@@ -24,14 +25,16 @@
 </template>
 
 <script>
-import axios from 'axios';
 import Header from './components/Header.vue';
 import Footer from './components/Footer.vue';
+import SearchBox from './components/SearchBox.vue';
+
 export default {
     name:'App',
     components:{
         Header,
         Footer,
+        SearchBox,
     }
 }
 </script>

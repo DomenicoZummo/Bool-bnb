@@ -121,15 +121,14 @@
 
         <div class="form-group">
             <label class="form-label mt-3" for="address">Address  *</label>
-            <input type="hidden" id="lat" name="longitude" class="form-control" value="">
-            <input type="hidden" id="lng" name="latitude" class="form-control" value="">
-            <div id="searchbox" class="mb-3"></div>
+            <input type="hidden" id="lat" name="latitude" class="form-control" value="">
+            <input type="hidden" id="lng" name="longitude" class="form-control" value="">
+            <div id="searchbox-back" class="mb-3"></div>
             <input type="hidden" id="address" name="address" required class="form-control" value="">
             @error('address')
             <span class="alert alert-danger my-3 p-2">{{ $message }}</span>
             @enderror
             <div id="map" class="map"></div>
-
 
             <div class="mt-3 d-flex">
                 <input class="mr-1"  type="radio" id="public" name="visibility" checked value="1">

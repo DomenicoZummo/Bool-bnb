@@ -104,10 +104,10 @@
             @error('address')
             <span class="alert alert-danger"></span>
             @enderror
-            <input type="hidden" id="lat" name="longitude" class="form-control" value="{{ old('latitude' , $apartment->latitude) }}">
-            <input type="hidden" id="lng" name="latitude" class="form-control" value="{{ old('longitude' , $apartment->longitude) }}">
+            <input type="hidden" id="lat" name="latitude" class="form-control" value="{{ old('latitude' , $apartment->latitude) }}">
+            <input type="hidden" id="lng" name="longitude" class="form-control" value="{{ old('longitude' , $apartment->longitude) }}">
             
-            <div id="searchbox"></div>
+            <div id="searchbox-back"></div>
             <div id="map" class="map"></div>
 
 

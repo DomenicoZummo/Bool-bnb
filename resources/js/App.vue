@@ -46,9 +46,9 @@ export default {
     methods:{
          getPoint(){
 
-         axios.get(`https://api.tomtom.com/search/2/search/${window.address}.json?/?lat=${window.lat}&lon=${window.lng}&ountrySet=IT&radius=10000&key=gKIZzIyagJPsNGDOLL9WGenkQlFeapDb`)
+         axios.get(`https://api.tomtom.com/search/2/search/${window.address}.json?/?lat=${window.lat}&lon=${window.lng}&ountrySet=IT&radius=100000&key=gKIZzIyagJPsNGDOLL9WGenkQlFeapDb`)
              .then( result => {
-                 console.log(result);
+                 console.log(result.data);
              })
              .catch( error => {
                  console.log(error);

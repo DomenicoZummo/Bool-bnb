@@ -174,7 +174,7 @@ var map = tt.map({
 // var ttSearchBox = new tt.plugins.SearchBox(tt.services, options);
 const ttSearchBox = new SearchBox(services, options);
 var searchBoxHTML = ttSearchBox.getSearchBoxHTML();
-document.getElementById('searchbox').prepend(searchBoxHTML) ;
+document.getElementById('searchbox-back').prepend(searchBoxHTML) ;
 // var inputSearchBox = document.querySelector('.tt-search-box-input');
 // inputSearchBox.value = `via stazione`;
 // console.log(inputSearchBox.value);

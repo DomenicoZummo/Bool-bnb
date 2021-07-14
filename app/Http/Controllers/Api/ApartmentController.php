@@ -11,10 +11,27 @@ class ApartmentController extends Controller
 {
     //
 
-    public function index()
+    public function index(Request $request)
     {
-        $apartments = Apartment::with('user', 'services' , 'sponsorships')->get();
-        return response()->json( $apartments);
+
+        $query = $request->query();
+
+        $minlat = $query['minlat'];
+
+        $maxlat = $query['maxlat'];
+
+        $minlng = $query['minlng'];
+
+        $maxlng = $query['maxlng'];
+
+       
+
+
+        $apartment_filter = Apartment::whereRaw('(latitude >= ' .$minlat.  ' and latitude <= ' . $maxlat .') && (longitude >= ' . $minlng . ' and longitude <= ' . $maxlng . ')', array(25))->with('user', 'services' , 'sponsorships')->get();
+
+         $apartments = Apartment::with('user', 'services' , 'sponsorships')->get();
+
+        return response()->json( $apartment_filter);
 
     }
 

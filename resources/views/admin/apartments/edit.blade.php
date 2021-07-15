@@ -107,10 +107,10 @@
                 checked 
                 @endif
                 value="1">
-                <label class="mr-5" for="public">Public</label><br>
+                <label class="mr-5" for="public">Visible</label><br>
                 <input class="mr-1" type="radio" id="private" name="visibility"@if(0 == old('visibility' , $apartment->visibility)) 
                 checked @endif value="0">
-                <label for="private">Private</label><br>
+                <label for="private">Not Visible</label><br>
             </div>
 
             <div class="text-center final-button">

@@ -1,6 +1,6 @@
 <template>
-    <header class="text-center">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary ">
+    <header class="text-center  bg-primary navbar-dark  fixed-top">
+        <nav class="navbar navbar-expand-lg">
             <div class="container">
                 <a class="navbar-brand" href="#">Boolbnb</a>
                 <button
@@ -23,13 +23,6 @@
                         <li class="nav-item">
                             <router-link class="nav-link" :to="{ name: 'home' }"
                                 >Home</router-link
-                            >
-                        </li>
-                        <li class="nav-item">
-                            <router-link
-                                class="nav-link"
-                                :to="{ name: 'about' }"
-                                >About</router-link
                             >
                         </li>
                         <li class="nav-item">

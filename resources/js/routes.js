@@ -4,7 +4,6 @@ import VueRouter from 'vue-router';
 
 // Components from routes
 import Home from './pages/Home.vue';
-import About from './pages/About.vue';
 
 
 // Router registration 
@@ -19,11 +18,6 @@ const router = new VueRouter({
             path:'/',
             name:'home',
             component:Home,
-        },
-        {
-            path:'/about',
-            name:'about',
-            component:About,
         },
     ],
 });

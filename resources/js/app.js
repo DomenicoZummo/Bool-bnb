@@ -5,7 +5,6 @@ window.Vue = require("vue");
 
 // Vue main instance
 import App from "./App.vue";
-
 // Router
 import router from "./routes";
 

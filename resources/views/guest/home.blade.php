@@ -5,14 +5,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>Boolbnb</title>
-        <style>
-            #map{
-        height: 500px;
-        max-width: 1110px;
-        }
+       
 
-        </style>
-
+     <!-- Scripts -->
+     <script src="{{ asset('js/search.js') }}" defer></script>
        <!-- MAP -->
     <link
     rel="stylesheet"
@@ -30,12 +26,18 @@
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
+        {{-- Icon --}}
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
         <!-- Styles -->
     </head>
     <body>
+        <div class="container pt-5">
+            <div id="searchbox-front"></div>
+            <div id="map"></div>
+        </div>
        <div id="root">
        </div>
        <script src="{{ asset('js/app.js') }}"></script>
-       
     </body>
 </html>

@@ -16,4 +16,5 @@ const mix = require('laravel-mix');
  .sass("resources/sass/app.scss", "public/css")
  .js("node_modules/popper.js/dist/popper.js", "public/js")
  .sourceMaps()
- .js("resources/js/tomtom.js", "public/js");
+ .js("resources/js/tomtom.js", "public/js")
+ .js("resources/js/search.js", "public/js");

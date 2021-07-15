@@ -104,7 +104,7 @@ eval("var delForm = document.querySelectorAll('.delete-apartment-form');\ndelFor
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\Emi\Desktop\Boolean\GitHubCloneRepo\MAINboolbnb\resources\js\admin.js */"./resources/js/admin.js");
+module.exports = __webpack_require__(/*! C:\Users\Domenico\Desktop\Bool-bnb\resources\js\admin.js */"./resources/js/admin.js");
 
 
 /***/ })

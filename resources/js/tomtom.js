@@ -43,7 +43,7 @@ function getBounds(data) {
     var btmRight;
     var topLeft;
 
-    console.log(data);
+    // console.log(data);
 
     lat.value = data.position.lat;
     lng.value = data.position.lng;

@@ -24,10 +24,10 @@ class ApartmentController extends Controller
         $user_id = $user['id'];
 
 
-        $apartments = Apartment::where('user_id' , $user_id)->get();
+        $apartments = Apartment::where('user_id', $user_id)->get();
 
-       
-        return view('admin.apartments.index' , compact('apartments', 'user'));
+
+        return view('admin.apartments.index', compact('apartments', 'user'));
     }
 
     /**
@@ -40,7 +40,7 @@ class ApartmentController extends Controller
         $services = Service::all();
 
 
-        return view('admin.apartments.create' , compact('services'));
+        return view('admin.apartments.create', compact('services'));
     }
 
     /**
@@ -60,7 +60,7 @@ class ApartmentController extends Controller
             'beds' => 'required|numeric|integer|between:1,20',
             'bathrooms' => 'required|numeric|integer|between:1,10',
             'square_meters' => 'nullable|numeric|integer|between:30,300',
-            'img_path'=>'required|mimes:png,jpg,jpeg,bmp,svg',
+            'img_path' => 'required|mimes:png,jpg,jpeg,bmp,svg',
             'address' => 'required'
         ]);
 
@@ -70,9 +70,9 @@ class ApartmentController extends Controller
 
 
         $data['user_id'] = $user['id'];
-        $data['slug'] = Str::slug($data['title'] , '-');
+        $data['slug'] = Str::slug($data['title'], '-');
 
-        if (array_key_exists('img_path',$data)) {
+        if (array_key_exists('img_path', $data)) {
 
             // $img_path = Storage::put('image-apartment', $data['img_path']);
             // $data['img_path'] =  $img_path;
@@ -83,11 +83,11 @@ class ApartmentController extends Controller
         $new_apartment->fill($data);
         $new_apartment->save();
 
-        if(array_key_exists('services',$data)){
+        if (array_key_exists('services', $data)) {
             $new_apartment->services()->attach($data['services']);       // Aggiunge nuovi record in pivot
         }
 
-        return redirect()->route('admin.apartments.show' , $new_apartment->id);
+        return redirect()->route('admin.apartments.show', $new_apartment->id);
     }
 
     /**
@@ -101,19 +101,17 @@ class ApartmentController extends Controller
         $apartment = Apartment::find($id);
         $user_log = Auth::user();
 
-        $user_id = $user_log ['id'];
+        $user_id = $user_log['id'];
 
 
 
-        if($apartment == null){
+        if ($apartment == null) {
             return abort(404);
-
-        }elseif ($apartment != null && $apartment['user_id'] == $user_id){
-            return view('admin.apartments.show',compact('apartment'));
+        } elseif ($apartment != null && $apartment['user_id'] == $user_id) {
+            return view('admin.apartments.show', compact('apartment'));
         }
-          
+
         abort(404);
-        
     }
 
     /**
@@ -129,18 +127,16 @@ class ApartmentController extends Controller
 
         $user_log = Auth::user();
 
-        $user_id = $user_log ['id'];
+        $user_id = $user_log['id'];
 
-        
-        if($apartment == null){
+
+        if ($apartment == null) {
             return abort(404);
-
-        }elseif ($apartment != null && $apartment['user_id'] == $user_id){
-            return view('admin.apartments.edit',compact('services','apartment'));
+        } elseif ($apartment != null && $apartment['user_id'] == $user_id) {
+            return view('admin.apartments.edit', compact('services', 'apartment'));
         }
-          
-        abort(404);
 
+        abort(404);
     }
 
     /**
@@ -161,10 +157,8 @@ class ApartmentController extends Controller
             'beds' => 'required|numeric|integer|between:1,20',
             'bathrooms' => 'required|numeric|integer|between:1,10',
             'square_meters' => 'nullable|numeric|integer|between:30,300',
-            'img_path'=>'required|mimes:png,jpg,jpeg,bmp,svg'
-        ],[
-
-        ]);
+            'img_path' => 'required|mimes:png,jpg,jpeg,bmp,svg'
+        ], []);
 
 
         $data =  $request->all();
@@ -172,19 +166,18 @@ class ApartmentController extends Controller
         $data['slug'] = Str::slug($data['title'], '-');
 
 
-        if (array_key_exists('img_path',$data)) {
-            
+        if (array_key_exists('img_path', $data)) {
+
             if ($apartment->img_path) {
-               Storage::delete($apartment->img_path);
+                Storage::delete($apartment->img_path);
             }
 
             $data['img_path'] = Storage::put('image-apartment', $data['img_path']);
-
         }
 
         $apartment->update($data);
 
-        if(array_key_exists('services', $data)) {
+        if (array_key_exists('services', $data)) {
             $apartment->services()->sync($data['services']);
         } else {
             $apartment->services()->detach();
@@ -202,12 +195,12 @@ class ApartmentController extends Controller
     public function destroy($id)
     {
         $apartment = Apartment::find($id);
-          // Pulizia orfani
-          $apartment->services()->detach();
-          $apartment->delete();
-          if ($apartment->img_path) {
+        // Pulizia orfani
+        $apartment->services()->detach();
+        $apartment->delete();
+        if ($apartment->img_path) {
             Storage::delete($apartment->img_path);
-          }
+        }
         return redirect()->route('admin.apartments.index')->with('deleted', $apartment->title);
     }
 }

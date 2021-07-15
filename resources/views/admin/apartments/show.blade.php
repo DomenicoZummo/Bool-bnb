@@ -10,7 +10,7 @@
         </div>
    
         <div class="text-img col-xs-12 col-md-6">
-            <h1>Titolo: </h2> <p>{{ $apartment->title }}</p>
+            <h1>Titolo: </h1> <p>{{ $apartment->title }}</p>
             <h2>Descrizione: </h2> <p>{{ $apartment->description }}</p>
             <h2>Address: </h2> <p>{{ $apartment->address }}</p>
             <h2>Floor: </h2> <p>{{ $apartment->floor }}</p>

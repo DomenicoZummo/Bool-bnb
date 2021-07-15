@@ -54,7 +54,7 @@
                             <label for="birth_date" class="col-md-4 col-form-label text-md-right">{{ __('Birth date') }}</label>
 
                             <div class="col-md-6">
-                                <input id="birth_date" min="1900-01-01" max="{{ Carbon\Carbon::now()->format('Y') - 18 }}-{{ Carbon\Carbon::now()->format('m') }}-{{ Carbon\Carbon::now()->format('d') }}"  type="date" class="form-control @error('birth_date') is-invalid @enderror" name="birth_date" value="{{ old('birth_date') }}"  autocomplete="birth_date" autofocus>
+                                <input id="birth_date" min="1920-01-01" max="{{ Carbon\Carbon::now()->format('Y') - 18 }}-{{ Carbon\Carbon::now()->format('m') }}-{{ Carbon\Carbon::now()->format('d') }}"  type="date" class="form-control @error('birth_date') is-invalid @enderror" name="birth_date" value="{{ old('birth_date') }}"  autocomplete="birth_date" autofocus>
 
                                 @error('birth_date')
                                     <span class="invalid-feedback" role="alert">

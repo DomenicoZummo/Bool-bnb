@@ -157,7 +157,7 @@ class ApartmentController extends Controller
             'beds' => 'required|numeric|integer|between:1,20',
             'bathrooms' => 'required|numeric|integer|between:1,10',
             'square_meters' => 'nullable|numeric|integer|between:30,300',
-            'img_path' => 'required|mimes:png,jpg,jpeg,bmp,svg'
+            'img_path' => 'nullable|mimes:png,jpg,jpeg,bmp,svg'
         ], []);
 
 

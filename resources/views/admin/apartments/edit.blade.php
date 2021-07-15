@@ -62,7 +62,7 @@
             @foreach ($services as $service)
                 <span class="d-inline-block mr-3">
                     <input type="checkbox" name="services[]" id="service{{$loop->iteration}}" value="{{ $service->id }}"
-                    @if (($errors->any() && in_array($service->id, old('services'))))
+                    @if ($errors->any() && in_array($service->id, old('services')))
                         checked
                         @elseif(! $errors->any() && $apartment->services->contains($service->id))
                         checked
@@ -82,7 +82,12 @@
         {{-- Img path --}}
         <div class="mt-3">
             <label class="form-label" for="img_path">Image  *</label>
-            <input class="form-control-file @error('img_path') is-invalid @enderror"  type="file" required id="img_path" name="img_path">
+             @if ($apartment->img_path)
+                <div class="mb-3">
+                    <img width="200" height="200" src="{{ asset('storage/' . $apartment->img_path) }}" alt="{{ $apartment->title }}">
+                </div>
+            @endif
+            <input class="form-control-file @error('img_path') is-invalid @enderror"  type="file" id="img_path" name="img_path">
             @error('img_path')
             <span class="invalid-feedback">{{ $message  }}</span>
             @enderror

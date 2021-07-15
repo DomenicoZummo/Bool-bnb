@@ -10,14 +10,14 @@
         </div>
    
         <div class="text-img col-xs-12 col-md-6">
-            <h1>Titolo :  {{ $apartment->title }}</h1>
-            <h2>Descrizione : {{ $apartment->description }}</h2>
-            <h2>Address : {{ $apartment->address }}</h2>
-            <h2>Floor : {{ $apartment->floor }}</h2>
-            <h2>Rooms : {{ $apartment->rooms }}</h2>
-            <h2>Beds : {{ $apartment->beds }}</h2>
-            <h2>Bathrooms : {{ $apartment->bathrooms }}</h2>
-            <h2>Square meters : {{ $apartment->square_meters }}</h2>
+            <h1>Titolo: </h2> <p>{{ $apartment->title }}</p>
+            <h2>Descrizione: </h2> <p>{{ $apartment->description }}</p>
+            <h2>Address: </h2> <p>{{ $apartment->address }}</p>
+            <h2>Floor: </h2> <p>{{ $apartment->floor }}</p>
+            <h2>Rooms: </h2> <p>{{ $apartment->rooms }}</p>
+            <h2>Beds: </h2> <p>{{ $apartment->beds }}</p>
+            <h2>Bathrooms: </h2> <p>{{ $apartment->bathrooms }}</p>
+            <h2>Square meters: </h2> <p>{{ $apartment->square_meters }}</p>
 
             @if(count($apartment->services) > 0)
             @foreach ($apartment->services as $service)

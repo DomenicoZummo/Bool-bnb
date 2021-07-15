@@ -18,9 +18,12 @@ class ApartmentController extends Controller
 
         $minlat = $query['lat'];
         $minlng = $query['lng'];
+        $range = $query['range'] / 100;
 
 
-        $apartment_filter = Apartment::whereRaw('(latitude >= ' . ($minlat - 0.1) .  ' and latitude <= ' . ($minlat + 0.1) .') && (longitude >= ' . ($minlng - 0.1) . ' and longitude <= ' . ($minlng + 0.1) . ')', array(25))->with('user', 'services' , 'sponsorships')->get();
+
+
+        $apartment_filter = Apartment::whereRaw('(latitude >= ' . ($minlat - $range) .  ' and latitude <= ' . ($minlat + $range) .') && (longitude >= ' . ($minlng - $range) . ' and longitude <= ' . ($minlng + $range) . ')', array(25))->with('user', 'services' , 'sponsorships')->get();
 
         //  $apartments = Apartment::with('user', 'services' , 'sponsorships')->get();
 

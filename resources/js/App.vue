@@ -4,7 +4,21 @@
       <!-- Header -->
       <Header />
 
-        <input class="btn btn-success" @click="getApartment" type="button" value="Cerca">
+        
+        <div class="d-flex">
+            <!-- <select @change="setRange(range)" v-model="range" class="mr-5" name="km" id="km">
+                <option value="1">1KM</option>
+                <option value="3">2KM</option>
+                <option value="5">5KM</option>
+                <option value="10">10KM</option>
+                <option value="20">20KM</option>
+                <option value="50">50KM</option>
+                <option value="100">100KM</option>
+            </select> -->
+            <input @change="setRange(range)" v-model="range" class="mr-3" min="0" max="100" value="range" step="5" default="20" type="range" name="range" id="range">
+            <label value="20" class="mx-5 range" for="range">{{range}} km</label>
+            <input class="btn btn-success" @click="getApartment" type="button" value="Cerca">
+        </div>
       <!-- Main -->
       <main>
           <router-view>
@@ -52,13 +66,14 @@ export default {
             lng:window.lng,
             address:window.address,
             apartmentsFilter:[],
+            range:'20',
         }
     },
    
     methods:{
 
         getApartment(){
-            axios.get(`http://127.0.0.1:8000/api/apartments?address=${window.address}&lat=${window.lat}&lng=${window.lng}`)
+            axios.get(`http://127.0.0.1:8000/api/apartments?address=${window.address}&lat=${window.lat}&lng=${window.lng}&range=${this.range}`)
             .then(result => {
                 this.apartmentsFilter = [];
                 result.data.filter(element => {
@@ -70,9 +85,10 @@ export default {
             .catch( error => {
                 console.log(error);
             });
-
-
             
+        },
+        setRange(value){
+            this.range = value;
         }
     }
 }
@@ -84,6 +100,18 @@ export default {
         height: 500px;
         max-width: 1110px;
         display: none;
+        }
+
+
+        .range{
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: chartreuse;
+            color: #000;
+            border-radius: 50%;
         }
 
 

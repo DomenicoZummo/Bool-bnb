@@ -1,13 +1,10 @@
+import tt from "@tomtom-international/web-sdk-maps";
+import { services } from "@tomtom-international/web-sdk-services";
+import SearchBox from "@tomtom-international/web-sdk-plugin-searchbox";
 
-import tt from '@tomtom-international/web-sdk-maps';
-import { services } from '@tomtom-international/web-sdk-services';
-import SearchBox from '@tomtom-international/web-sdk-plugin-searchbox';
-
-
-let lat = document.getElementById('lat');
-let lng = document.getElementById('lng');
-let address = document.getElementById('address');
-
+let lat = document.getElementById("lat");
+let lng = document.getElementById("lng");
+let address = document.getElementById("address");
 
 function handleResultsFound(event) {
     var results = event.data.results.fuzzySearch.results;
@@ -29,36 +26,33 @@ function handleResultSelection(event) {
 }
 
 function fitToViewport(markerData) {
-    if (
-        !markerData ||
-        (markerData instanceof Array && !markerData.length)
-    ) {
+    if (!markerData || (markerData instanceof Array && !markerData.length)) {
         return;
     }
     var bounds = new tt.LngLatBounds();
     if (markerData instanceof Array) {
-        markerData.forEach(function (marker) {
+        markerData.forEach(function(marker) {
             bounds.extend(getBounds(marker));
         });
     } else {
         bounds.extend(getBounds(markerData));
     }
     map.fitBounds(bounds, { padding: 100, linear: true });
-} 
+}
 function getBounds(data) {
     var btmRight;
     var topLeft;
 
     console.log(data);
 
-    lat.value  = data.position.lat;
+    lat.value = data.position.lat;
     lng.value = data.position.lng;
     address.value = data.address.freeformAddress;
 
     // lat = data.position.lat;
     // lng = data.position.lng;
     // address = data.address.freeformAddress;
-    
+
     // console.log(this.lat);
     // console.log(lat);
     // console.log(lng.value);
@@ -66,15 +60,14 @@ function getBounds(data) {
     if (data.viewport) {
         btmRight = [
             data.viewport.btmRightPoint.lng,
-            data.viewport.btmRightPoint.lat,
+            data.viewport.btmRightPoint.lat
         ];
         topLeft = [
             data.viewport.topLeftPoint.lng,
-            data.viewport.topLeftPoint.lat,
+            data.viewport.topLeftPoint.lat
         ];
     }
 
-    
     return [btmRight, topLeft];
 }
 
@@ -89,10 +82,10 @@ function SearchMarkersManager(map, options) {
     this.markers = {};
 }
 
-SearchMarkersManager.prototype.draw = function (poiList) {
+SearchMarkersManager.prototype.draw = function(poiList) {
     this._poiList = poiList;
     this.clear();
-    this._poiList.forEach(function (poi) {
+    this._poiList.forEach(function(poi) {
         var markerId = poi.id;
         var poiOpts = {
             name: poi.poi ? poi.poi.name : undefined,
@@ -102,7 +95,7 @@ SearchMarkersManager.prototype.draw = function (poiList) {
                 ? poi.poi.classifications[0].code
                 : undefined,
             position: poi.position,
-            entryPoints: poi.entryPoints,
+            entryPoints: poi.entryPoints
         };
         var marker = new SearchMarker(poiOpts, this._options);
         marker.addTo(this.map);
@@ -110,7 +103,7 @@ SearchMarkersManager.prototype.draw = function (poiList) {
     }, this);
 };
 
-SearchMarkersManager.prototype.clear = function () {
+SearchMarkersManager.prototype.clear = function() {
     for (var markerId in this.markers) {
         var marker = this.markers[markerId];
         marker.remove();
@@ -124,19 +117,19 @@ function SearchMarker(poiData, options) {
     this.options = options || {};
     this.marker = new tt.Marker({
         element: this.createMarker(),
-        anchor: "bottom",
+        anchor: "bottom"
     });
     var lon = this.poiData.position.lng || this.poiData.position.lon;
     this.marker.setLngLat([lon, this.poiData.position.lat]);
 }
 
-SearchMarker.prototype.addTo = function (map) {
+SearchMarker.prototype.addTo = function(map) {
     this.marker.addTo(map);
     this._map = map;
     return this;
 };
 
-SearchMarker.prototype.createMarker = function () {
+SearchMarker.prototype.createMarker = function() {
     var elem = document.createElement("div");
     elem.className = "tt-icon-marker-black tt-search-marker";
     if (this.options.markerClassName) {
@@ -152,40 +145,49 @@ SearchMarker.prototype.createMarker = function () {
     return elem;
 };
 
-SearchMarker.prototype.remove = function () {
+SearchMarker.prototype.remove = function() {
     this.marker.remove();
     this._map = null;
 };
 
-
- var options = {
+var options = {
     searchOptions: {
         key: "gKIZzIyagJPsNGDOLL9WGenkQlFeapDb",
         language: "it-IT",
-        limit: 5,
-    },       
+        limit: 5
+    }
 };
 
+function lati(latitude) {
+    if (latitude == 0 || latitude == null) {
+        return 12;
+    } else {
+        return latitude;
+    }
+}
+
+function long(longitude) {
+    if (longitude == 0 || longitude == null) {
+        return 42;
+    } else {
+        return longitude;
+    }
+}
 
 tt.setProductInfo("BoolBnB", "1.0");
 var map = tt.map({
     key: "gKIZzIyagJPsNGDOLL9WGenkQlFeapDb",
     container: "map",
-    center: [12, 41],
-    zoom: 4,
+    center: [long(lng.value), lati(lat.value)],
+    zoom: 5
 });
 // var ttSearchBox = new tt.plugins.SearchBox(tt.services, options);
 const ttSearchBox = new SearchBox(services, options);
 var searchBoxHTML = ttSearchBox.getSearchBoxHTML();
-document.getElementById('searchbox-back').prepend(searchBoxHTML) ;
-// var inputSearchBox = document.querySelector('.tt-search-box-input');
-// inputSearchBox.value = `via stazione`;
+document.getElementById("searchbox-back").prepend(searchBoxHTML);
+var inputSearchBox = document.querySelector(".tt-search-box-input");
+inputSearchBox.value = address.value;
 // console.log(inputSearchBox.value);
 var searchMarkersManager = new SearchMarkersManager(map);
-ttSearchBox.on("tomtom.searchbox.resultselected", handleResultSelection); // CHIAMATA ON CLICK  
+ttSearchBox.on("tomtom.searchbox.resultselected", handleResultSelection); // CHIAMATA ON CLICK
 ttSearchBox.on("tomtom.searchbox.resultscleared", handleResultClearing);
-
-
-
-
- 

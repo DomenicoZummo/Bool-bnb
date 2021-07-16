@@ -178,7 +178,7 @@ tt.setProductInfo("BoolBnB", "1.0");
 var map = tt.map({
     key: "gKIZzIyagJPsNGDOLL9WGenkQlFeapDb",
     container: "map",
-    center: [long(lng.value), lati(lat.value)],
+    center: [lati(lat.value), long(lng.value)],
     zoom: 5
 });
 // var ttSearchBox = new tt.plugins.SearchBox(tt.services, options);
@@ -187,7 +187,6 @@ var searchBoxHTML = ttSearchBox.getSearchBoxHTML();
 document.getElementById("searchbox-back").prepend(searchBoxHTML);
 var inputSearchBox = document.querySelector(".tt-search-box-input");
 inputSearchBox.value = address.value;
-// console.log(inputSearchBox.value);
 var searchMarkersManager = new SearchMarkersManager(map);
 ttSearchBox.on("tomtom.searchbox.resultselected", handleResultSelection); // CHIAMATA ON CLICK
 ttSearchBox.on("tomtom.searchbox.resultscleared", handleResultClearing);

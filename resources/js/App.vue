@@ -26,7 +26,7 @@
           <div class="  d-flex flew-wrap">
               <div 
               v-for="(apartment , key) in apartmentsFilter" :key="key"
-               class="card m-3" style="width: 18rem;">
+               class="card m-3">
                <img class="card-img-top" :src="apartment.img_path" alt="Card image cap">
                 <div class="card-body">
                     <h5 class="card-title">{{apartment.title}}</h5>
@@ -76,6 +76,7 @@ export default {
             axios.get(`http://127.0.0.1:8000/api/apartments?address=${window.address}&lat=${window.lat}&lng=${window.lng}&range=${this.range}`)
             .then(result => {
                 this.apartmentsFilter = [];
+                console.log(result.data);
                 result.data.filter(element => {
                 if(element.visibility){
                     this.apartmentsFilter.push(element);
@@ -94,7 +95,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 @import'~bootstrap/dist/css/bootstrap.css';
       #map{
         height: 500px;
@@ -113,6 +114,26 @@ export default {
             color: #000;
             border-radius: 50%;
         }
+
+
+        .card{
+            width: 18rem;
+            animation: card-effect 0.7s forwards;
+           opacity: 0;
+           transform: scale(0.1);
+        }
+
+        @keyframes card-effect {
+            0%{
+                opacity: 0;
+                transform: scale(0.1);
+            }
+            100%{
+                opacity: 1;
+                transform: scale(1.0);
+            }
+        }
+
 
 
 </style>

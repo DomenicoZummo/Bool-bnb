@@ -34,8 +34,6 @@
     </head>
     <body>
         <div class="container pt-5">
-            <div id="searchbox-front"></div>
-            <div id="map"></div>
         </div>
        <div id="root"></div>
        <script src="{{ asset('js/app.js') }}"></script>

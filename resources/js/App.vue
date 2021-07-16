@@ -1,10 +1,10 @@
 <template>
   <div class="container pt-1">
-
+       
       <!-- Header -->
       <Header />
 
-        
+       <div id="searchbox-front" class="mb-3"></div>
         <div class="d-flex box-input align-items-center">
             <!-- <select @change="setRange(range)" v-model="range" class="mr-5" name="km" id="km">
                 <option value="1">1KM</option>
@@ -23,21 +23,24 @@
       <main>
           <router-view>
           </router-view>
-          <div class="  d-flex flew-wrap">
-              <div 
-              v-for="(apartment , key) in apartmentsFilter" :key="key"
-               class="card m-3">
-               <img class="card-img-top" :src="apartment.img_path" alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title">{{apartment.title}}</h5>
-                    <p class="card-text">{{apartment.address}}</p>
-                    <p class="card-text">{{apartment.floor}}</p>
-                    <p class="card-text">{{apartment.rooms}}</p>
-                    <p class="card-text">{{apartment.beds}}</p>
-                    <p class="card-text">{{apartment.description}}</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+          <div class="d-flex box-search">
+                    <div class="d-flex flex-column box-apartments flew-wrap">
+                    <div 
+                    v-for="(apartment , key) in apartmentsFilter" :key="key"
+                    class="card m-3">
+                    <img class="card-img-top" :src="apartment.img_path" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">{{apartment.title}}</h5>
+                            <p class="card-text">{{apartment.address}}</p>
+                            <p class="card-text">{{apartment.floor}}</p>
+                            <p class="card-text">{{apartment.rooms}}</p>
+                            <p class="card-text">{{apartment.beds}}</p>
+                            <p class="card-text">{{apartment.description}}</p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                        </div>
                 </div>
-                </div>
+           <div v-show="statusBtnSearch" id="map" class="ml-5"></div>
           </div>
       </main>
       <!-- Footer -->
@@ -67,12 +70,14 @@ export default {
             address:window.address,
             apartmentsFilter:[],
             range:'20',
+            statusBtnSearch:false,
         }
     },
    
     methods:{
 
         getApartment(){
+            this.statusBtnSearch = !this.statusBtnSearch;
             axios.get(`http://127.0.0.1:8000/api/apartments?address=${window.address}&lat=${window.lat}&lng=${window.lng}&range=${this.range}`)
             .then(result => {
                 this.apartmentsFilter = [];
@@ -98,11 +103,9 @@ export default {
 <style scoped lang="scss">
 @import'~bootstrap/dist/css/bootstrap.css';
       #map{
-        height: 500px;
-        max-width: 1110px;
-        display: none;
+        width: 60%;
+        height: 70vh;
         }
-
 
         .range{
             width: 40px;
@@ -113,7 +116,8 @@ export default {
             background: chartreuse;
             color: #000;
             border-radius: 50%;
-            font-size: 15px;
+            font-weight: bold;
+            font-size: 10px;
         }
 
 
@@ -133,6 +137,13 @@ export default {
                 opacity: 1;
                 transform: scale(1.0);
             }
+        }
+
+
+        .box-apartments{
+            max-height: 70vh;
+            width: 40%;
+            overflow-y:auto;
         }
 
 

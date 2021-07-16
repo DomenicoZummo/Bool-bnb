@@ -5,7 +5,7 @@
       <Header />
 
         
-        <div class="d-flex">
+        <div class="d-flex box-input align-items-center">
             <!-- <select @change="setRange(range)" v-model="range" class="mr-5" name="km" id="km">
                 <option value="1">1KM</option>
                 <option value="3">2KM</option>
@@ -105,14 +105,15 @@ export default {
 
 
         .range{
-            width: 80px;
-            height: 80px;
+            width: 40px;
+            height: 40px;
             display: flex;
             align-items: center;
             justify-content: center;
             background: chartreuse;
             color: #000;
             border-radius: 50%;
+            font-size: 15px;
         }
 
 

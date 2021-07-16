@@ -20,10 +20,10 @@
             <h2>Square meters: </h2> <p>{{ $apartment->square_meters }}</p>
 
             @if(count($apartment->services) > 0)
-            @foreach ($apartment->services as $service)
-                <span class="badge badge-primary p-2 my-2">{{$service->name}}</span>
-            @endforeach
-        @endif
+                @foreach ($apartment->services as $service)
+                    <span class="badge badge-primary p-2 my-2">{{$service->name}}</span>
+                @endforeach
+             @endif
 
             <div class="d-flex action-show">
                 <a class="btn btn-success mt-5 mr-5" href="{{ route('admin.apartments.index') }}">Back</a>

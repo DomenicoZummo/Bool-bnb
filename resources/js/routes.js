@@ -4,6 +4,8 @@ import VueRouter from 'vue-router';
 
 // Components from routes
 import Home from './pages/Home.vue';
+// Components from routes
+import AdvancedSearch from './pages/AdvancedSearch.vue';
 
 
 // Router registration 
@@ -18,6 +20,11 @@ const router = new VueRouter({
             path:'/',
             name:'home',
             component:Home,
+        },
+        {
+            path:'/advancedsearch',
+            name:'advancedsearch',
+            component:AdvancedSearch,
         },
     ],
 });

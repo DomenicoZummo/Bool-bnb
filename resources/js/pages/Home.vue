@@ -1,7 +1,6 @@
 <template>
   <div class="container">
       <h1>Router home here</h1>
-      <div id="map"></div>
   </div>
 </template>
 

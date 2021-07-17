@@ -1,6 +1,6 @@
 <template>
   <div>
- <div class="d-flex box-search">
+ <!-- <div class="d-flex box-search">
                     <div class="d-flex flex-column box-apartments flew-wrap">
                     <div 
                     v-for="(apartment , key) in apartments" :key="key"
@@ -17,23 +17,17 @@
                         </div>
                         </div>
                 </div>
-           <div  id="map" class="ml-5"></div>
-          </div>
+          </div> -->
   </div>
 </template>
 
 <script>
 export default {
-    props:['apartments'],
     name:'AdvancedSearch',
 }
 </script>
 
 <style scoped lang="scss">
-#map{
-        width: 65%;
-        height: 70vh;
-        }
 
         .range{
             width: 40px;

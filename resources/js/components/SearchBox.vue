@@ -14,10 +14,31 @@
 
             <input @change="setRange(range)" v-model="range" class="mr-3" min="0" max="100" value="range" step="5" default="20" type="range" name="range" id="range">
             <label value="20" class="mx-5 range" for="range">{{range}} km</label>
-             <div  @click="$emit('getApartmentsSearchBox', apartmentsFilter)">
-                 <router-link class="btn btn-success " :to="{ name: 'advancedsearch' }"
+
+            <!-- Bottone ricerca normale -->
+           <router-link v-if="this.$route.name == 'home'" class="btn btn-success " :to="{ name: 'advancedsearch' }"
             >Cerca</router-link>
-             </div>
+
+            <!-- Bottone ricerca avanzata -->
+            <input class="btn btn-success " @click="getApartmentFiltered" v-else type="button" value="Ricerca Avanzata">
+
+            <!-- Bottone filtri -->
+            <input v-show="this.$route.name == 'advancedsearch'" @click="clickFilter" class="ml-5" type="button" value="Filtri">
+            </div>
+
+
+            <div v-show="clickFilterStatus"
+            class="searchFilter">
+                <div class="box-search py-2">
+                    <div  v-for="(service , key) in service" :key="key"
+                    class="checkbox-service ml-3">
+                    <label @click="clickCheckbox(service.name)"
+                    :for="service.id">{{service.name}}</label>
+                    <input
+                     type="checkbox" :name="service.id" :id="service.id">
+                    </div>
+                    <span class="close" @click="clickFilter">Close</span>
+                </div>
             </div>
   </div>
 </template>
@@ -32,11 +53,61 @@ export default {
             lng:window.lng,
             address:window.address,
             apartmentsFilter:[],
+            servivesChecked:[],
+            service:[],
             range:'20',
+            clickFilterStatus: false,
         }
+    },
+    created(){
+        this.getServices();
     },
 
     methods:{
+
+         getServices(){
+             this.servivesChecked = [],
+              this.service = [];
+            axios.get(`http://127.0.0.1:8000/api/services`)
+            .then(result => {
+                this.service = result.data;
+                console.log(result.data);
+            })
+            .catch( error => {
+                console.log(error);
+            });
+            
+        },
+
+        clickCheckbox(e){
+            if(!this.servivesChecked.includes()){
+                console.log(e);
+                this.servivesChecked.push(e)
+                console.log(this.servivesChecked);
+            }
+        },
+
+        clickFilter(){
+            this.clickFilterStatus = !this.clickFilterStatus;
+        },
+
+        getApartmentFiltered(){
+            axios.get(`http://127.0.0.1:8000/api/filterapartments?address=${window.address}&lat=${window.lat}&lng=${window.lng}&range=${this.range}&services=${this.servivesChecked}`)
+            .then(result => {
+                console.log(`http://127.0.0.1:8000/api/filterapartments?address=${window.address}&lat=${window.lat}&lng=${window.lng}&range=${this.range}&services=${this.servivesChecked}`);
+                this.apartmentsFilter = [];
+                console.log(result.data);
+                result.data.filter(element => {
+                if(element.visibility){
+                    this.apartmentsFilter.push(element);
+                }
+            });
+            })
+            .catch( error => {
+                console.log(error);
+            });
+            
+        },
 
         getApartment(){
             axios.get(`http://127.0.0.1:8000/api/apartments?address=${window.address}&lat=${window.lat}&lng=${window.lng}&range=${this.range}`)
@@ -62,5 +133,50 @@ export default {
 </script>
 
 <style scoped lang="scss">
+
+.searchFilter{
+    display: flex;
+    position: absolute;
+    z-index: 10;
+    background:rgba( #000000, 0.3);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    justify-content: center;
+    align-items: center;
+
+    .box-search{
+        position: relative;
+        width: 600px;
+        height: 500px;
+        background: #fff;
+        color: #000;
+        overflow-y: auto;
+        transform: scale(0.1);
+        opacity: 0;
+        animation: box-search-in 0.3s forwards;
+
+        @keyframes  box-search-in {
+            0%{
+                transform: scale(0.1);
+                 opacity: 0;
+            }
+
+            100%{
+                transform: scale(1.0);
+                 opacity: 1;
+            }
+        }
+
+        .close{
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+    }
+}
  
 </style>

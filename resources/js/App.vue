@@ -4,11 +4,13 @@
       <!-- Header -->
       <Header />
 
-      <SearchBox @getApartmentsSearchBox="getApartment"/>
+      <SearchBox />
+
+      <Maps class="my-3" v-show="this.$route.name == 'advancedsearch'" />
     
       <!-- Main -->
       <main>
-          <router-view :apartments="apartmentsFilter">
+          <router-view >
           </router-view>
       </main>
       <!-- Footer -->
@@ -21,6 +23,7 @@
 import Header from './components/Header.vue';
 import Footer from './components/Footer.vue';
 import SearchBox from './components/SearchBox.vue';
+import Maps from './components/Maps.vue';
 
 
 export default {
@@ -29,6 +32,7 @@ export default {
         Header,
         Footer,
         SearchBox,
+        Maps,
     },
     data(){
         return {
@@ -36,12 +40,11 @@ export default {
         }
     },
     methods:{
-        getApartment(array){
-            this.apartmentsFilter = array;
-        }
+
     }
    
 }
+
 </script>
 
 <style  lang="scss">

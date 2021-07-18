@@ -5,11 +5,16 @@
 
         <SearchBox @getApartmentFiltered="getApartmentFiltered" />
 
-        <Maps class="my-3" v-show="this.$route.name == 'advancedsearch'" />
-
         <!-- Main -->
-        <main>
+        <main class="d-flex">
             <router-view :apartments="apartmentsFilter"> </router-view>
+            <Maps
+                class="my-3"
+                v-show="
+                    this.$route.name == 'advancedsearch' &&
+                        this.apartmentsFilter.length > 0
+                "
+            />
         </main>
         <!-- Footer -->
         <Footer />

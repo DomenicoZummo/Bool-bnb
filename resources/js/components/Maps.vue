@@ -1,18 +1,18 @@
 <template>
-  <div>
-   <div id="map"></div>
-  </div>
+    <div>
+        <div id="map"></div>
+    </div>
 </template>
 
 <script>
 export default {
-    name:'Maps',
-}
+    name: "Maps"
+};
 </script>
 
 <style scoped lang="scss">
-#map{
-        width: 65%;
-        height: 70vh;
-        }
+#map {
+    width: 50vw;
+    height: 60vh;
+}
 </style>

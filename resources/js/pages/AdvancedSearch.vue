@@ -1,7 +1,10 @@
 <template>
     <div>
         <div class="d-flex box-search">
-            <div class="d-flex flex-column box-apartments flew-wrap">
+            <div
+                v-if="apartments.length > 0"
+                class="d-flex flex-column box-apartments flew-wrap"
+            >
                 <div
                     v-for="(apartment, key) in apartments"
                     :key="key"
@@ -23,6 +26,7 @@
                     </div>
                 </div>
             </div>
+            <h1 v-else>No results</h1>
         </div>
     </div>
 </template>
@@ -70,7 +74,7 @@ export default {
 
 .box-apartments {
     max-height: 70vh;
-    width: 35%;
+    width: 20vw;
     overflow-y: auto;
 }
 </style>

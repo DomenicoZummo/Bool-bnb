@@ -16,11 +16,10 @@
                 @change="setRange(range)"
                 v-model="range"
                 class="mr-3"
-                min="0"
+                min="5"
                 max="100"
                 value="range"
                 step="5"
-                default="20"
                 type="range"
                 name="range"
                 id="range"
@@ -49,8 +48,12 @@
                 type="button"
                 value="Filtri"
             />
-            <div v-show="servicesChecked.length > 0"
-            class="badge badge-primary p-2 m-2">Filtri attivi : {{servicesChecked.length}}</div>
+            <div
+                v-show="servicesChecked.length > 0"
+                class="badge badge-primary p-2 m-2"
+            >
+                Filtri attivi : {{ servicesChecked.length }}
+            </div>
         </div>
 
         <div v-show="clickFilterStatus" class="searchFilter">

@@ -1,6 +1,6 @@
 <template>
-  <div>
-      <div @click="getApartment"  id="searchbox-front"  class="mb-3"></div>
+    <div>
+        <div @click="getApartment" id="searchbox-front" class="mb-3"></div>
         <div class="d-flex box-input align-items-center">
             <!-- <select @change="setRange(range)" v-model="range" class="mr-5" name="km" id="km">
                 <option value="1">1KM</option>
@@ -12,133 +12,209 @@
                 <option value="100">100KM</option>
             </select> -->
 
-            <input @change="setRange(range)" v-model="range" class="mr-3" min="0" max="100" value="range" step="5" default="20" type="range" name="range" id="range">
-            <label value="20" class="mx-5 range" for="range">{{range}} km</label>
+            <input
+                @change="setRange(range)"
+                v-model="range"
+                class="mr-3"
+                min="0"
+                max="100"
+                value="range"
+                step="5"
+                default="20"
+                type="range"
+                name="range"
+                id="range"
+            />
+            <label value="20" class="mx-5 range" for="range"
+                >{{ range }} km</label
+            >
 
             <!-- Bottone ricerca normale -->
-           <router-link v-if="this.$route.name == 'home'" class="btn btn-success " :to="{ name: 'advancedsearch' }"
-            >Cerca</router-link>
+            <router-link
+                v-if="this.$route.name == 'home'"
+                class="btn btn-success "
+                :to="{ name: 'advancedsearch' }"
+                >Cerca</router-link
+            >
 
             <!-- Bottone ricerca avanzata -->
-            <input class="btn btn-success " @click="getApartmentFiltered" v-else type="button" value="Ricerca Avanzata">
+            <input
+                class="btn btn-success "
+                @click="getApartmentFiltered"
+                v-else
+                type="button"
+                value="Ricerca Avanzata"
+            />
 
             <!-- Bottone filtri -->
-            <input v-show="this.$route.name == 'advancedsearch'" @click="clickFilter" class="ml-5" type="button" value="Filtri">
-            </div>
+            <input
+                v-show="this.$route.name == 'advancedsearch'"
+                @click="clickFilter"
+                class="ml-5"
+                type="button"
+                value="Filtri"
+            />
+        </div>
 
-
-            <div v-show="clickFilterStatus"
-            class="searchFilter">
-                <div class="box-search py-2">
-                    <div  v-for="(service , key) in service" :key="key"
-                    class="checkbox-service ml-3">
-                    <label @click="clickCheckbox(service.name)"
-                    :for="service.id">{{service.name}}</label>
+        <div v-show="clickFilterStatus" class="searchFilter">
+            <div class="box-search py-2">
+                <div
+                    v-for="(service, key) in service"
+                    :key="key"
+                    class="checkbox-service ml-3"
+                >
+                    <label
+                        @click="clickCheckbox(service.name)"
+                        :for="service.id"
+                        >{{ service.name }}</label
+                    >
                     <input
-                     type="checkbox" :name="service.id" :id="service.id">
-                    </div>
-                    <span class="close" @click="clickFilter">Close</span>
+                        type="checkbox"
+                        :name="service.id"
+                        :id="service.id"
+                        :value="service.id"
+                        v-model="servicesChecked"
+                    />
                 </div>
+                <span class="close" @click="clickFilter">Close</span>
             </div>
-  </div>
+        </div>
+
+        <div class="inp" v-show="this.$route.name == 'advancedsearch'">
+            <div class="mt-3 mr-3">
+                <label class="form-label" for="beds">Beds</label>
+                <input
+                    id="beds"
+                    name="beds"
+                    min="1"
+                    max="20"
+                    required
+                    type="number"
+                    v-model.number="minBeds"
+                    value="minBeds"
+                />
+            </div>
+            <div class="mt-3 mr-3">
+                <label class="form-label" for="rooms">Rooms </label>
+                <input
+                    id="rooms"
+                    name="rooms"
+                    required
+                    min="1"
+                    max="20"
+                    type="number"
+                    v-model.number="minRooms"
+                    value="minRooms"
+                />
+            </div>
+        </div>
+    </div>
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 export default {
-    name:'SearchBox',
-    data(){
+    name: "SearchBox",
+    data() {
         return {
-            lat:window.lat,
-            lng:window.lng,
-            address:window.address,
-            apartmentsFilter:[],
-            servivesChecked:[],
-            service:[],
-            range:'20',
+            lat: window.lat,
+            lng: window.lng,
+            address: window.address,
+            apartmentsFilter: [],
+            servicesChecked: [],
+            service: [],
+            range: "20",
             clickFilterStatus: false,
-        }
+            minRooms: "1",
+            minBeds: "1"
+        };
     },
-    created(){
+    created() {
         this.getServices();
     },
 
-    methods:{
-
-         getServices(){
-             this.servivesChecked = [],
-              this.service = [];
-            axios.get(`http://127.0.0.1:8000/api/services`)
-            .then(result => {
-                this.service = result.data;
-                console.log(result.data);
-            })
-            .catch( error => {
-                console.log(error);
-            });
-            
+    methods: {
+        getServices() {
+            (this.servivesChecked = []), (this.service = []);
+            axios
+                .get(`http://127.0.0.1:8000/api/services`)
+                .then(result => {
+                    this.service = result.data;
+                    console.log(result.data);
+                })
+                .catch(error => {
+                    console.log(error);
+                });
         },
 
-        clickCheckbox(e){
-            if(!this.servivesChecked.includes()){
+        clickCheckbox(e) {
+            if (!this.servivesChecked.includes()) {
                 console.log(e);
-                this.servivesChecked.push(e)
-                console.log(this.servivesChecked);
+                this.servivesChecked.push(e);
+                console.log(this.servicesChecked);
             }
         },
 
-        clickFilter(){
+        clickFilter() {
             this.clickFilterStatus = !this.clickFilterStatus;
         },
 
-        getApartmentFiltered(){
-            axios.get(`http://127.0.0.1:8000/api/filterapartments?address=${window.address}&lat=${window.lat}&lng=${window.lng}&range=${this.range}&services=${this.servivesChecked}`)
-            .then(result => {
-                console.log(`http://127.0.0.1:8000/api/filterapartments?address=${window.address}&lat=${window.lat}&lng=${window.lng}&range=${this.range}&services=${this.servivesChecked}`);
-                this.apartmentsFilter = [];
-                console.log(result.data);
-                result.data.filter(element => {
-                if(element.visibility){
-                    this.apartmentsFilter.push(element);
-                }
-            });
-            })
-            .catch( error => {
-                console.log(error);
-            });
-            
+        getApartmentFiltered() {
+            axios
+                .get(
+                    `http://127.0.0.1:8000/api/filterapartments?address=${window.address}&lat=${window.lat}&lng=${window.lng}&range=${this.range}&rooms=${this.minRooms}&beds=${this.minBeds}&services=${this.servicesChecked}`
+                )
+                .then(result => {
+                    console.log("Stanze minime", this.minRooms);
+                    console.log("Letti minimi", this.minBeds);
+                    console.log("Servizi", this.servicesChecked);
+                    console.log(
+                        `http://127.0.0.1:8000/api/filterapartments?address=${window.address}&lat=${window.lat}&lng=${window.lng}&range=${this.range}&rooms=${this.minRooms}&beds=${this.minBeds}&services=${this.servicesChecked}`
+                    );
+                    this.apartmentsFilter = [];
+                    console.log(result.data);
+                    result.data.filter(element => {
+                        if (element.visibility) {
+                            this.apartmentsFilter.push(element);
+                        }
+                    });
+                })
+                .catch(error => {
+                    console.log(error);
+                });
         },
 
-        getApartment(){
-            axios.get(`http://127.0.0.1:8000/api/apartments?address=${window.address}&lat=${window.lat}&lng=${window.lng}&range=${this.range}`)
-            .then(result => {
-                this.apartmentsFilter = [];
-                console.log(result.data);
-                result.data.filter(element => {
-                if(element.visibility){
-                    this.apartmentsFilter.push(element);
-                }
-            });
-            })
-            .catch( error => {
-                console.log(error);
-            });
-            
+        getApartment() {
+            axios
+                .get(
+                    `http://127.0.0.1:8000/api/apartments?address=${window.address}&lat=${window.lat}&lng=${window.lng}&range=${this.range}`
+                )
+                .then(result => {
+                    this.apartmentsFilter = [];
+                    console.log(result.data);
+                    result.data.filter(element => {
+                        if (element.visibility) {
+                            this.apartmentsFilter.push(element);
+                        }
+                    });
+                })
+                .catch(error => {
+                    console.log(error);
+                });
         },
-        setRange(value){
+        setRange(value) {
             this.range = value;
         }
     }
-}
+};
 </script>
 
 <style scoped lang="scss">
-
-.searchFilter{
+.searchFilter {
     display: flex;
     position: absolute;
     z-index: 10;
-    background:rgba( #000000, 0.3);
+    background: rgba(#000000, 0.3);
     top: 0;
     left: 0;
     right: 0;
@@ -146,7 +222,7 @@ export default {
     justify-content: center;
     align-items: center;
 
-    .box-search{
+    .box-search {
         position: relative;
         width: 600px;
         height: 500px;
@@ -157,19 +233,19 @@ export default {
         opacity: 0;
         animation: box-search-in 0.3s forwards;
 
-        @keyframes  box-search-in {
-            0%{
+        @keyframes box-search-in {
+            0% {
                 transform: scale(0.1);
-                 opacity: 0;
+                opacity: 0;
             }
 
-            100%{
-                transform: scale(1.0);
-                 opacity: 1;
+            100% {
+                transform: scale(1);
+                opacity: 1;
             }
         }
 
-        .close{
+        .close {
             position: absolute;
             top: 20px;
             right: 20px;
@@ -178,5 +254,4 @@ export default {
         }
     }
 }
- 
 </style>

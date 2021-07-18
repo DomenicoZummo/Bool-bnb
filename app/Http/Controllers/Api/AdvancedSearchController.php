@@ -18,49 +18,112 @@ class AdvancedSearchController extends Controller
         $lat = $query['lat'];
         $lng = $query['lng'];
         $range = $query['range'];
+
+        $rooms = $query['rooms'];
+        $beds = $query['beds'];
         $services = $query['services'];
-       
 
+        $listIntServices =[];
 
-
+        // dd($listIntServices);
         $apartment_filter= Apartment::whereBetween('latitude', [($lat - $range /100),($lat + $range/100)])
-        ->whereBetween('longitude', [[($lng - $range/100),($lng + $range/100)]])->with('user', 'services' , 'sponsorships')->get();
+        ->whereBetween('longitude', [[($lng - $range/100),($lng + $range/100)]])
+        ->where('rooms', '>=',  $rooms)
+        ->where('beds', '>=',  $beds)
+        ->with('user', 'services' , 'sponsorships')->get();
 
-
-       $apartment_filter_service = [];
-
-
-
-        foreach ($apartment_filter as $apartment) {
-
-            $service_apartment = $apartment->services;
-
-            foreach ($service_apartment as $service) {
-                $id_service = strtolower($service['name']);
-                $test[] =  $id_service;
-                if(strpos($services, $id_service)){
-                    $apartment_filter_service[] = $apartment;
-                }
-
-            }
-
-
-        }
-
-      
-        dd($test);
-
-
-
-        if( $apartment_filter_service){
-            foreach ($apartment_filter as  $apartment) {
-                $apartment['img_path'] = url('storage/'.   $apartment['img_path']);
-            }
-            
-         }
 
         
-        return response()->json(  $apartment_filter_service);
+        $serviceApartment=[];
+        $apartment_service_filter = [];
+
+
+
+        
+
+        if($services != null){
+            $listServices = explode(',',$services);
+
+            foreach($listServices as $servic){
+                $intServ = intval($servic);
+                $listIntServices[] = $intServ;
+            }
+        sort($listIntServices);
+
+        // dd($listIntServices);
+
+        if(count($listIntServices) >= 1 ){
+
+            
+
+            foreach($apartment_filter as $apartment){
+
+                
+            $service_apartment = $apartment->services;
+
+
+            // dd($apartment->services);
+            if(count($service_apartment) >= 1){
+
+                foreach($service_apartment as $service){
+               
+                // dd($listIntServices);
+                // dd($service['id']);
+
+
+                foreach($listIntServices as $idfilter){
+                    // dd($idfilter);
+                    if($service['id'] == $idfilter){
+                        
+                        $apartment_service_filter[] = $apartment;
+
+
+                    }
+                }
+                // dump($serviceApartment);
+                
+                // array_diff($serviceApartment,$listIntServices );
+                // dd(array_diff($serviceApartment,$listIntServices ));
+             }
+
+            }
+
+            }
+
+        } 
+
+        // dd(array_unique($apartment_service_filter));
+
+        $apartmentFilteredService = array_unique($apartment_service_filter);
+
+                 if($apartmentFilteredService ){
+             foreach ($apartmentFilteredService as  $apartment) {
+
+                //  dd($apartment['attributes']->id);
+                 $apartment->img_path = url('storage/'.   $apartment['img_path']);
+             }
+            
+          }
+
+        return response()->json( $apartmentFilteredService );
+
+        }else{
+
+            if($apartment_filter ){
+             foreach ($apartment_filter as  $apartment) {
+
+                //  dd($apartment['attributes']->id);
+                 $apartment->img_path = url('storage/'.   $apartment['img_path']);
+             }
+            
+          }
+        return response()->json(  $apartment_filter);
+            
+        }
 
     }
+
+
+
+
 }

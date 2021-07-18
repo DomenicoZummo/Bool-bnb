@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div @click="getApartment" id="searchbox-front" class="mb-3"></div>
+        <div id="searchbox-front" class="mb-3"></div>
         <div class="d-flex box-input align-items-center">
             <!-- <select @change="setRange(range)" v-model="range" class="mr-5" name="km" id="km">
                 <option value="1">1KM</option>
@@ -30,21 +30,16 @@
             >
 
             <!-- Bottone ricerca normale -->
-            <router-link
-                v-if="this.$route.name == 'home'"
-                class="btn btn-success "
-                :to="{ name: 'advancedsearch' }"
-                >Cerca</router-link
-            >
 
-            <!-- Bottone ricerca avanzata -->
-            <input
-                class="btn btn-success "
-                @click="getApartmentFiltered"
-                v-else
-                type="button"
-                value="Ricerca Avanzata"
-            />
+            <div @click="getApartmentFiltered">
+                <router-link
+                    @click="getApartmentFiltered"
+                    :apartmentFiltered="apartmentsFilter"
+                    class="btn btn-success "
+                    :to="{ name: 'advancedsearch' }"
+                    >Cerca</router-link
+                >
+            </div>
 
             <!-- Bottone filtri -->
             <input
@@ -160,6 +155,7 @@ export default {
         },
 
         getApartmentFiltered() {
+            this.apartmentsFilter = [];
             axios
                 .get(
                     `http://127.0.0.1:8000/api/filterapartments?address=${window.address}&lat=${window.lat}&lng=${window.lng}&range=${this.range}&rooms=${this.minRooms}&beds=${this.minBeds}&services=${this.servicesChecked}`
@@ -171,7 +167,7 @@ export default {
                     console.log(
                         `http://127.0.0.1:8000/api/filterapartments?address=${window.address}&lat=${window.lat}&lng=${window.lng}&range=${this.range}&rooms=${this.minRooms}&beds=${this.minBeds}&services=${this.servicesChecked}`
                     );
-                    this.apartmentsFilter = [];
+
                     console.log(result.data);
                     result.data.filter(element => {
                         if (element.visibility) {
@@ -182,26 +178,29 @@ export default {
                 .catch(error => {
                     console.log(error);
                 });
+
+            this.$emit("getApartmentFiltered", this.apartmentsFilter);
         },
 
-        getApartment() {
-            axios
-                .get(
-                    `http://127.0.0.1:8000/api/apartments?address=${window.address}&lat=${window.lat}&lng=${window.lng}&range=${this.range}`
-                )
-                .then(result => {
-                    this.apartmentsFilter = [];
-                    console.log(result.data);
-                    result.data.filter(element => {
-                        if (element.visibility) {
-                            this.apartmentsFilter.push(element);
-                        }
-                    });
-                })
-                .catch(error => {
-                    console.log(error);
-                });
-        },
+        // getApartment() {
+        //     axios
+        //         .get(
+        //             `http://127.0.0.1:8000/api/apartments?address=${window.address}&lat=${window.lat}&lng=${window.lng}&range=${this.range}`
+        //         )
+        //         .then(result => {
+        //             this.apartmentsFilter = [];
+        //             console.log(result.data);
+        //             result.data.filter(element => {
+        //                 if (element.visibility) {
+        //                     this.apartmentsFilter.push(element);
+        //                 }
+        //             });
+        //         })
+        //         .catch(error => {
+        //             console.log(error);
+        //         });
+        //     // this.$emit("getApartmentFiltered", this.apartmentsFilter);
+        // },
         setRange(value) {
             this.range = value;
         }

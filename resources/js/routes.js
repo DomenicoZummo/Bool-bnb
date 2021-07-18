@@ -13,20 +13,20 @@ Vue.use(VueRouter);
 
 // App routes
 const router = new VueRouter({
-    mode:'history',
-    linkActiveClass:'active',
-    routes:[
-        {
-            path:'/',
-            name:'home',
-            component:Home,
+    mode: 'history',
+    linkActiveClass: 'active',
+    routes: [{
+            path: '/',
+            name: 'home',
+            component: Home,
         },
         {
-            path:'/advancedsearch',
-            name:'advancedsearch',
-            component:AdvancedSearch,
+            path: '/advancedsearch',
+            name: 'advancedsearch',
+            props: true,
+            component: AdvancedSearch,
         },
     ],
 });
 
-export default router ;
+export default router;

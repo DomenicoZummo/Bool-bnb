@@ -3,7 +3,8 @@
         <!-- Header -->
         <Header />
 
-        <SearchBox @getApartmentFiltered="getApartmentFiltered" />
+        <SearchBox v-show="this.$route.name == 'advancedsearch' ||
+                        this.$route.name == 'home'" @getApartmentFiltered="getApartmentFiltered" />
 
         <!-- Main -->
         <main class="d-flex">

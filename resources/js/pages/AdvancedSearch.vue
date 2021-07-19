@@ -30,7 +30,15 @@
                         >
                             {{ service.name }}
                         </p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                        <div>
+                            <router-link
+                                :apartment="apartment"
+                                :to="{ name: 'details', params: {id: apartment.id} }"
+                                class="btn btn-primary">
+                                    Go somewhere
+                            </router-link>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -44,6 +52,16 @@ export default {
     name: "AdvancedSearch",
     props: {
         apartments: Array
+    },
+    data() {
+        return {
+            arr: [],
+        }
+    },
+    methods: {
+        getDetails(e) {
+            this.arr = e;
+        }
     }
 };
 </script>

@@ -29,7 +29,8 @@ class AdvancedSearchController extends Controller
 
         $listIntServices = [];
 
-        // dd($listIntServices);
+        intval($services);
+       
         $apartment_filter = Apartment::whereBetween('latitude', [($lat - $range / 100), ($lat + $range / 100)])
             ->whereBetween('longitude', [[($lng - $range / 100), ($lng + $range / 100)]])
             ->where('rooms', '>=',  $rooms)
@@ -37,78 +38,39 @@ class AdvancedSearchController extends Controller
             ->with('user', 'services', 'sponsorships')
             ->get();
 
-        // $distances=[];
-
-        // foreach($apartment_filter as $coordinate){
-        //     $coordLat = $coordinate->latitude;
-        //     $coordLng = $coordinate->longitude;
-        //     $distance = sqrt(($coordLat - $lat)*($coordLat - $lat) + ($coordLng - $lng)*($coordLng - $lng) );
-        //      $distances[] = $distance;
-        //     
-        // };
-
-        // sort($distances);
-        // dd($distances);
 
 
-
-
-        $serviceApartment = [];
-        $apartment_service_filter = [];
-
-
-
-
-
-        if ($services != null) {
+            if ($services != null) {
             $listServices = explode(',', $services);
 
             foreach ($listServices as $servic) {
                 $intServ = intval($servic);
                 $listIntServices[] = $intServ;
             }
-            sort($listIntServices);
-
-            // dd($listIntServices);
-
-            if (count($listIntServices) >= 1) {
+            
 
 
-
-                foreach ($apartment_filter as $apartment) {
-
-
-                    $service_apartment = $apartment->services;
+            sort($listIntServices);         // Array id numerico della query
 
 
-                    // dd($apartment->services);
-                    if (count($service_apartment) >= 1) {
+            $apartmentFilteredByService = [];
 
-                        foreach ($service_apartment as $service) {
+            foreach($apartment_filter as $apartment){
+            $services = $apartment->services->find($listIntServices);
 
-                            // dd($listIntServices);
-                            // dd($service['id']);
+            
+            
 
-
-                            foreach ($listIntServices as $idfilter) {
-                                // dd($idfilter);
-                                if ($service['id'] == $idfilter) {
-
-                                    $apartment_service_filter[] = $apartment;
-                                }
-                            }
-                            // dump($serviceApartment);
-
-                            // array_diff($serviceApartment,$listIntServices );
-                            // dd(array_diff($serviceApartment,$listIntServices ));
-                        }
-                    }
-                }
+            if(count($services) >= count($listIntServices)){
+               
+                $apartmentFilteredByService[] = $apartment;
             }
 
-            // dd(array_unique($apartment_service_filter));
+            
 
-            $apartmentFilteredService = array_unique($apartment_service_filter);
+        }
+
+        $apartmentFilteredService = array_unique($apartmentFilteredByService);
 
             if ($apartmentFilteredService) {
                 foreach ($apartmentFilteredService as  $apartment) {
@@ -119,7 +81,8 @@ class AdvancedSearchController extends Controller
             }
 
             return response()->json($apartmentFilteredService);
-        } else {
+
+            }else {
 
             if ($apartment_filter) {
                 foreach ($apartment_filter as  $apartment) {

@@ -36,8 +36,6 @@ class AdvancedSearchController extends Controller
         ->where('beds', '>=',  $beds)
         ->with('user', 'services' , 'sponsorships')
         ->orderBy('address', 'desc')
-        // ->orderBy('latitude', 'asc')
-        // ->orderBy('longitude', 'asc')
         ->get();
 
 

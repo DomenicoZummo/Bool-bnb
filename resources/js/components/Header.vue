@@ -26,6 +26,13 @@
                             >
                         </li>
                         <li class="nav-item">
+                            <router-link
+                                class="nav-link"
+                                :to="{ name: 'advancedsearch' }"
+                                >Advanced Search</router-link
+                            >
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="/admin">Admin</a>
                         </li>
                     </ul>

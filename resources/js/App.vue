@@ -40,6 +40,7 @@ export default {
             apartmentsFilter: []
         };
     },
+
     methods: {
         getApartmentFiltered(e) {
             console.log("emit", e);

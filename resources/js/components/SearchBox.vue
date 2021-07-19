@@ -65,19 +65,15 @@
         <div v-show="clickFilterStatus" class="searchFilter">
             <div class="box-search py-2">
                 <div
-                    v-for="(service, key) in service"
-                    :key="key"
+                    v-for="(service, index) in services"
+                    :key="index"
                     class="checkbox-service ml-3"
                 >
-                    <label
-                        @click="clickCheckbox(service.name)"
-                        :for="service.id"
-                        >{{ service.name }}</label
-                    >
+                    <label :for="service.name">{{ service.name }}</label>
                     <input
                         type="checkbox"
-                        :name="service.id"
-                        :id="service.id"
+                        :name="service.name"
+                        :id="service.name"
                         :value="service.id"
                         v-model="servicesChecked"
                     />
@@ -128,7 +124,7 @@ export default {
             address: window.address,
             apartmentsFilter: [],
             servicesChecked: [],
-            service: [],
+            services: [],
             range: "20",
             clickFilterStatus: false,
             minRooms: "1",
@@ -141,24 +137,17 @@ export default {
 
     methods: {
         getServices() {
-            (this.servivesChecked = []), (this.service = []);
+            this.servicesChecked = [];
+            this.services = [];
             axios
                 .get(`http://127.0.0.1:8000/api/services`)
                 .then(result => {
-                    this.service = result.data;
+                    this.services = result.data;
                     console.log(result.data);
                 })
                 .catch(error => {
                     console.log(error);
                 });
-        },
-
-        clickCheckbox(e) {
-            if (!this.servivesChecked.includes()) {
-                console.log(e);
-                this.servivesChecked.push(e);
-                console.log(this.servicesChecked);
-            }
         },
 
         clickFilter() {

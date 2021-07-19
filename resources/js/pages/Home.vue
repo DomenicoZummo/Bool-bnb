@@ -1,15 +1,13 @@
 <template>
-  <div class="container">
-      <h1>Router home here</h1>
-  </div>
+    <div class="container">
+        <h1>Home</h1>
+    </div>
 </template>
 
 <script>
 export default {
-    name:'Home',
-}
+    name: "Home"
+};
 </script>
 
-<style scoped lang="scss">
-
-</style>
+<style scoped lang="scss"></style>

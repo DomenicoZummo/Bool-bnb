@@ -15,9 +15,13 @@ class AdvancedSearchController extends Controller
 
         $query = $request->query();
 
+        $address = $query['address'];
+
         $lat = $query['lat'];
         $lng = $query['lng'];
         $range = $query['range'];
+
+        // dd($range); 
 
         $rooms = $query['rooms'];
         $beds = $query['beds'];
@@ -30,7 +34,20 @@ class AdvancedSearchController extends Controller
         ->whereBetween('longitude', [[($lng - $range/100),($lng + $range/100)]])
         ->where('rooms', '>=',  $rooms)
         ->where('beds', '>=',  $beds)
-        ->with('user', 'services' , 'sponsorships')->get();
+        ->with('user', 'services' , 'sponsorships')
+        ->orderBy('address', 'desc')
+        // ->orderBy('latitude', 'asc')
+        // ->orderBy('longitude', 'asc')
+        ->get();
+
+
+        // foreach($apartment_filter as $coordinate){
+        //     $coord = $coordinate->latitude;
+        //     dump($coord);
+        // };
+
+        // dd($apartment_filter);
+
 
 
         

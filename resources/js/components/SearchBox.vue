@@ -54,6 +54,12 @@
             >
                 Filtri attivi : {{ servicesChecked.length }}
             </div>
+
+            <div>
+                <h6 v-show="this.$route.name == 'advancedsearch'" class="ml-3">
+                    Risultati: {{ apartmentsFilter.length }}
+                </h6>
+            </div>
         </div>
 
         <div v-show="clickFilterStatus" class="searchFilter">

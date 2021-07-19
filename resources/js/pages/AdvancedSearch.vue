@@ -18,10 +18,18 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ apartment.title }}</h5>
                         <p class="card-text">{{ apartment.address }}</p>
-                        <p class="card-text">{{ apartment.floor }}</p>
-                        <p class="card-text">{{ apartment.rooms }}</p>
-                        <p class="card-text">{{ apartment.beds }}</p>
+                        <p class="card-text">Floor: {{ apartment.floor }}</p>
+                        <p class="card-text">Rooms: {{ apartment.rooms }}</p>
+                        <p class="card-text">Beds: {{ apartment.beds }}</p>
                         <p class="card-text">{{ apartment.description }}</p>
+                        <h6>Services:</h6>
+                        <p
+                            v-for="(service, key) in apartment.services"
+                            :key="key"
+                            class="card-text badge badge-warning p-2 m-2"
+                        >
+                            {{ service.name }}
+                        </p>
                         <a href="#" class="btn btn-primary">Go somewhere</a>
                     </div>
                 </div>

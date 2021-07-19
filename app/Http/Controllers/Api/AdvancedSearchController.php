@@ -38,13 +38,18 @@ class AdvancedSearchController extends Controller
         ->orderBy('address', 'desc')
         ->get();
 
+        // $distances=[];
 
         // foreach($apartment_filter as $coordinate){
-        //     $coord = $coordinate->latitude;
-        //     dump($coord);
+        //     $coordLat = $coordinate->latitude;
+        //     $coordLng = $coordinate->longitude;
+        //     $distance = sqrt(($coordLat - $lat)*($coordLat - $lat) + ($coordLng - $lng)*($coordLng - $lng) );
+        //      $distances[] = $distance;
+        //     
         // };
 
-        // dd($apartment_filter);
+        // sort($distances);
+        // dd($distances);
 
 
 

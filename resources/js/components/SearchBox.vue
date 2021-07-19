@@ -49,7 +49,10 @@
                 value="Filtri"
             />
             <div
-                v-show="servicesChecked.length > 0"
+                v-show="
+                    servicesChecked.length > 0 &&
+                        this.$route.name == 'advancedsearch'
+                "
                 class="badge badge-primary p-2 m-2"
             >
                 Filtri attivi : {{ servicesChecked.length }}

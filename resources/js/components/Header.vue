@@ -33,7 +33,7 @@
                             >
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/admin">Admin</a>
+                            <a class="nav-link" href="/admin">Host</a>
                         </li>
                     </ul>
                 </div>

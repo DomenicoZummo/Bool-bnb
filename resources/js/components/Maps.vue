@@ -14,5 +14,6 @@ export default {
 #map {
     width: 50vw;
     height: 60vh;
+    margin-left: 50px;
 }
 </style>

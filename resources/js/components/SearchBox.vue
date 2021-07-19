@@ -1,17 +1,10 @@
 <template>
     <div>
+        <!-- Search-bar -->
         <div id="searchbox-front" class="mb-3"></div>
-        <div class="d-flex box-input align-items-center">
-            <!-- <select @change="setRange(range)" v-model="range" class="mr-5" name="km" id="km">
-                <option value="1">1KM</option>
-                <option value="3">2KM</option>
-                <option value="5">5KM</option>
-                <option value="10">10KM</option>
-                <option value="20">20KM</option>
-                <option value="50">50KM</option>
-                <option value="100">100KM</option>
-            </select> -->
 
+        <div class="d-flex box-input align-items-center">
+            <!-- Radius -->
             <input
                 @change="setRange(range)"
                 v-model="range"
@@ -28,8 +21,7 @@
                 >{{ range }} km</label
             >
 
-            <!-- Bottone ricerca normale -->
-
+            <!-- Search button -->
             <div @click="getApartmentFiltered">
                 <router-link
                     @click="getApartmentFiltered"
@@ -40,7 +32,7 @@
                 >
             </div>
 
-            <!-- Bottone filtri -->
+            <!-- Filters button -->
             <input
                 v-show="this.$route.name == 'advancedsearch'"
                 @click="clickFilter"
@@ -48,6 +40,8 @@
                 type="button"
                 value="Filtri"
             />
+
+            <!-- Active services badge -->
             <div
                 v-show="
                     servicesChecked.length > 0 &&
@@ -58,13 +52,16 @@
                 Filtri attivi : {{ servicesChecked.length }}
             </div>
 
-            <div>
-                <h6 v-show="this.$route.name == 'advancedsearch'" class="ml-3">
-                    Risultati: {{ apartmentsFilter.length }}
-                </h6>
+            <!-- Number of results finded -->
+            <div
+                v-show="this.$route.name == 'advancedsearch'"
+                class="m-2 p-2 badge badge-success"
+            >
+                Risultati: {{ apartmentsFilter.length }}
             </div>
         </div>
 
+        <!-- Filters menu -->
         <div v-show="clickFilterStatus" class="searchFilter">
             <div class="box-search py-2">
                 <div
@@ -86,6 +83,7 @@
         </div>
 
         <div class="inp" v-show="this.$route.name == 'advancedsearch'">
+            <!-- Numbers of beds -->
             <div class="mt-3 mr-3">
                 <label class="form-label" for="beds">Beds</label>
                 <input
@@ -99,6 +97,8 @@
                     value="minBeds"
                 />
             </div>
+
+            <!-- Numbers of rooms -->
             <div class="mt-3 mr-3">
                 <label class="form-label" for="rooms">Rooms </label>
                 <input
@@ -122,9 +122,6 @@ export default {
     name: "SearchBox",
     data() {
         return {
-            lat: window.lat,
-            lng: window.lng,
-            address: window.address,
             apartmentsFilter: [],
             servicesChecked: [],
             services: [],
@@ -139,6 +136,7 @@ export default {
     },
 
     methods: {
+        // Axios call to get services list from dp on creating
         getServices() {
             this.servicesChecked = [];
             this.services = [];
@@ -153,10 +151,12 @@ export default {
                 });
         },
 
+        // Open/Close the filters menu
         clickFilter() {
             this.clickFilterStatus = !this.clickFilterStatus;
         },
 
+        // Axios call to get the apartments with filters if they exist
         getApartmentFiltered() {
             this.apartmentsFilter = [];
             axios
@@ -164,19 +164,25 @@ export default {
                     `http://127.0.0.1:8000/api/filterapartments?address=${window.address}&lat=${window.lat}&lng=${window.lng}&range=${this.range}&rooms=${this.minRooms}&beds=${this.minBeds}&services=${this.servicesChecked}`
                 )
                 .then(result => {
-                    console.log("Stanze minime", this.minRooms);
-                    console.log("Letti minimi", this.minBeds);
-                    console.log("Servizi", this.servicesChecked);
                     console.log(
                         `http://127.0.0.1:8000/api/filterapartments?address=${window.address}&lat=${window.lat}&lng=${window.lng}&range=${this.range}&rooms=${this.minRooms}&beds=${this.minBeds}&services=${this.servicesChecked}`
                     );
-
-                    console.log(result.data);
                     result.data.filter(element => {
                         if (element.visibility) {
+                            let distance = Math.sqrt(
+                                (element.latitude - window.lat) *
+                                    (element.latitude - window.lat) +
+                                    (element.longitude - window.lng) *
+                                        (element.longitude - window.lng)
+                            );
+                            element["distance"] = distance;
                             this.apartmentsFilter.push(element);
                         }
                     });
+                    this.apartmentsFilter.sort((a, b) =>
+                        a.distance > b.distance ? 1 : -1
+                    );
+                    console.log("array", this.apartmentsFilter);
                 })
                 .catch(error => {
                     console.log(error);
@@ -185,25 +191,7 @@ export default {
             this.$emit("getApartmentFiltered", this.apartmentsFilter);
         },
 
-        // getApartment() {
-        //     axios
-        //         .get(
-        //             `http://127.0.0.1:8000/api/apartments?address=${window.address}&lat=${window.lat}&lng=${window.lng}&range=${this.range}`
-        //         )
-        //         .then(result => {
-        //             this.apartmentsFilter = [];
-        //             console.log(result.data);
-        //             result.data.filter(element => {
-        //                 if (element.visibility) {
-        //                     this.apartmentsFilter.push(element);
-        //                 }
-        //             });
-        //         })
-        //         .catch(error => {
-        //             console.log(error);
-        //         });
-        //     // this.$emit("getApartmentFiltered", this.apartmentsFilter);
-        // },
+        // Set the radius of the research dynamically
         setRange(value) {
             this.range = value;
         }

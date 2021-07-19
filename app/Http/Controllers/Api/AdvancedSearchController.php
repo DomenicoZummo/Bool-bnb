@@ -9,7 +9,7 @@ use App\Apartment;
 
 class AdvancedSearchController extends Controller
 {
-    
+
     public function index(Request $request)
     {
 
@@ -27,16 +27,15 @@ class AdvancedSearchController extends Controller
         $beds = $query['beds'];
         $services = $query['services'];
 
-        $listIntServices =[];
+        $listIntServices = [];
 
         // dd($listIntServices);
-        $apartment_filter= Apartment::whereBetween('latitude', [($lat - $range /100),($lat + $range/100)])
-        ->whereBetween('longitude', [[($lng - $range/100),($lng + $range/100)]])
-        ->where('rooms', '>=',  $rooms)
-        ->where('beds', '>=',  $beds)
-        ->with('user', 'services' , 'sponsorships')
-        ->orderBy('address', 'desc')
-        ->get();
+        $apartment_filter = Apartment::whereBetween('latitude', [($lat - $range / 100), ($lat + $range / 100)])
+            ->whereBetween('longitude', [[($lng - $range / 100), ($lng + $range / 100)]])
+            ->where('rooms', '>=',  $rooms)
+            ->where('beds', '>=',  $beds)
+            ->with('user', 'services', 'sponsorships')
+            ->get();
 
         // $distances=[];
 
@@ -53,97 +52,83 @@ class AdvancedSearchController extends Controller
 
 
 
-        
-        $serviceApartment=[];
+
+        $serviceApartment = [];
         $apartment_service_filter = [];
 
 
 
-        
 
-        if($services != null){
-            $listServices = explode(',',$services);
 
-            foreach($listServices as $servic){
+        if ($services != null) {
+            $listServices = explode(',', $services);
+
+            foreach ($listServices as $servic) {
                 $intServ = intval($servic);
                 $listIntServices[] = $intServ;
             }
-        sort($listIntServices);
+            sort($listIntServices);
 
-        // dd($listIntServices);
+            // dd($listIntServices);
 
-        if(count($listIntServices) >= 1 ){
-
-            
-
-            foreach($apartment_filter as $apartment){
-
-                
-            $service_apartment = $apartment->services;
+            if (count($listIntServices) >= 1) {
 
 
-            // dd($apartment->services);
-            if(count($service_apartment) >= 1){
 
-                foreach($service_apartment as $service){
-               
-                // dd($listIntServices);
-                // dd($service['id']);
+                foreach ($apartment_filter as $apartment) {
 
 
-                foreach($listIntServices as $idfilter){
-                    // dd($idfilter);
-                    if($service['id'] == $idfilter){
-                        
-                        $apartment_service_filter[] = $apartment;
+                    $service_apartment = $apartment->services;
 
 
+                    // dd($apartment->services);
+                    if (count($service_apartment) >= 1) {
+
+                        foreach ($service_apartment as $service) {
+
+                            // dd($listIntServices);
+                            // dd($service['id']);
+
+
+                            foreach ($listIntServices as $idfilter) {
+                                // dd($idfilter);
+                                if ($service['id'] == $idfilter) {
+
+                                    $apartment_service_filter[] = $apartment;
+                                }
+                            }
+                            // dump($serviceApartment);
+
+                            // array_diff($serviceApartment,$listIntServices );
+                            // dd(array_diff($serviceApartment,$listIntServices ));
+                        }
                     }
                 }
-                // dump($serviceApartment);
-                
-                // array_diff($serviceApartment,$listIntServices );
-                // dd(array_diff($serviceApartment,$listIntServices ));
-             }
-
             }
 
+            // dd(array_unique($apartment_service_filter));
+
+            $apartmentFilteredService = array_unique($apartment_service_filter);
+
+            if ($apartmentFilteredService) {
+                foreach ($apartmentFilteredService as  $apartment) {
+
+                    //  dd($apartment['attributes']->id);
+                    $apartment->img_path = url('storage/' .   $apartment['img_path']);
+                }
             }
 
-        } 
+            return response()->json($apartmentFilteredService);
+        } else {
 
-        // dd(array_unique($apartment_service_filter));
+            if ($apartment_filter) {
+                foreach ($apartment_filter as  $apartment) {
 
-        $apartmentFilteredService = array_unique($apartment_service_filter);
-
-                 if($apartmentFilteredService ){
-             foreach ($apartmentFilteredService as  $apartment) {
-
-                //  dd($apartment['attributes']->id);
-                 $apartment->img_path = url('storage/'.   $apartment['img_path']);
-             }
-            
-          }
-
-        return response()->json( $apartmentFilteredService );
-
-        }else{
-
-            if($apartment_filter ){
-             foreach ($apartment_filter as  $apartment) {
-
-                //  dd($apartment['attributes']->id);
-                 $apartment->img_path = url('storage/'.   $apartment['img_path']);
-             }
-            
-          }
-        return response()->json(  $apartment_filter);
-            
+                    //  dd($apartment['attributes']->id);
+                    $apartment->img_path = url('storage/' .   $apartment['img_path']);
+                }
+            }
+            return response()->json($apartment_filter);
         }
-
     }
-
-
-
-
 }

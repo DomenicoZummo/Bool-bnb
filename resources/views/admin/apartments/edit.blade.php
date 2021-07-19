@@ -119,7 +119,7 @@
             </div>
 
             <div class="text-center final-button">
-                <input type="submit" value="Edit" class="btn btn-success">
+                <input type="submit" value="Update" class="btn btn-success">
             </div>
         </div>
 

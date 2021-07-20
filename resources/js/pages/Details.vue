@@ -14,12 +14,18 @@
                 {{ service.name }}
             </div>
         </div>
+        <!-- <Maps /> -->
     </div>
 </template>
 
 <script>
+// import Maps from "../components/Maps.vue";
+
 export default {
     name: "Details",
+    // component: {
+    //     Maps
+    // },
     data() {
         return {
             apartment: null

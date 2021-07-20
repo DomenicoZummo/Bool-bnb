@@ -2,9 +2,9 @@ import tt from "@tomtom-international/web-sdk-maps";
 import { services } from "@tomtom-international/web-sdk-services";
 import SearchBox from "@tomtom-international/web-sdk-plugin-searchbox";
 
-window.lat = '';
-window.lng = '';
-window.address = '';
+window.lat = "";
+window.lng = "";
+window.address = "";
 
 function handleResultsFound(event) {
     var results = event.data.results.fuzzySearch.results;
@@ -49,12 +49,9 @@ function getBounds(data) {
     window.lng = data.position.lng;
     window.address = data.address.freeformAddress;
 
-
-    console.log( 'Lat' + window.lat);
-    console.log( 'Lon' + window.lng);
-    console.log( window.address);
-
-   
+    console.log("Lat" + window.lat);
+    console.log("Lon" + window.lng);
+    console.log(window.address);
 
     if (data.viewport) {
         btmRight = [
@@ -118,8 +115,8 @@ function SearchMarker(poiData, options) {
         element: this.createMarker(),
         anchor: "bottom"
     });
-    var lon = this.poiData.position.lng || this.poiData.position.lon;
-    this.marker.setLngLat([lon, this.poiData.position.lat]);
+    // var lon = this.poiData.position.lng || this.poiData.position.lon;
+    this.marker.setLngLat([window.lng, window.lat]);
 }
 
 SearchMarker.prototype.addTo = function(map) {
@@ -157,27 +154,11 @@ var options = {
     }
 };
 
-function lati(latitude) {
-    if (latitude == 0 || latitude == null) {
-        return 12;
-    } else {
-        return latitude;
-    }
-}
-
-function long(longitude) {
-    if (longitude == 0 || longitude == null) {
-        return 42;
-    } else {
-        return longitude;
-    }
-}
-
 tt.setProductInfo("BoolBnB", "1.0");
 var map = tt.map({
     key: "gKIZzIyagJPsNGDOLL9WGenkQlFeapDb",
     container: "map",
-    center: [12,42],
+    center: [12, 42],
     zoom: 5
 });
 // var ttSearchBox = new tt.plugins.SearchBox(tt.services, options);

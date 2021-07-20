@@ -3,8 +3,13 @@
         <!-- Header -->
         <Header />
 
-        <SearchBox v-show="this.$route.name == 'advancedsearch' ||
-                        this.$route.name == 'home'" @getApartmentFiltered="getApartmentFiltered" />
+        <SearchBox
+            v-show="
+                this.$route.name == 'advancedsearch' ||
+                    this.$route.name == 'home'
+            "
+            @getApartmentFiltered="getApartmentFiltered"
+        />
 
         <!-- Main -->
         <main class="d-flex">
@@ -12,7 +17,7 @@
             <Maps
                 class="my-3"
                 v-show="
-                    this.$route.name == 'advancedsearch' &&
+                    this.$route.name == 'apartment-details' &&
                         this.apartmentsFilter.length > 0
                 "
             />

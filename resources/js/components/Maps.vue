@@ -12,8 +12,8 @@ export default {
 
 <style scoped lang="scss">
 #map {
-    width: 50vw;
-    height: 60vh;
+    width: 500px;
+    height: 500px;
     margin-left: 50px;
 }
 </style>

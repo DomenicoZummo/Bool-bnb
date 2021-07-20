@@ -14,21 +14,34 @@
                 {{ service.name }}
             </div>
         </div>
-        <!-- <Maps /> -->
+        <input
+            v-show="this.$route.name == 'apartment-details'"
+            @click="clickMessage"
+            class="mt-4"
+            type="button"
+            value="Invia un messaggio"
+        />
+        <div v-show="clickMessageStatus" class="searchFilter">
+            <div class="box-search py-2">
+                <Message class="p-5" />
+                <span class="close" @click="clickMessage">Close</span>
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
-// import Maps from "../components/Maps.vue";
+import Message from "../components/Message.vue";
 
 export default {
     name: "Details",
-    // component: {
-    //     Maps
-    // },
+    components: {
+        Message
+    },
     data() {
         return {
-            apartment: null
+            apartment: null,
+            clickMessageStatus: false
         };
     },
     created() {
@@ -49,9 +62,60 @@ export default {
                 .catch(err => {
                     console.log(err);
                 });
+        },
+
+        // Open/Close the messages menu
+        clickMessage() {
+            this.clickMessageStatus = !this.clickMessageStatus;
         }
     }
 };
 </script>
 
-<style></style>
+<style scoped lang="scss">
+.searchFilter {
+    display: flex;
+    position: absolute;
+    z-index: 10;
+    background: rgba(#000000, 0.3);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    justify-content: center;
+    align-items: center;
+
+    .box-search {
+        position: relative;
+        width: 1000px;
+        height: 800px;
+        background: #fff;
+        color: #000;
+        overflow-y: auto;
+        transform: scale(0.1);
+        opacity: 0;
+        animation: box-search-in 0.3s forwards;
+
+        @keyframes box-search-in {
+            0% {
+                transform: scale(0.1);
+                opacity: 0;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .close {
+            color: red;
+            position: absolute;
+            top: 30px;
+            right: 60px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+    }
+}
+</style>

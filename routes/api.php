@@ -29,4 +29,7 @@ Route::namespace('Api')
 
         // Get apartments details
         Route::get('apartments/{slug}', 'AdvancedSearchController@show');
+
+        // Save messages
+        Route::get('messages', 'MessagesController@store');
     });

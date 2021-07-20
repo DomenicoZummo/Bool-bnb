@@ -16,10 +16,7 @@
             <router-view :apartments="apartmentsFilter"> </router-view>
             <Maps
                 class="my-3"
-                v-show="
-                    this.$route.name == 'apartment-details' &&
-                        this.apartmentsFilter.length > 0
-                "
+                v-show="this.$route.name == 'apartment-details'"
             />
         </main>
         <!-- Footer -->

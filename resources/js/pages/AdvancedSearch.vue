@@ -35,7 +35,9 @@
                                 :apartment="apartment"
                                 :to="{
                                     name: 'apartment-details',
-                                    params: { slug: apartment.slug }
+                                    params: {
+                                        slug: apartment.slug
+                                    }
                                 }"
                                 class="btn btn-primary"
                             >

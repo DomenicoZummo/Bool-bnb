@@ -7,9 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 class Message extends Model
 {
 
-    // Gestione relazione con tabella Apartments
+    protected $fillable = [
+        "name",
+        "email",
+        "message"
+    ];
 
-    public function apartment(){
+    // Gestione relazione con tabella Apartments
+    public function apartment()
+    {
         return $this->belongsTo('App\Apartment');
     }
 }

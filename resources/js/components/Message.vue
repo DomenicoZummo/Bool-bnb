@@ -1,0 +1,149 @@
+<template>
+    <div class="container">
+        <h1 class="mb-5">Send us a message</h1>
+
+        <div v-show="success" class="succes-message">
+            Message sent succesfully
+        </div>
+        <form @submit.prevent="postForm">
+            <!-- Name -->
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input v-model="name" type="text" id="name" class="max-width" />
+                <div
+                    class="error-message"
+                    v-for="(error, index) in errors.name"
+                    :key="`err-name-${index}`"
+                >
+                    {{ error }}
+                </div>
+            </div>
+            <!-- Email -->
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input
+                    v-model="email"
+                    type="text"
+                    id="email"
+                    class="max-width"
+                />
+                <div
+                    class="error-message"
+                    v-for="(error, index) in errors.email"
+                    :key="`err-email-${index}`"
+                >
+                    {{ error }}
+                </div>
+            </div>
+            <!-- Message -->
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea
+                    class="max-width"
+                    v-model="message"
+                    type="text"
+                    cols="30"
+                    rows="10"
+                    id="message"
+                ></textarea>
+                <div
+                    class="error-message"
+                    v-for="(error, index) in errors.message"
+                    :key="`err-message-${index}`"
+                >
+                    {{ error }}
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-center">
+                <button
+                    type="submit"
+                    :disabled="sending"
+                    class="btn btn-success"
+                >
+                    {{ sending ? "Sending..." : "Send" }}
+                </button>
+            </div>
+        </form>
+    </div>
+</template>
+
+<script>
+export default {
+    name: "Message",
+    data() {
+        return {
+            name: "",
+            email: "",
+            message: "",
+            errors: {},
+            success: false,
+            sending: false
+        };
+    },
+    created() {
+        console.log(this.$route);
+    },
+    methods: {
+        postForm() {
+            this.sending = true;
+
+            axios
+                .post(
+                    `http://127.0.0.1:8000/api/messages?slug=${this.$route.params.slug}`,
+                    {
+                        name: this.name,
+                        email: this.email,
+                        message: this.message
+                    }
+                )
+                .then(res => {
+                    console.log(
+                        `http://127.0.0.1:8000/api/messages?slug=${this.$route.params.slug}`
+                    );
+                    this.sending = false;
+
+                    if (res.data.errors) {
+                        this.errors = res.data.errors;
+                        this.success = false;
+                    } else {
+                        this.name = "";
+                        this.email = "";
+                        this.message = "";
+                        this.success = true;
+                        this.errors = {};
+                    }
+                })
+                .catch(err => {
+                    console.log(err);
+                });
+        }
+    }
+};
+</script>
+
+<style lang="scss" scoped>
+.max-width {
+    width: 100%;
+}
+
+.success-message {
+    margin-bottom: 2rem;
+    color: limegreen;
+    font-size: 1.2rem;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+    label {
+        display: block;
+    }
+    .error-message {
+        color: red;
+    }
+}
+
+button:disabled {
+    cursor: not-allowed;
+}
+</style>

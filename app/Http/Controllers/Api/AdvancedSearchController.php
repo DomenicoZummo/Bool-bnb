@@ -30,7 +30,7 @@ class AdvancedSearchController extends Controller
         $listIntServices = [];
 
         intval($services);
-       
+
         $apartment_filter = Apartment::whereBetween('latitude', [($lat - $range / 100), ($lat + $range / 100)])
             ->whereBetween('longitude', [[($lng - $range / 100), ($lng + $range / 100)]])
             ->where('rooms', '>=',  $rooms)
@@ -40,14 +40,14 @@ class AdvancedSearchController extends Controller
 
 
 
-            if ($services != null) {
+        if ($services != null) {
             $listServices = explode(',', $services);
 
             foreach ($listServices as $servic) {
                 $intServ = intval($servic);
                 $listIntServices[] = $intServ;
             }
-            
+
 
 
             sort($listIntServices);         // Array id numerico della query
@@ -55,22 +55,19 @@ class AdvancedSearchController extends Controller
 
             $apartmentFilteredByService = [];
 
-            foreach($apartment_filter as $apartment){
-            $services = $apartment->services->find($listIntServices);
+            foreach ($apartment_filter as $apartment) {
+                $services = $apartment->services->find($listIntServices);
 
-            
-            
 
-            if(count($services) >= count($listIntServices)){
-               
-                $apartmentFilteredByService[] = $apartment;
+
+
+                if (count($services) >= count($listIntServices)) {
+
+                    $apartmentFilteredByService[] = $apartment;
+                }
             }
 
-            
-
-        }
-
-        $apartmentFilteredService = array_unique($apartmentFilteredByService);
+            $apartmentFilteredService = array_unique($apartmentFilteredByService);
 
             if ($apartmentFilteredService) {
                 foreach ($apartmentFilteredService as  $apartment) {
@@ -81,8 +78,7 @@ class AdvancedSearchController extends Controller
             }
 
             return response()->json($apartmentFilteredService);
-
-            }else {
+        } else {
 
             if ($apartment_filter) {
                 foreach ($apartment_filter as  $apartment) {
@@ -93,5 +89,17 @@ class AdvancedSearchController extends Controller
             }
             return response()->json($apartment_filter);
         }
+    }
+
+    // Get blog's post detail by slug
+    public function show($slug)
+    {
+        $apartment = Apartment::where('slug', $slug)->with(['services'])->first();
+
+        if ($apartment->img_path) {
+            $apartment->img_path = url('storage/' . $apartment->img_path);
+        }
+
+        return response()->json($apartment);
     }
 }

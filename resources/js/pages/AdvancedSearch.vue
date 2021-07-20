@@ -33,12 +33,15 @@
                         <div>
                             <router-link
                                 :apartment="apartment"
-                                :to="{ name: 'details', params: {id: apartment.id} }"
-                                class="btn btn-primary">
-                                    Go somewhere
+                                :to="{
+                                    name: 'apartment-details',
+                                    params: { slug: apartment.slug }
+                                }"
+                                class="btn btn-primary"
+                            >
+                                Go somewhere
                             </router-link>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -54,15 +57,9 @@ export default {
         apartments: Array
     },
     data() {
-        return {
-            arr: [],
-        }
+        return {};
     },
-    methods: {
-        getDetails(e) {
-            this.arr = e;
-        }
-    }
+    methods: {}
 };
 </script>
 

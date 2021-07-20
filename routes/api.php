@@ -19,8 +19,14 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::namespace('Api')
-      ->group(function() {
-          Route::get('/apartments', 'ApartmentController@index');
-          Route::get('/services', 'ServicesContoller@index');
-          Route::get('/filterapartments', 'AdvancedSearchController@index');
-      });
+    ->group(function () {
+
+        // Get services
+        Route::get('/services', 'ServicesContoller@index');
+
+        // Get filtered apartments
+        Route::get('/filterapartments', 'AdvancedSearchController@index');
+
+        // Get apartments details
+        Route::get('apartments/{slug}', 'AdvancedSearchController@show');
+    });

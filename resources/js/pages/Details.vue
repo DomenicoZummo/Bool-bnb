@@ -1,6 +1,6 @@
 <template>
     <div class="container" v-if="apartment">
-        <h2>{{ apartment.title }}</h2>
+        <h2 class="mt-5">{{ apartment.title }}</h2>
         <h4>Camere: {{ apartment.rooms }}</h4>
         <h4>Letti: {{ apartment.beds }}</h4>
         <img :src="apartment.img_path" :alt="apartment.title" />

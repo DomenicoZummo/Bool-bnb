@@ -72,6 +72,7 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
     name: "Message",
     props: {
@@ -86,6 +87,10 @@ export default {
             success: false,
             sending: false
         };
+    },
+
+    created() {
+        this.getUserInfos();
     },
     methods: {
         postForm(id) {
@@ -111,6 +116,18 @@ export default {
                         this.success = true;
                         this.errors = {};
                     }
+                })
+                .catch(err => {
+                    console.log(err);
+                });
+        },
+        getUserInfos() {
+            axios
+                .get(`http://127.0.0.1:8000/admin/user`)
+                .then(res => {
+                    console.log(res.data);
+                    this.name = res.data.name;
+                    this.email = res.data.email;
                 })
                 .catch(err => {
                     console.log(err);

@@ -32,6 +32,8 @@ Route::prefix('admin')
 
         // Messages Route
         Route::resource('/messages', 'MessagesController');
+        
+        Route::resource('/user', 'UserController');
     });
 
 // Front-Office

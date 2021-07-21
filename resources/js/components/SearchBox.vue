@@ -8,7 +8,6 @@
             <input
                 @change="setRange(range)"
                 v-model="range"
-                class="mr-3"
                 min="5"
                 max="100"
                 value="range"
@@ -82,7 +81,7 @@
             </div>
         </div>
 
-        <div class="inp" v-show="this.$route.name == 'advancedsearch'">
+        <div class="inp d-flex" v-show="this.$route.name == 'advancedsearch'">
             <!-- Numbers of beds -->
             <div class="mt-3 mr-3">
                 <label class="form-label" for="beds">Beds</label>
@@ -243,5 +242,13 @@ export default {
             cursor: pointer;
         }
     }
+}
+
+.range {
+    width: 60px;
+    height: 20px;
+    color: #000;
+    font-weight: 500;
+    font-size: 16px;
 }
 </style>

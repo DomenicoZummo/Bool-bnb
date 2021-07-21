@@ -1,16 +1,16 @@
 <template>
     <div>
-        <div class="d-flex box-search">
             <div
                 v-if="apartments.length > 0"
-                class="d-flex flex-column box-apartments flew-wrap"
+                class="d-flex container flex-wrap box-apartments"
             >
                 <div
                     v-for="(apartment, key) in apartments"
                     :key="key"
-                    class="card m-3"
+                    class=" my-3 px-3 col-xs-12 col-md-4"
                 >
-                    <img
+                    <div class="card ">
+                        <img
                         class="card-img-top"
                         :src="apartment.img_path"
                         alt="Card image cap"
@@ -45,10 +45,10 @@
                             </router-link>
                         </div>
                     </div>
+                    </div>
                 </div>
             </div>
             <h1 v-else>No results</h1>
-        </div>
     </div>
 </template>
 
@@ -66,24 +66,15 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.range {
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: chartreuse;
-    color: #000;
-    border-radius: 50%;
-    font-weight: bold;
-    font-size: 10px;
-}
+
 
 .card {
-    width: 18rem;
     animation: card-effect 0.7s forwards;
     opacity: 0;
     transform: scale(0.1);
+    overflow: auto;
+    min-height: 500px;
+    max-height: 500px;
 }
 
 @keyframes card-effect {
@@ -97,9 +88,4 @@ export default {
     }
 }
 
-.box-apartments {
-    max-height: 70vh;
-    width: 20vw;
-    overflow-y: auto;
-}
 </style>

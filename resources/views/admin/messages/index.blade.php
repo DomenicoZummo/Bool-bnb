@@ -14,10 +14,11 @@
         <table class="table mt-5">
             <thead>
                 <tr>
-                    <th>User</th>
-                    <th>Apartment name</th>
-                    <th>Address</th>
-                    <th>Publication Date</th>
+                    <th>Guest</th>
+                    <th>Email</th>
+                    <th>Message</th>
+                    <th>Name apartment</th>
+                    <th>Send date</th>
                     <th colspan="3" class="text-center">Actions</th>
                 </tr>
             </thead>
@@ -32,10 +33,27 @@
                             {{ $message->email }}
                         </td>
                         <td>
-                            {{ $message->message }}
+                            {{Str::limit($message->message, 30, ' ...')}}
                         </td>
                         <td>
                             {{ $message->apartment->title }}
+                        </td>
+                        <td>
+                            <div>{{ $message->created_at->format('l d/m/y') }}</div>
+                            <div>{{ $message->created_at->diffForHumans() }}</div>
+                        </td>
+                        <td>
+                            <a class="btn btn-success" href="{{ route('admin.messages.show' , $message->id) }}">Show</a>
+                        </td>
+
+                        <td>
+                            <form class="delete-apartment-form" action="{{ route('admin.messages.destroy', $message->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-danger" type="submit">
+                                    DELETE
+                                </button>
+                            </form>
                         </td>
                     </tr>
                 @endforeach

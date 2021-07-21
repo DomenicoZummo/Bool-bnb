@@ -31,7 +31,20 @@ class MessagesController extends Controller
 
     public function show($id)
     {
-        //
+        $message = Message::find($id);
+        $user_log = Auth::user();
+
+        $user_id = $user_log['id'];
+
+
+
+        if ($message == null) {
+            return abort(404);
+        } elseif ($message != null && $message->apartment['user_id'] == $user_id) {
+            return view('admin.messages.show', compact('message'));
+        }
+
+        abort(404);
     }
 
 

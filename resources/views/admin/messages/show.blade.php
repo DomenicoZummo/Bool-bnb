@@ -6,20 +6,24 @@
     <div class="container d-flex">
        
         <div class="box-img col-xs-12 col-md-6">
-            <img src="{{ asset('storage/' . $message->apartment->img_path) }}" alt="{{ $message->apartment->img_path->title }}">
+            <img src="{{ asset('storage/' . $message->apartment->img_path) }}" alt="{{ $message->apartment->img_path }}">
         </div>
    
         <div class="text-img col-xs-12 col-md-6">
+        <h2 class="mb-3 ">{{ $message->apartment->title}}</h2>
 
-            @if(count($message->apartment->services) > 0)
-                @foreach ($message->apartment->services as $service)
-                    <span class="badge badge-primary p-2 my-2">{{$service->name}}</span>
-                @endforeach
-             @endif
+        <h4>Messaggio inviato da: </h4> 
+        <p>{{ $message->name}} {{ $message->surname}}</p>
+        
+        <h4>Email:</h4>
+        <p>{{ $message->email }}</p>
+
+        <h4>Testo:</h4>
+        <p>{{ $message->message}}</p>
 
             <div class="d-flex action-show">
                 <a class="btn btn-success mt-5 mr-5" href="{{ route('admin.messages.index') }}">Back</a>
-                <form class="mt-5 delete-apartment-form" action="{{ route('admin.messages.destroy', $message->id) }}" method="POST">
+                <form class="mt-5 delete-apartment-form " action="{{ route('admin.messages.destroy', $message->id) }}" method="POST">
                     @csrf
                     @method('DELETE')
                     <button class="btn btn-danger" type="submit">

@@ -50,6 +50,9 @@ class MessagesController extends Controller
 
     public function destroy($id)
     {
-        //
+        $message = Message::find($id);
+        // Pulizia orfani
+        $message->delete();
+        return redirect()->route('admin.messages.index')->with('deleted', $message->title);
     }
 }

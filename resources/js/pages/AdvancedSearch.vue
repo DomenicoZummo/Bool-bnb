@@ -1,20 +1,21 @@
 <template>
     <div>
+        <div
+            v-if="apartments.length > 0"
+            class="d-flex container flex-wrap box-apartments"
+        >
             <div
-                v-if="apartments.length > 0"
-                class="d-flex container flex-wrap box-apartments"
+                v-for="(apartment, key) in apartments"
+                :key="key"
+                class=" my-3 px-3 col-xs-12 col-md-4"
             >
-                <div
-                    v-for="(apartment, key) in apartments"
-                    :key="key"
-                    class=" my-3 px-3 col-xs-12 col-md-4"
-                >
-                    <div class="card ">
-                        <img
+                <div class="card ">
+                    <img
                         class="card-img-top"
                         :src="apartment.img_path"
                         alt="Card image cap"
                     />
+
                     <div class="card-body">
                         <h5 class="card-title">{{ apartment.title }}</h5>
                         <p class="card-text">{{ apartment.address }}</p>
@@ -45,10 +46,10 @@
                             </router-link>
                         </div>
                     </div>
-                    </div>
                 </div>
             </div>
-            <h1 v-else>No results</h1>
+        </div>
+        <h1 v-else>No results</h1>
     </div>
 </template>
 
@@ -66,8 +67,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
-
 .card {
     animation: card-effect 0.7s forwards;
     opacity: 0;
@@ -75,6 +74,7 @@ export default {
     overflow: auto;
     min-height: 500px;
     max-height: 500px;
+    min-width: 250px;
 }
 
 @keyframes card-effect {
@@ -87,5 +87,4 @@ export default {
         transform: scale(1);
     }
 }
-
 </style>

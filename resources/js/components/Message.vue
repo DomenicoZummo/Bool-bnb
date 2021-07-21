@@ -45,7 +45,7 @@
                     v-model="message"
                     type="text"
                     cols="30"
-                    rows="1"
+                    rows="10"
                     id="message"
                 ></textarea>
                 <div

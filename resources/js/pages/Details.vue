@@ -1,9 +1,8 @@
 <template>
     <div class="container" v-if="apartment">
-        <div>Titolo: {{ apartment.title }}</div>
-        <div>Camere: {{ apartment.rooms }}</div>
-        <div>Letti: {{ apartment.beds }}</div>
-        <div>ID: {{ apartment.id }}</div>
+        <h2>{{ apartment.title }}</h2>
+        <h4>Camere: {{ apartment.rooms }}</h4>
+        <h4>Letti: {{ apartment.beds }}</h4>
         <img :src="apartment.img_path" :alt="apartment.title" />
         <div class="d-flex">
             <div
@@ -14,10 +13,12 @@
                 {{ service.name }}
             </div>
         </div>
+
+        <!-- Send Message -->
         <input
             v-show="this.$route.name == 'apartment-details'"
             @click="clickMessage"
-            class="mt-4"
+            class="mt-4 btn btn-warning"
             type="button"
             value="Invia un messaggio"
         />
@@ -73,10 +74,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
-.container{
+.container {
     width: 100%;
-    img{
+    img {
         width: 100%;
     }
 }

@@ -105,7 +105,7 @@
             @enderror
             
             <div id="searchbox-back"></div>
-            <div id="map" class="map"></div>
+            <div id="map" class="map map-none"></div>
 
             <div class="mt-3 d-flex">
                 <input class="mr-1"  type="radio" id="public" name="visibility" @if(1 == old('visibility' , $apartment->visibility)) 

@@ -43,19 +43,9 @@ function getBounds(data) {
     var btmRight;
     var topLeft;
 
-    // console.log(data);
-
     lat.value = data.position.lat;
     lng.value = data.position.lng;
     address.value = data.address.freeformAddress;
-
-    // lat = data.position.lat;
-    // lng = data.position.lng;
-    // address = data.address.freeformAddress;
-
-    // console.log(this.lat);
-    // console.log(lat);
-    // console.log(lng.value);
 
     if (data.viewport) {
         btmRight = [
@@ -158,27 +148,27 @@ var options = {
     }
 };
 
-function lati(latitude) {
-    if (latitude == 0 || latitude == null || latitude == '') {
-        return 42;
-    } else {
-        return latitude;
-    }
-}
+// function lati(latitude) {
+//     if (latitude == 0 || latitude == null || latitude == '') {
+//         return 42;
+//     } else {
+//         return latitude;
+//     }
+// }
 
-function long(longitude) {
-    if (longitude == 0 || longitude == null || longitude == '') {
-        return 12;
-    } else {
-        return longitude;
-    }
-}
+// function long(longitude) {
+//     if (longitude == 0 || longitude == null || longitude == '') {
+//         return 12;
+//     } else {
+//         return longitude;
+//     }
+// }
 
 tt.setProductInfo("BoolBnB", "1.0");
 var map = tt.map({
     key: "gKIZzIyagJPsNGDOLL9WGenkQlFeapDb",
     container: "map",
-    center:[long(lng.value),lati(lat.value)], 
+    center: [12, 42],
     zoom: 5
 });
 // var ttSearchBox = new tt.plugins.SearchBox(tt.services, options);

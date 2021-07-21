@@ -23,10 +23,15 @@ Route::prefix('admin')
     ->namespace('Admin')
     ->middleware('auth')
     ->name('admin.')
-    ->group(function(){
-        // Rotta Admin Home
+    ->group(function () {
+        // Admin Dashboard Route
         Route::get('/', 'HomeController@index')->name('home');
+
+        // Apartments Routes
         Route::resource('/apartments', 'ApartmentController');
+
+        // Messages Route
+        Route::resource('/messages', 'MessagesController');
     });
 
 // Front-Office

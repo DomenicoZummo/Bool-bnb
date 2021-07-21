@@ -122,7 +122,7 @@
             @enderror
             
             <div id="searchbox-back" class="mb-3"></div>
-            <div id="map" class="map"></div>
+            <div id="map" class="map map-displayed"></div>
 
             <div class="mt-3 d-flex">
                 <input class="mr-1"  type="radio" id="public" name="visibility" checked value="1">

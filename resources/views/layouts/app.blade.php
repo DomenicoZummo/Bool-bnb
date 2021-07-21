@@ -66,6 +66,9 @@
                             @endif
                             @else
                             <li class="nav-item">
+                                <a class="nav-link" href="{{ route('admin.messages.index') }}">My messages</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" href="{{ route('admin.apartments.create') }}">Create new apartment</a>
                             </li>
                             <li class="nav-item">

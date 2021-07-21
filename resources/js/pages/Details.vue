@@ -23,7 +23,7 @@
         />
         <div v-show="clickMessageStatus" class="searchFilter">
             <div class="box-search py-2">
-                <Message class="p-5" />
+                <Message class="p-5" :apartment="apartment" />
                 <span class="close" @click="clickMessage">Close</span>
             </div>
         </div>

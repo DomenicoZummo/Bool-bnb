@@ -5,7 +5,7 @@
         <div v-show="success" class="succes-message">
             Message sent succesfully
         </div>
-        <form @submit.prevent="postForm">
+        <form @submit.prevent="postForm(apartment.id)">
             <!-- Name -->
             <div class="form-group">
                 <label for="name">Name</label>
@@ -18,12 +18,13 @@
                     {{ error }}
                 </div>
             </div>
+
             <!-- Email -->
             <div class="form-group">
                 <label for="email">Email</label>
                 <input
                     v-model="email"
-                    type="text"
+                    type="email"
                     id="email"
                     class="max-width"
                 />
@@ -35,6 +36,7 @@
                     {{ error }}
                 </div>
             </div>
+
             <!-- Message -->
             <div class="form-group">
                 <label for="message">Message</label>
@@ -43,7 +45,7 @@
                     v-model="message"
                     type="text"
                     cols="30"
-                    rows="10"
+                    rows="1"
                     id="message"
                 ></textarea>
                 <div
@@ -55,6 +57,7 @@
                 </div>
             </div>
 
+            <!-- Submit button -->
             <div class="d-flex justify-content-center">
                 <button
                     type="submit"
@@ -71,6 +74,9 @@
 <script>
 export default {
     name: "Message",
+    props: {
+        apartment: Object
+    },
     data() {
         return {
             name: "",
@@ -81,26 +87,18 @@ export default {
             sending: false
         };
     },
-    created() {
-        console.log(this.$route);
-    },
     methods: {
-        postForm() {
+        postForm(id) {
             this.sending = true;
 
             axios
-                .post(
-                    `http://127.0.0.1:8000/api/messages?slug=${this.$route.params.slug}`,
-                    {
-                        name: this.name,
-                        email: this.email,
-                        message: this.message
-                    }
-                )
+                .post(`http://127.0.0.1:8000/api/messages`, {
+                    name: this.name,
+                    email: this.email,
+                    message: this.message,
+                    apartment_id: id
+                })
                 .then(res => {
-                    console.log(
-                        `http://127.0.0.1:8000/api/messages?slug=${this.$route.params.slug}`
-                    );
                     this.sending = false;
 
                     if (res.data.errors) {

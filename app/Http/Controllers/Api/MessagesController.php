@@ -13,11 +13,11 @@ class MessagesController extends Controller
     public function store(Request $request)
     {
         // dd($request->query());
-        $query = $request->query();
-        $slug = $query['slug'];
+        // $query = $request->query();
+        // $slug = $query['slug'];
 
-        $apartment = Apartment::where('slug', $slug)->get();
-        dd($apartment['0']['user_id']);
+        // $apartment = Apartment::where('slug', $slug)->get();
+        // dd($apartment['0']['id']);
 
         // Validation
         $validator = Validator::make($request->all(), [
@@ -32,7 +32,7 @@ class MessagesController extends Controller
 
 
         $data = $request->all();
-
+        // dd($data);
 
         // New instance on db
         $new_message = new Message();

@@ -10,7 +10,8 @@ class Message extends Model
     protected $fillable = [
         "name",
         "email",
-        "message"
+        "message",
+        "apartment_id"
     ];
 
     // Gestione relazione con tabella Apartments

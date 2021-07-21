@@ -31,5 +31,5 @@ Route::namespace('Api')
         Route::get('apartments/{slug}', 'AdvancedSearchController@show');
 
         // Save messages
-        Route::get('messages', 'MessagesController@store');
+        Route::post('messages', 'MessagesController@store');
     });

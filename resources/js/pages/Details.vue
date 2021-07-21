@@ -1,5 +1,5 @@
 <template>
-    <div v-if="apartment">
+    <div class="container" v-if="apartment">
         <div>Titolo: {{ apartment.title }}</div>
         <div>Camere: {{ apartment.rooms }}</div>
         <div>Letti: {{ apartment.beds }}</div>
@@ -73,6 +73,13 @@ export default {
 </script>
 
 <style scoped lang="scss">
+
+.container{
+    width: 100%;
+    img{
+        width: 100%;
+    }
+}
 .searchFilter {
     display: flex;
     position: absolute;

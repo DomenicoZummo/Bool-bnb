@@ -3,7 +3,7 @@
         <!-- Header -->
         <Header />
 
-        <SearchBox class="mb-3"
+        <SearchBox class="mb-3.."
             v-show="
                 this.$route.name == 'advancedsearch' ||
                     this.$route.name == 'home'

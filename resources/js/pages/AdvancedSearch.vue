@@ -30,7 +30,7 @@
                         >
                             {{ service.name }}
                         </p>
-                        <div>
+                        <div class="mb-3">
                             <router-link
                                 :apartment="apartment"
                                 :to="{
@@ -41,7 +41,7 @@
                                 }"
                                 class="btn btn-primary"
                             >
-                                Go somewhere
+                                View more
                             </router-link>
                         </div>
                     </div>

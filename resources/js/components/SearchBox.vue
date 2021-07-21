@@ -143,7 +143,6 @@ export default {
                 .get(`http://127.0.0.1:8000/api/services`)
                 .then(result => {
                     this.services = result.data;
-                    console.log(result.data);
                 })
                 .catch(error => {
                     console.log(error);
@@ -163,9 +162,6 @@ export default {
                     `http://127.0.0.1:8000/api/filterapartments?address=${window.address}&lat=${window.lat}&lng=${window.lng}&range=${this.range}&rooms=${this.minRooms}&beds=${this.minBeds}&services=${this.servicesChecked}`
                 )
                 .then(result => {
-                    console.log(
-                        `http://127.0.0.1:8000/api/filterapartments?address=${window.address}&lat=${window.lat}&lng=${window.lng}&range=${this.range}&rooms=${this.minRooms}&beds=${this.minBeds}&services=${this.servicesChecked}`
-                    );
                     result.data.filter(element => {
                         if (element.visibility) {
                             let distance = Math.sqrt(
@@ -181,7 +177,6 @@ export default {
                     this.apartmentsFilter.sort((a, b) =>
                         a.distance > b.distance ? 1 : -1
                     );
-                    console.log("array", this.apartmentsFilter);
                 })
                 .catch(error => {
                     console.log(error);

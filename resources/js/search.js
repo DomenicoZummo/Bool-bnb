@@ -33,28 +33,19 @@ function fitToViewport(markerData) {
     if (markerData instanceof Array) {
         markerData.forEach(function(marker) {
             bounds.extend(getBounds(marker));
-            console.log(marker);
         });
     } else {
         bounds.extend(getBounds(markerData));
-        console.log(markerData);
     }
     map.fitBounds(bounds, { padding: 100, linear: true });
-    
 }
 function getBounds(data) {
     var btmRight;
     var topLeft;
 
-    // console.log(data);
-
     window.lat = data.position.lat;
     window.lng = data.position.lng;
     window.address = data.address.freeformAddress;
-
-    console.log("Lat" + window.lat);
-    console.log("Lon" + window.lng);
-    console.log(window.address);
 
     if (data.viewport) {
         btmRight = [
@@ -118,8 +109,8 @@ function SearchMarker(poiData, options) {
         element: this.createMarker(),
         anchor: "bottom"
     });
-     var lon = this.poiData.position.lng || this.poiData.position.lon;
-    this.marker.setLngLat([lon,this.poiData.position.lat]);
+    var lon = this.poiData.position.lng || this.poiData.position.lon;
+    this.marker.setLngLat([lon, this.poiData.position.lat]);
 }
 
 SearchMarker.prototype.addTo = function(map) {

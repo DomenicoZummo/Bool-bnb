@@ -1,8 +1,8 @@
 <template>
     <div class="container" v-if="apartment">
         <h2 class="mt-5">{{ apartment.title }}</h2>
-        <h4>Camere: {{ apartment.rooms }}</h4>
-        <h4>Letti: {{ apartment.beds }}</h4>
+        <div><strong>Camere:</strong> {{ apartment.rooms }}</div>
+        <div><strong>Letti:</strong> {{ apartment.beds }}</div>
         <img :src="apartment.img_path" :alt="apartment.title" />
         <div class="d-flex">
             <div
@@ -55,9 +55,6 @@ export default {
                     `http://127.0.0.1:8000/api/apartments/${this.$route.params.slug}`
                 )
                 .then(res => {
-                    console.log(
-                        `http://127.0.0.1:8000/api/apartments/${this.$route.params.slug}`
-                    );
                     this.apartment = res.data;
                 })
                 .catch(err => {
@@ -94,8 +91,8 @@ export default {
 
     .box-search {
         position: relative;
-        width: 1000px;
-        height: 800px;
+        width: 50vw;
+        height: 60vh;
         background: #fff;
         color: #000;
         overflow-y: auto;

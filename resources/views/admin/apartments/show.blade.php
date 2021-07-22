@@ -10,14 +10,20 @@
         </div>
    
         <div class="text-img col-xs-12 col-md-6">
-            <h1>Titolo: </h1> <p>{{ $apartment->title }}</p>
-            <h2>Descrizione: </h2> <p>{{ $apartment->description }}</p>
-            <h2>Address: </h2> <p>{{ $apartment->address }}</p>
-            <h2>Floor: </h2> <p>{{ $apartment->floor }}</p>
-            <h2>Rooms: </h2> <p>{{ $apartment->rooms }}</p>
-            <h2>Beds: </h2> <p>{{ $apartment->beds }}</p>
-            <h2>Bathrooms: </h2> <p>{{ $apartment->bathrooms }}</p>
-            <h2>Square meters: </h2> <p>{{ $apartment->square_meters }}</p>
+            <h1>{{ $apartment->title }}</h1>
+            <p><strong>Address:</strong> {{ $apartment->address }}</p>
+            <div class="d-flex">
+                @if ($apartment->floor)
+                    <p class="mr-3"><strong>Floor:</strong> {{ $apartment->floor }}</p>
+                @endif
+                <p class="mr-3"><strong>Rooms:</strong> {{ $apartment->rooms }}</p>
+                <p class="mr-3"><strong>Beds:</strong> {{ $apartment->beds }}</p>
+                <p class="mr-3"><strong>Bathrooms:</strong> {{ $apartment->bathrooms }}</p>
+                @if ($apartment->square_meters)
+                    <p><strong>Square meters:</strong> {{ $apartment->square_meters }}</p>
+                @endif
+            </div>
+            <div><strong>Descrizione:</strong></div> <p>{{ $apartment->description }}</p>
             
             @if(count($apartment->services) > 0)
                 @foreach ($apartment->services as $service)
@@ -25,7 +31,6 @@
                 @endforeach
              @endif
 
-             <canvas id="myChart" width="400" height="400"></canvas>
              <div class="d-flex action-show">
                  <a class="btn btn-success mt-5 mr-5" href="{{ route('admin.apartments.index') }}">Back</a>
                  <a class="btn btn-warning mt-5 mr-5" href="{{ route('admin.apartments.edit', $apartment->id) }}">EDIT</a>
@@ -38,6 +43,9 @@
                 </form>
             </div>
         </div>
+    </div>
+    <div class="container mt-5" height="400">
+        <canvas id="myChart"></canvas>
     </div>
     <script src='https://cdn.jsdelivr.net/npm/chart.js@3.4.1/dist/chart.min.js'></script>
     <script>

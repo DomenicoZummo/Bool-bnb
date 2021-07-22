@@ -5,7 +5,7 @@
         <h1 class="mr-5">Your messages</h1>
         <div class="new-message ">
             @if (count($unread_messages))
-            <h3 class="badge badge-primary ">Undread mesasage<span class="num-message">{{ count($unread_messages) }}</span></h3>
+            <h3 class="badge badge-primary ">Unread messages<span class="num-message">{{ count($unread_messages) }}</span></h3>
         @else
             <p class="badge badge-dark p-2"><strong>No new messages</strong></p>
         @endif

@@ -1,10 +1,11 @@
 <template>
-    <div class="container py-5" v-if="apartment">
+    <div class="container my-container py-4" v-if="apartment">
         <!-- Back button -->
         <router-link
             :to="{
                 name: 'advancedsearch'
             }"
+            class="arrow-container"
         >
             <i class="fas fa-arrow-left back-arrow"></i>
         </router-link>
@@ -158,73 +159,79 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.img-wrapper {
-    width: 500px;
-    img {
-        width: 100%;
+.my-container {
+    position: relative;
+    .img-wrapper {
+        width: 500px;
+        img {
+            width: 100%;
+        }
     }
-}
 
-.searchFilter {
-    display: flex;
-    position: absolute;
-    z-index: 10;
-    background: rgba(#000000, 0.3);
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    justify-content: center;
-    align-items: center;
+    .searchFilter {
+        display: flex;
+        position: absolute;
+        z-index: 10;
+        background: rgba(#000000, 0.3);
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        justify-content: center;
+        align-items: center;
 
-    .box-search {
-        position: relative;
-        width: 50vw;
-        background: #fff;
-        color: #000;
-        overflow-y: auto;
-        transform: scale(0.1);
-        opacity: 0;
-        animation: box-search-in 0.3s forwards;
+        .box-search {
+            position: relative;
+            width: 50vw;
+            background: #fff;
+            color: #000;
+            overflow-y: auto;
+            transform: scale(0.1);
+            opacity: 0;
+            animation: box-search-in 0.3s forwards;
 
-        @keyframes box-search-in {
-            0% {
-                transform: scale(0.1);
-                opacity: 0;
+            @keyframes box-search-in {
+                0% {
+                    transform: scale(0.1);
+                    opacity: 0;
+                }
+
+                100% {
+                    transform: scale(1);
+                    opacity: 1;
+                }
             }
 
-            100% {
-                transform: scale(1);
-                opacity: 1;
+            .close {
+                color: red;
+                position: absolute;
+                top: 30px;
+                right: 60px;
+                font-size: 20px;
+                cursor: pointer;
             }
         }
+    }
 
-        .close {
-            color: red;
-            position: absolute;
-            top: 30px;
-            right: 60px;
-            font-size: 20px;
+    .arrow-container {
+        position: absolute;
+        left: -50px;
+        top: 20px;
+        .back-arrow {
+            font-size: 35px;
+            color: rgba(30, 143, 255, 0.685);
             cursor: pointer;
+            transition: transform 0.3s;
+            &:hover {
+                transform: translateX(-10px);
+                color: rgb(30, 143, 255);
+            }
         }
     }
-}
 
-.back-arrow {
-    font-size: 35px;
-    color: rgba(30, 143, 255, 0.685);
-    margin-top: 20px;
-    margin-bottom: 15px;
-    cursor: pointer;
-    transition: transform 0.3s;
-    &:hover {
-        transform: translateX(-15px);
-        color: rgb(30, 143, 255);
+    .user-icon {
+        font-size: 20px;
+        margin-left: 9px;
     }
-}
-
-.user-icon {
-    font-size: 20px;
-    margin-left: 9px;
 }
 </style>

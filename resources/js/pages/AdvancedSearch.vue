@@ -1,8 +1,8 @@
 <template>
-    <div>
+    <div class="py-5">
         <div
             v-if="apartments.length > 0"
-            class="d-flex container flex-wrap box-apartments"
+            class="d-flex container box-apartments"
         >
             <div
                 v-for="(apartment, key) in apartments"
@@ -18,12 +18,15 @@
 
                     <div class="card-body">
                         <h5 class="card-title">{{ apartment.title }}</h5>
-                        <p class="card-text">{{ apartment.address }}</p>
-                        <p class="card-text">Floor: {{ apartment.floor }}</p>
-                        <p class="card-text">Rooms: {{ apartment.rooms }}</p>
-                        <p class="card-text">Beds: {{ apartment.beds }}</p>
-                        <p class="card-text">{{ apartment.description }}</p>
+                        <p class="card-text"><i class="fas fa-map-marker-alt mr-1"></i>{{ apartment.address }}</p>
+                      <div class="descriptions d-flex flex-wrap mb-3">
+                        <p class="card-text ml-3">Floor: {{ apartment.floor }}</p>
+                        <p class="card-text ml-3">Rooms: {{ apartment.rooms }}</p>
+                        <p class="card-text ml-3"><i class="fas fa-bed mr-1"></i> {{ apartment.beds }}</p>
+                        <p class="card-text ml-3"><i class="fas fa-toilet"></i> {{ apartment.bathrooms }}</p>
+                      </div>
                         <h6>Services:</h6>
+
                         <p
                             v-for="(service, key) in apartment.services"
                             :key="key"
@@ -31,6 +34,7 @@
                         >
                             {{ service.name }}
                         </p>
+                       
                         <div class="mb-3">
                             <router-link
                                 @click="getApartmentFiltered"
@@ -103,13 +107,21 @@ export default {
 </script>
 
 <style scoped lang="scss">
+
+.card-title{
+    text-transform: capitalize;
+}
+
+.box-apartments{
+    overflow-x: auto;
+}
 .card {
     animation: card-effect 0.7s forwards;
     opacity: 0;
     transform: scale(0.1);
     overflow: auto;
-    min-height: 500px;
-    max-height: 500px;
+    min-height: 650px;
+    max-height: 650px;
     min-width: 250px;
 }
 

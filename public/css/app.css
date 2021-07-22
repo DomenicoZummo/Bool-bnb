@@ -10970,3 +10970,27 @@ form label {
   opacity: 1;
 }
 
+.new-message {
+  margin-top: 30px;
+}
+
+.new-message h3 {
+  font-size: 16px;
+  font-weight: 400;
+  position: relative;
+}
+
+.new-message h3 .num-message {
+  position: absolute;
+  font-size: 14px;
+  top: -10px;
+  right: -10px;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background-color: red;
+}
+

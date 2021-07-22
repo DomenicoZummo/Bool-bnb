@@ -112,9 +112,8 @@
                             @endif
                             @else
                             <li class="nav-item">
-                                <div class="position-relative">
+                                <div>
                                     <a class="nav-link" href="{{ route('admin.messages.index') }}">My messages</a>
-                                    <div class="num-message">{{ count($unread_messages) }}</div>
                                 </div>
                             </li>
                             <li class="nav-item">

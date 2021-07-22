@@ -10960,3 +10960,13 @@ form label {
   max-width: 100%;
 }
 
+.far.fa-check-circle {
+  font-size: 20px;
+  opacity: 0.3;
+}
+
+.read-true .far.fa-check-circle {
+  color: #34fa3e;
+  opacity: 1;
+}
+

@@ -40,7 +40,7 @@
                         <td>
                             {{ $message->apartment->title }}
                         </td>
-                        <td class="text-center @if($message->read == 1) active @else notActive" @endif>
+                        <td class="text-center @if($message->read == 1) read-true @endif">
                             <i class="far fa-check-circle"></i>
                         </td>
                         <td>

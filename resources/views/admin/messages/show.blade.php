@@ -21,9 +21,6 @@
         <h4>Testo:</h4>
         <p>{{ $message->message}}</p>
 
-        <h4>Visibility:</h4>
-        <p>{{ $message->read}}</p>
-
             <div class="d-flex action-show">
                 <a class="btn btn-success mt-5 mr-5" href="{{ route('admin.messages.index') }}">Back</a>
                 <form class="mt-5 delete-apartment-form " action="{{ route('admin.messages.destroy', $message->id) }}" method="POST">

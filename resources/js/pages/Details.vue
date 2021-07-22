@@ -111,6 +111,19 @@ export default {
                     this.marker = new tt.Marker()
                         .setLngLat([res.data.longitude, res.data.latitude])
                         .addTo(this.map);
+                    var popupOffsets = {
+                        top: [0, 0],
+                        bottom: [0, -50],
+                        "bottom-right": [0, -70],
+                        "bottom-left": [0, -70],
+                        left: [25, -35],
+                        right: [-25, -35]
+                    };
+
+                    var popup = new tt.Popup({ offset: popupOffsets }).setHTML(
+                        res.data.title + "<br>" + res.data.address
+                    );
+                    this.marker.setPopup(popup).togglePopup();
                 })
                 .catch(err => {
                     console.log(err);
@@ -129,6 +142,7 @@ export default {
 #map {
     width: 50vw;
     height: 50vh;
+    border-radius: 50%;
 }
 
 .img-wrapper {

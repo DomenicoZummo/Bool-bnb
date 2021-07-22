@@ -32,36 +32,7 @@
             <label value="20" class="mx-5 range" for="range"
                 >{{ range }} km</label
             > -->
-            
-            <!-- Numbers of beds -->
-            <div class="mt-3 mr-3">
-                <label class="form-label" for="beds">Beds</label>
-                <input
-                    id="beds"
-                    name="beds"
-                    min="1"
-                    max="20"
-                    required
-                    type="number"
-                    v-model.number="minBeds"
-                    value="minBeds"
-                />
-            </div>
-
-            <!-- Numbers of rooms -->
-            <div class="mt-3 mr-3">
-                <label class="form-label" for="rooms">Rooms </label>
-                <input
-                    id="rooms"
-                    name="rooms"
-                    required
-                    min="1"
-                    max="20"
-                    type="number"
-                    v-model.number="minRooms"
-                    value="minRooms"
-                />
-            </div>
+           
 
             <!-- Filters button -->
             <input
@@ -91,8 +62,9 @@
             </div>
              <!-- Filters menu -->
         <div v-show="clickFilterStatus" class="searchFilter">
-            <div class="box-search py-2">
-                <div
+            <div class="box-search py-2 d-flex">
+                <div class="box-check mr-3">
+                    <div
                     v-for="(service, index) in services"
                     :key="index"
                     class="checkbox-service ml-3"
@@ -106,7 +78,40 @@
                         v-model="servicesChecked"
                     />
                 </div>
+                </div>
                 <span class="close" @click="clickFilter">Close</span>
+                <div class="room-bed">
+                     
+            <!-- Numbers of beds -->
+            <div class="mt-3 mr-3">
+                <label class="form-label" for="beds">Beds</label>
+                <input
+                    id="beds"
+                    name="beds"
+                    min="1"
+                    max="20"
+                    required
+                    type="number"
+                    v-model.number="minBeds"
+                    value="minBeds"
+                />
+            </div>
+
+            <!-- Numbers of rooms -->
+            <div class="mt-3 mr-3">
+                <label class="form-label" for="rooms">Rooms </label>
+                <input
+                    id="rooms"
+                    name="rooms"
+                    required
+                    min="1"
+                    max="20"
+                    type="number"
+                    v-model.number="minRooms"
+                    value="minRooms"
+                />
+            </div>
+                </div>
             </div>
         </div>
         </div>

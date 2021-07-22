@@ -34,7 +34,9 @@
             </div>
 
             <!-- Mq -->
-            <div><strong>Mq:</strong> {{ apartment.square_meters }} mq</div>
+            <div v-if="apartment.square_meters">
+                <strong>Mq:</strong> {{ apartment.square_meters }} mq
+            </div>
         </div>
 
         <!-- Img -->
@@ -151,7 +153,7 @@ export default {
     .box-search {
         position: relative;
         width: 50vw;
-        height: 60vh;
+        height: 80vh;
         background: #fff;
         color: #000;
         overflow-y: auto;

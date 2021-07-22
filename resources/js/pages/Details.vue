@@ -153,7 +153,6 @@ export default {
     .box-search {
         position: relative;
         width: 50vw;
-        height: 80vh;
         background: #fff;
         color: #000;
         overflow-y: auto;

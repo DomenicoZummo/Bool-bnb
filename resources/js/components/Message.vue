@@ -1,7 +1,6 @@
 <template>
     <div class="container">
         <h1 class="mb-5">Send us a message</h1>
-
         <div v-show="success" class="alert alert-success">
             Message sent succesfully
         </div>
@@ -18,12 +17,15 @@
                     {{ error }}
                 </div>
             </div>
-
-
             <!-- Surname -->
             <div class="form-group">
                 <label for="surname">Surname</label>
-                <input v-model="surname" type="text" id="surname" class="max-width" />
+                <input
+                    v-model="surname"
+                    type="text"
+                    id="surname"
+                    class="max-width"
+                />
                 <div
                     class="error-message"
                     v-for="(error, index) in errors.surname"
@@ -32,10 +34,9 @@
                     {{ error }}
                 </div>
             </div>
-
             <!-- Email -->
             <div class="form-group">
-                <label for="email">Email  *</label>
+                <label for="email">Email *</label>
                 <input
                     v-model="email"
                     type="email"
@@ -50,10 +51,9 @@
                     {{ error }}
                 </div>
             </div>
-
             <!-- Message -->
             <div class="form-group">
-                <label for="message">Message  *</label>
+                <label for="message">Message *</label>
                 <textarea
                     class="max-width"
                     v-model="message"
@@ -70,7 +70,6 @@
                     {{ error }}
                 </div>
             </div>
-
             <!-- Submit button -->
             <div class="d-flex justify-content-center">
                 <button
@@ -114,7 +113,7 @@ export default {
             axios
                 .post(`http://127.0.0.1:8000/api/messages`, {
                     name: this.name,
-                    surname:this.surname,
+                    surname: this.surname,
                     email: this.email,
                     message: this.message,
                     apartment_id: id
@@ -127,8 +126,7 @@ export default {
                         this.success = false;
                     } else {
                         this.name = "";
-                        this.surname='',
-                        this.email = "";
+                        (this.surname = ""), (this.email = "");
                         this.message = "";
                         this.success = true;
                         this.errors = {};
@@ -177,6 +175,4 @@ export default {
 button:disabled {
     cursor: not-allowed;
 }
-
-
 </style>

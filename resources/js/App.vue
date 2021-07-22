@@ -57,22 +57,22 @@ export default {
 @import "~bootstrap/dist/css/bootstrap.css";
 /* width */
 ::-webkit-scrollbar {
-  width: 10px;
+    width: 10px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+    background: #f1f1f1;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: rgb(45, 109, 173);
-  border-radius: 20px;
+    background: rgb(45, 109, 173);
+    border-radius: 20px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: dodgerblue;
+    background: dodgerblue;
 }
 </style>

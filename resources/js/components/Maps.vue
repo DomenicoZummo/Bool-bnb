@@ -14,7 +14,13 @@ export default {
 #map {
     width: 500px;
     height: 500px;
-    margin-left: 50px;
-    margin-top: 50px;
+    margin-right: 50px;
+    margin-top: 100px;
+    border-radius: 15% 15% 0 15%;
+    border: 1px solid rgb(61, 123, 238);
+    transition: 0.3s;
+    &:hover {
+        border: 2px solid blue;
+    }
 }
 </style>

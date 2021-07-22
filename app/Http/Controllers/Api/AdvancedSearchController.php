@@ -94,7 +94,7 @@ class AdvancedSearchController extends Controller
     // Get blog's post detail by slug
     public function show($slug)
     {
-        $apartment = Apartment::where('slug', $slug)->with(['services'])->first();
+        $apartment = Apartment::where('slug', $slug)->with(['services','user'])->first();
 
         if ($apartment->img_path) {
             $apartment->img_path = url('storage/' . $apartment->img_path);

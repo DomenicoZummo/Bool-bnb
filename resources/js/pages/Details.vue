@@ -1,34 +1,53 @@
 <template>
-    <div class="container" v-if="apartment">
+    <div class="container py-5" v-if="apartment">
         <!-- Back button -->
         <router-link
             :to="{
                 name: 'advancedsearch'
             }"
-            class="btn btn-danger my-4"
         >
-            Back
+            <i class="fas fa-arrow-left back-arrow"></i>
         </router-link>
 
         <!-- Title -->
-        <h2 class="my-3 mb-5">
+        <h2 class="my-3 mb-1">
             <i class="fas fa-house-user"></i> {{ apartment.title }}
         </h2>
+        <!-- Address -->
+        <div class="mb-3">
+            <i class="fas fa-map-marker-alt mr-3 user-icon"></i
+            >{{ apartment.address }}
+        </div>
 
-        <div class="d-flex mb-4 justify-content-around">
+        <!-- Host d kitemmurt -->
+        <div class="mb-5">
+            <i class="far fa-user-circle mr-2 user-icon"></i
+            >{{ apartment.user.name }}
+        </div>
+
+        <!-- Img -->
+        <div class="img-wrapper">
+            <img :src="apartment.img_path" :alt="apartment.title" />
+        </div>
+
+        <div class="d-flex mt-3">
             <!-- Rooms -->
-            <div><strong>Camere:</strong> {{ apartment.rooms }}</div>
+            <div class="mr-3">
+                <strong>Camere:</strong> {{ apartment.rooms }}
+            </div>
 
             <!-- Beds -->
-            <div>
+            <div class="mr-3">
                 <strong><i class="fas fa-bed"></i></strong> {{ apartment.beds }}
             </div>
 
             <!-- Floor -->
-            <div><strong>Piano:</strong> {{ apartment.floor }}</div>
+            <div class="mr-3">
+                <strong>Piano:</strong> {{ apartment.floor }}
+            </div>
 
             <!-- Bathrooms -->
-            <div>
+            <div class="mr-3">
                 <strong><i class="fas fa-toilet"></i></strong>
                 {{ apartment.bathrooms }}
             </div>
@@ -37,11 +56,6 @@
             <div v-if="apartment.square_meters">
                 <strong>Mq:</strong> {{ apartment.square_meters }} mq
             </div>
-        </div>
-
-        <!-- Img -->
-        <div class="img-wrapper">
-            <img :src="apartment.img_path" :alt="apartment.title" />
         </div>
 
         <!-- Services -->
@@ -53,6 +67,11 @@
             >
                 {{ service.name }}
             </div>
+        </div>
+
+        <!-- Description -->
+        <div class="mb-3 mt-3">
+            <strong>Description:</strong> {{ apartment.description }}
         </div>
 
         <!-- Send Message -->
@@ -139,12 +158,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-#map {
-    width: 50vw;
-    height: 50vh;
-    border-radius: 50%;
-}
-
 .img-wrapper {
     width: 500px;
     img {
@@ -195,5 +208,23 @@ export default {
             cursor: pointer;
         }
     }
+}
+
+.back-arrow {
+    font-size: 35px;
+    color: rgba(30, 143, 255, 0.685);
+    margin-top: 20px;
+    margin-bottom: 15px;
+    cursor: pointer;
+    transition: transform 0.3s;
+    &:hover {
+        transform: translateX(-15px);
+        color: rgb(30, 143, 255);
+    }
+}
+
+.user-icon {
+    font-size: 20px;
+    margin-left: 9px;
 }
 </style>

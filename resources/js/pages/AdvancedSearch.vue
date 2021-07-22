@@ -40,6 +40,7 @@
                                 {{ apartment.bathrooms }}
                             </p>
                         </div>
+                    <div class="service">
                         <h6>Services:</h6>
 
                         <p
@@ -49,8 +50,10 @@
                         >
                             {{ service.name }}
                         </p>
-
-                        <div class="mb-3">
+                    </div>
+                    </div>
+                    <div class="btn-service ml-5">
+                          <div class="mb-3">
                             <router-link
                                 @click="getApartmentFiltered"
                                 :apartment="apartment"

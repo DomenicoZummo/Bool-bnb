@@ -74,7 +74,7 @@
                 </div>
             </div>
         </div>
-        <h1 v-else>No results</h1>
+        <h1 class="text-white" v-else>No results</h1>
     </div>
 </template>
 

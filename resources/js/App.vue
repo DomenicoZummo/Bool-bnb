@@ -98,7 +98,7 @@ body.body{
     background-size: cover;
     background-repeat: no-repeat;
     background-position: top;
-    h1{
+    .text-white{
     color: #fff;
     text-shadow: 1px 0px 3px #000;
 }

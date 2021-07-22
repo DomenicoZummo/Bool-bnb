@@ -1,5 +1,5 @@
 <template>
-    <div class="container py-4" v-if="apartment">
+    <div class="container py-4 text-white" v-if="apartment">
         <!-- Back button -->
         <router-link
             :to="{

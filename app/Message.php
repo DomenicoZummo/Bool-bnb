@@ -12,7 +12,8 @@ class Message extends Model
         "surname",
         "email",
         "message",
-        "apartment_id"
+        "apartment_id",
+        "read",
     ];
 
     // Gestione relazione con tabella Apartments

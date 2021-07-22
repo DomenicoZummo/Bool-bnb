@@ -28,13 +28,37 @@ class MessagesController extends Controller
         return view('admin.messages.index', compact('user_messages'));
     }
 
+    public function update(Request $request, $id){
+
+            $data = $request->All();
+            $message = Message::find($id);
+
+            if($message['read'] === 0){
+            $data["read"] = 1;
+            };
+
+
+            $message->update($data);
+
+            return redirect()->route('admin.messages.show', $id);
+
+            
+
+
+        }
+    
+
+
+
 
     public function show($id)
     {
+
         $message = Message::find($id);
         $user_log = Auth::user();
 
         $user_id = $user_log['id'];
+        
 
 
 

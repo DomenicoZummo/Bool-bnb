@@ -19,6 +19,8 @@
                     <th>Message</th>
                     <th>Name apartment</th>
                     <th>Send date</th>
+                    <th>visibility</th>
+
                     <th colspan="3" class="text-center">Actions</th>
                 </tr>
             </thead>
@@ -39,11 +41,21 @@
                             {{ $message->apartment->title }}
                         </td>
                         <td>
+                            {{ $message->read }}
+                        </td>
+                        <td>
                             <div>{{ $message->created_at->format('l d/m/y') }}</div>
                             <div>{{ $message->created_at->diffForHumans() }}</div>
                         </td>
                         <td>
-                            <a class="btn btn-success" href="{{ route('admin.messages.show' , $message->id) }}">Show</a>
+                            <form  action="{{ route('admin.messages.show', $message->id) }}" method="POST">
+                                @csrf
+                                @method('PATCH')
+                                <button class="btn btn-danger" type="submit">
+                                    show
+                                </button>
+                            </form>
+
                         </td>
 
                         <td>

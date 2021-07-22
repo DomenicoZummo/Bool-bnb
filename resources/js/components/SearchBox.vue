@@ -13,6 +13,14 @@
                     >Cerca</router-link
                 >
             </div>
+            <!-- Filters button -->
+            <input
+                v-show="this.$route.name == 'advancedsearch'"
+                @click="clickFilter"
+                class="ml-2 mr-5 btn btn-warning"
+                type="button"
+                value="Filtri"
+            />
        </div>
 
         <div v-if="this.$route.name == 'advancedsearch'"
@@ -34,14 +42,7 @@
             > -->
            
 
-            <!-- Filters button -->
-            <input
-                v-show="this.$route.name == 'advancedsearch'"
-                @click="clickFilter"
-                class="ml-2 mr-5 btn btn-primary"
-                type="button"
-                value="Filtri"
-            />
+            
 
             <!-- Active services badge -->
             <div
@@ -55,7 +56,7 @@
             </div>
 
             <!-- Number of results finded -->
-            <div
+            <div v-show="apartmentsFilter.length > 0"
                 class="m-2 p-2 badge badge-success"
             >
                 Risultati: {{ apartmentsFilter.length }}

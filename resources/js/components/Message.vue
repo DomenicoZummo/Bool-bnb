@@ -19,6 +19,20 @@
                 </div>
             </div>
 
+
+            <!-- Surname -->
+            <div class="form-group">
+                <label for="surname">Surname</label>
+                <input v-model="surname" type="text" id="surname" class="max-width" />
+                <div
+                    class="error-message"
+                    v-for="(error, index) in errors.surname"
+                    :key="`err-surname-${index}`"
+                >
+                    {{ error }}
+                </div>
+            </div>
+
             <!-- Email -->
             <div class="form-group">
                 <label for="email">Email</label>
@@ -81,6 +95,7 @@ export default {
     data() {
         return {
             name: "",
+            surname: "",
             email: "",
             message: "",
             errors: {},
@@ -99,6 +114,7 @@ export default {
             axios
                 .post(`http://127.0.0.1:8000/api/messages`, {
                     name: this.name,
+                    surname:this.surname,
                     email: this.email,
                     message: this.message,
                     apartment_id: id
@@ -111,6 +127,7 @@ export default {
                         this.success = false;
                     } else {
                         this.name = "";
+                        this.surname='',
                         this.email = "";
                         this.message = "";
                         this.success = true;

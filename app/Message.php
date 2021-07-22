@@ -9,6 +9,7 @@ class Message extends Model
 
     protected $fillable = [
         "name",
+        "surname",
         "email",
         "message",
         "apartment_id"

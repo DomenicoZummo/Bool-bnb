@@ -21,9 +21,10 @@ class MessagesController extends Controller
 
         // Validation
         $validator = Validator::make($request->all(), [
-            'name' => 'required',
-            'email' => 'required',
-            'message' => 'required',
+            'name' => ['nullable','string','max:30'],
+            'surname' => ['nullable','string','max:30'],
+            'email' => ['required', 'string', 'email', 'max:255'],
+            'message' => ['required','string' , 'max:1000']
         ]);
 
         if ($validator->fails()) {

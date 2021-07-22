@@ -2,7 +2,7 @@
     <div class="py-5">
         <div
             v-if="apartments.length > 0"
-            class="d-flex container box-apartments"
+            class="d-flex container flex-wrap box-apartments"
         >
             <div
                 v-for="(apartment, key) in apartments"
@@ -10,11 +10,13 @@
                 class=" my-3 px-3 col-xs-12 col-md-4"
             >
                 <div class="card ">
-                    <img
+                    <div class="box-img">
+                        <img
                         class="card-img-top"
                         :src="apartment.img_path"
                         alt="Card image cap"
                     />
+                    </div>
 
                     <div class="card-body">
                         <h5 class="card-title">{{ apartment.title }}</h5>
@@ -125,7 +127,6 @@ export default {
 }
 
 .box-apartments {
-    overflow-x: auto;
     scrollbar-width: thin;
     scrollbar-color: dodgerblue lightblue;
 }
@@ -137,6 +138,16 @@ export default {
     min-height: 650px;
     max-height: 650px;
     min-width: 250px;
+
+    .box-img{
+        height: 200px;
+        width: 100%;
+        overflow: hidden;
+        img{
+            width: 100%;
+            object-fit: cover;
+        }
+    }
 }
 
 @keyframes card-effect {

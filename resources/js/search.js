@@ -1,7 +1,5 @@
 import tt from "@tomtom-international/web-sdk-maps";
-import {
-    services
-} from "@tomtom-international/web-sdk-services";
+import { services } from "@tomtom-international/web-sdk-services";
 import SearchBox from "@tomtom-international/web-sdk-plugin-searchbox";
 
 window.lat = "";
@@ -33,7 +31,7 @@ function fitToViewport(markerData) {
     }
     var bounds = new tt.LngLatBounds();
     if (markerData instanceof Array) {
-        markerData.forEach(function (marker) {
+        markerData.forEach(function(marker) {
             bounds.extend(getBounds(marker));
         });
     } else {
@@ -78,17 +76,18 @@ function SearchMarkersManager(map, options) {
     this.markers = {};
 }
 
-SearchMarkersManager.prototype.draw = function (poiList) {
+SearchMarkersManager.prototype.draw = function(poiList) {
     this._poiList = poiList;
     this.clear();
-    this._poiList.forEach(function (poi) {
+    this._poiList.forEach(function(poi) {
         var markerId = poi.id;
         var poiOpts = {
             name: poi.poi ? poi.poi.name : undefined,
             address: poi.address ? poi.address.freeformAddress : "",
             distance: poi.dist,
-            classification: poi.poi ?
-                poi.poi.classifications[0].code : undefined,
+            classification: poi.poi
+                ? poi.poi.classifications[0].code
+                : undefined,
             position: poi.position,
             entryPoints: poi.entryPoints
         };
@@ -102,7 +101,7 @@ SearchMarkersManager.prototype.draw = function (poiList) {
     }, this);
 };
 
-SearchMarkersManager.prototype.clear = function () {
+SearchMarkersManager.prototype.clear = function() {
     for (var markerId in this.markers) {
         var marker = this.markers[markerId];
         marker.remove();
@@ -122,14 +121,13 @@ function SearchMarker(poiData, options) {
     this.marker.setLngLat([lon, this.poiData.position.lat]);
 }
 
-SearchMarker.prototype.addTo = function (map) {
+SearchMarker.prototype.addTo = function(map) {
     this.marker.addTo(map);
     this._map = map;
     return this;
 };
 
-
-SearchMarker.prototype.createMarker = function () {
+SearchMarker.prototype.createMarker = function() {
     var elem = document.createElement("div");
     elem.className = "tt-icon-marker-black tt-search-marker";
     if (this.options.markerClassName) {
@@ -145,7 +143,7 @@ SearchMarker.prototype.createMarker = function () {
     return elem;
 };
 
-SearchMarker.prototype.remove = function () {
+SearchMarker.prototype.remove = function() {
     this.marker.remove();
     this._map = null;
 };
@@ -166,11 +164,8 @@ var map = tt.map({
     zoom: 5
 });
 
-
 // window.latApartment = "";
 // window.lonApartment = "";
-
-
 
 // var ttSearchBox = new tt.plugins.SearchBox(tt.services, options);
 const ttSearchBox = new SearchBox(services, options);

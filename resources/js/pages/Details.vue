@@ -1,18 +1,48 @@
 <template>
     <div class="container" v-if="apartment">
-        <h2 class="my-3 mb-5"><i class="fas fa-house-user"></i> {{ apartment.title }}</h2>
+        <!-- Back button -->
+        <router-link
+            :to="{
+                name: 'advancedsearch'
+            }"
+            class="btn btn-danger my-4"
+        >
+            Back
+        </router-link>
+
+        <!-- Title -->
+        <h2 class="my-3 mb-5">
+            <i class="fas fa-house-user"></i> {{ apartment.title }}
+        </h2>
+
         <div class="d-flex mb-4 justify-content-around">
-        <div><strong>Camere:</strong> {{ apartment.rooms }}</div>
-        <div><strong><i class="fas fa-bed"></i></strong> {{ apartment.beds }}</div>
-        <div><strong>Piano:</strong> {{ apartment.floor }}</div>
-        <div><strong><i class="fas fa-toilet"></i></strong> {{ apartment.bathrooms }}</div>
-        <div><strong>Mq:</strong> {{ apartment.square_meters}} mq</div>
+            <!-- Rooms -->
+            <div><strong>Camere:</strong> {{ apartment.rooms }}</div>
+
+            <!-- Beds -->
+            <div>
+                <strong><i class="fas fa-bed"></i></strong> {{ apartment.beds }}
+            </div>
+
+            <!-- Floor -->
+            <div><strong>Piano:</strong> {{ apartment.floor }}</div>
+
+            <!-- Bathrooms -->
+            <div>
+                <strong><i class="fas fa-toilet"></i></strong>
+                {{ apartment.bathrooms }}
+            </div>
+
+            <!-- Mq -->
+            <div><strong>Mq:</strong> {{ apartment.square_meters }} mq</div>
         </div>
-        <img :src="apartment.img_path" :alt="apartment.title" />
-        <div><strong>Letti:</strong> {{ apartment.beds }}</div>
+
+        <!-- Img -->
         <div class="img-wrapper">
             <img :src="apartment.img_path" :alt="apartment.title" />
         </div>
+
+        <!-- Services -->
         <div class="d-flex">
             <div
                 v-for="(service, index) in apartment.services"

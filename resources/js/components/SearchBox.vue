@@ -1,11 +1,24 @@
 <template>
     <div>
-        <!-- Search-bar -->
-        <div id="searchbox-front" class="mb-3"></div>
+       <div class="d-flex align-items-center justify-content-center">
+            <!-- Search-bar -->
+        <div id="searchbox-front" class="mb-3 "></div>
+        <!-- Search button -->
+            <div @click="getApartmentFiltered">
+                <router-link
+                    @click="getApartmentFiltered"
+                    :apartmentFiltered="apartmentsFilter"
+                    class="btn btn-success "
+                    :to="{ name: 'advancedsearch' }"
+                    >Cerca</router-link
+                >
+            </div>
+       </div>
 
-        <div class="d-flex box-input align-items-center">
+        <div v-if="this.$route.name == 'advancedsearch'"
+        class="d-flex box-input align-items-center justify-content-center">
             <!-- Radius -->
-            <input
+            <!-- <input
                 @change="setRange(range)"
                 v-model="range"
                 min="5"
@@ -18,70 +31,8 @@
             />
             <label value="20" class="mx-5 range" for="range"
                 >{{ range }} km</label
-            >
-
-            <!-- Search button -->
-            <div @click="getApartmentFiltered">
-                <router-link
-                    @click="getApartmentFiltered"
-                    :apartmentFiltered="apartmentsFilter"
-                    class="btn btn-success "
-                    :to="{ name: 'advancedsearch' }"
-                    >Cerca</router-link
-                >
-            </div>
-
-            <!-- Filters button -->
-            <input
-                v-show="this.$route.name == 'advancedsearch'"
-                @click="clickFilter"
-                class="ml-5 btn btn-primary"
-                type="button"
-                value="Filtri"
-            />
-
-            <!-- Active services badge -->
-            <div
-                v-show="
-                    servicesChecked.length > 0 &&
-                        this.$route.name == 'advancedsearch'
-                "
-                class="badge badge-primary p-2 m-2"
-            >
-                Filtri attivi : {{ servicesChecked.length }}
-            </div>
-
-            <!-- Number of results finded -->
-            <div
-                v-show="this.$route.name == 'advancedsearch'"
-                class="m-2 p-2 badge badge-success"
-            >
-                Risultati: {{ apartmentsFilter.length }}
-            </div>
-        </div>
-
-        <!-- Filters menu -->
-        <div v-show="clickFilterStatus" class="searchFilter">
-            <div class="box-search py-2">
-                <div
-                    v-for="(service, index) in services"
-                    :key="index"
-                    class="checkbox-service ml-3"
-                >
-                    <label :for="service.name">{{ service.name }}</label>
-                    <input
-                        type="checkbox"
-                        :name="service.name"
-                        :id="service.name"
-                        :value="service.id"
-                        v-model="servicesChecked"
-                    />
-                </div>
-                <span class="close" @click="clickFilter">Close</span>
-            </div>
-        </div>
-
-        <div class="inp d-flex" v-show="this.$route.name == 'advancedsearch'">
+            > -->
+            
             <!-- Numbers of beds -->
             <div class="mt-3 mr-3">
                 <label class="form-label" for="beds">Beds</label>
@@ -111,6 +62,53 @@
                     value="minRooms"
                 />
             </div>
+
+            <!-- Filters button -->
+            <input
+                v-show="this.$route.name == 'advancedsearch'"
+                @click="clickFilter"
+                class="ml-2 mr-5 btn btn-primary"
+                type="button"
+                value="Filtri"
+            />
+
+            <!-- Active services badge -->
+            <div
+                v-show="
+                    servicesChecked.length > 0 &&
+                        this.$route.name == 'advancedsearch'
+                "
+                class="badge badge-primary p-2 m-2"
+            >
+                Filtri attivi : {{ servicesChecked.length }}
+            </div>
+
+            <!-- Number of results finded -->
+            <div
+                class="m-2 p-2 badge badge-success"
+            >
+                Risultati: {{ apartmentsFilter.length }}
+            </div>
+             <!-- Filters menu -->
+        <div v-show="clickFilterStatus" class="searchFilter">
+            <div class="box-search py-2">
+                <div
+                    v-for="(service, index) in services"
+                    :key="index"
+                    class="checkbox-service ml-3"
+                >
+                    <label :for="service.name">{{ service.name }}</label>
+                    <input
+                        type="checkbox"
+                        :name="service.name"
+                        :id="service.name"
+                        :value="service.id"
+                        v-model="servicesChecked"
+                    />
+                </div>
+                <span class="close" @click="clickFilter">Close</span>
+            </div>
+        </div>
         </div>
     </div>
 </template>
@@ -194,6 +192,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
+
+
 .searchFilter {
     display: flex;
     position: absolute;
@@ -205,6 +205,8 @@ export default {
     bottom: 0;
     justify-content: center;
     align-items: center;
+
+    
 
     .box-search {
         position: relative;
@@ -235,6 +237,7 @@ export default {
             right: 20px;
             font-size: 20px;
             cursor: pointer;
+            color: red;
         }
     }
 }

@@ -149,7 +149,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _tom
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\invac\Desktop\Bool-bnb\resources\js\search.js */"./resources/js/search.js");
+module.exports = __webpack_require__(/*! C:\Users\domen\Desktop\Bool-bnb\resources\js\search.js */"./resources/js/search.js");
 
 
 /***/ })

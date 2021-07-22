@@ -55,6 +55,11 @@ export default {
 
 <style lang="scss">
 @import "~bootstrap/dist/css/bootstrap.css";
+
+h1{
+    color: #fff;
+    text-shadow: 1px 0px 3px #000;
+}
 /* width */
 ::-webkit-scrollbar {
     width: 10px;
@@ -63,6 +68,7 @@ export default {
 /* Track */
 ::-webkit-scrollbar-track {
     background: #f1f1f1;
+     border-radius: 20px;
 }
 
 /* Handle */
@@ -74,5 +80,26 @@ export default {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
     background: dodgerblue;
+}
+
+#searchbox-front{
+    margin:0 20px 0 0 ;
+    width: 500px;
+    .tt-search-box{
+        border-radius: 50px;
+    }
+    .tt-search-box-input-container{
+        border-color: transparent;
+        border-radius: 50px;
+    }
+}
+
+body{
+    min-height: 100vh;
+    min-width: 100vw;
+    background-image: url('https://images-ext-2.discordapp.net/external/bRQb20q50e53VH1ZTuDbP1qeWhkZE2AnFkARtEDwfIA/https/wallpaperaccess.com/full/1431622.jpg?width=1191&height=670');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: top;
 }
 </style>

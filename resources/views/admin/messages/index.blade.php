@@ -3,6 +3,11 @@
 @section('content')
     <div class="container">
         <h1>Your messages</h1>
+        @if (count($unread_messages))
+            <p class="badge badge-primary p-2"><strong>Unread messages: {{ count($unread_messages) }}</strong></p>
+        @else
+            <p class="badge badge-dark p-2"><strong>No new messages</strong></p>
+        @endif
 
         @if (session('deleted'))
             <div class="alert alert-success">
@@ -10,7 +15,6 @@
                 Succesfully deleted item.
             </div>
         @endif
-
         <table class="table mt-5">
             <thead>
                 <tr>

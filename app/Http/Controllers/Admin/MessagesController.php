@@ -10,55 +10,44 @@ use Illuminate\Support\Facades\Auth;
 
 class MessagesController extends Controller
 {
+    // Index
     public function index()
     {
         $user = Auth::user();
         $user_id = $user['id'];
 
-        $messages = Message::with('apartment')->get();
+        $messages = Message::with('apartment')->orderBy('created_at', 'desc')->get();
         // dd($messages);
+        // $unviewedMessagesCount = Message::where('read', '0')
+        //     ->count();
+
         $user_messages = [];
+        $unread_messages = [];
+
         foreach ($messages as $message) {
             // dd($message->apartment['user_id']);
             if ($user_id == $message->apartment['user_id']) {
                 $user_messages[] = $message;
+
+                if ($message->read == 0) {
+                    $unread_messages[] = $message;
+                }
             }
         }
 
-        return view('admin.messages.index', compact('user_messages'));
+
+        return view('admin.messages.index', compact('user_messages', 'unread_messages'));
     }
 
-    public function update(Request $request, $id){
 
-            $data = $request->All();
-            $message = Message::find($id);
-
-            if($message['read'] === 0){
-            $data["read"] = 1;
-            };
-
-
-            $message->update($data);
-
-            return redirect()->route('admin.messages.show', $id);
-
-            
-
-
-        }
-    
-
-
-
-
+    // Show
     public function show($id)
     {
-
         $message = Message::find($id);
         $user_log = Auth::user();
 
         $user_id = $user_log['id'];
-        
+
 
 
 
@@ -72,6 +61,24 @@ class MessagesController extends Controller
     }
 
 
+    // Update
+    public function update(Request $request, $id)
+    {
+
+        $data = $request->All();
+        $message = Message::find($id);
+
+        if ($message['read'] === 0) {
+            $data["read"] = 1;
+        };
+
+        $message->update($data);
+
+        return redirect()->route('admin.messages.show', $id);
+    }
+
+
+    // Destroy
     public function destroy($id)
     {
         $message = Message::find($id);

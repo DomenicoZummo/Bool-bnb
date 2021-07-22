@@ -4,7 +4,6 @@
 @section('content')
 
     <div class="container d-flex">
-       
         <div class="box-img col-xs-12 col-md-6">
             <img src="{{ asset('storage/' . $message->apartment->img_path) }}" alt="{{ $message->apartment->img_path }}">
         </div>

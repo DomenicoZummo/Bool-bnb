@@ -33,6 +33,7 @@
 
 <script>
 import Message from "../components/Message.vue";
+import tt from "@tomtom-international/web-sdk-maps";
 
 export default {
     name: "Details",
@@ -42,11 +43,28 @@ export default {
     data() {
         return {
             apartment: null,
-            clickMessageStatus: false
+            clickMessageStatus: false,
+            // latApartment: "",
+            // lonApartment: "",
+            marker: "",
+
+            map: tt.map({
+                key: "gHNQlC91c7IVQOAYndiQCxDEAX09ZzVj",
+                container: "map",
+
+                center: [
+                    this.$route.params.longitude,
+                    this.$route.params.latitude
+                ],
+                zoom: 15
+            }),
+            service: tt.setProductInfo("bool", "version2")
         };
     },
     created() {
         this.getApartmentDetails();
+        console.log(this.$route.params.latitude);
+        console.log(this.$route.params.longitude);
     },
     methods: {
         getApartmentDetails() {
@@ -56,6 +74,12 @@ export default {
                 )
                 .then(res => {
                     this.apartment = res.data;
+                    this.marker = new tt.Marker()
+                        .setLngLat([
+                            this.$route.params.longitude,
+                            this.$route.params.latitude
+                        ])
+                        .addTo(this.map);
                 })
                 .catch(err => {
                     console.log(err);
@@ -71,6 +95,10 @@ export default {
 </script>
 
 <style scoped lang="scss">
+#map {
+    width: 50vw;
+    height: 50vh;
+}
 .container {
     width: 100%;
     img {

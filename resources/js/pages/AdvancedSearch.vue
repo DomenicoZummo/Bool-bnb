@@ -33,11 +33,14 @@
                         </p>
                         <div class="mb-3">
                             <router-link
+                                @click="getApartmentFiltered"
                                 :apartment="apartment"
                                 :to="{
                                     name: 'apartment-details',
                                     params: {
-                                        slug: apartment.slug
+                                        slug: apartment.slug,
+                                        latitude: apartment.latitude,
+                                        longitude: apartment.longitude
                                     }
                                 }"
                                 class="btn btn-primary"
@@ -60,9 +63,42 @@ export default {
         apartments: Array
     },
     data() {
-        return {};
+        return {
+            apartmentsFilter: []
+        };
     },
-    methods: {}
+
+    methods: {
+        getApartmentFiltered() {
+            this.apartmentsFilter = [];
+            axios
+                .get(
+                    `http://127.0.0.1:8000/api/filterapartments?address=${window.address}&lat=${window.lat}&lng=${window.lng}&range=${this.range}&rooms=${this.minRooms}&beds=${this.minBeds}&services=${this.servicesChecked}`
+                )
+                .then(result => {
+                    result.data.filter(element => {
+                        if (element.visibility) {
+                            let distance = Math.sqrt(
+                                (element.latitude - window.lat) *
+                                    (element.latitude - window.lat) +
+                                    (element.longitude - window.lng) *
+                                        (element.longitude - window.lng)
+                            );
+                            element["distance"] = distance;
+                            this.apartmentsFilter.push(element);
+                        }
+                    });
+                    this.apartmentsFilter.sort((a, b) =>
+                        a.distance > b.distance ? 1 : -1
+                    );
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+
+            this.$emit("getApartmentFiltered", this.apartmentsFilter);
+        }
+    }
 };
 </script>
 

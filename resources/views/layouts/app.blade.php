@@ -14,6 +14,10 @@
     <script src="{{ asset('js/tomtom.js') }}" defer></script>
     <script src="{{ asset('js/admin.js') }}" defer></script>
 
+    {{-- Icons --}}
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
     {{-- ChartJS --}}
     {{-- <script src='https://cdn.jsdelivr.net/npm/chart.js@3.4.1/dist/chart.min.js'></script>
     <script>

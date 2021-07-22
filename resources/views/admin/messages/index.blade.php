@@ -18,8 +18,8 @@
                     <th>Email</th>
                     <th>Message</th>
                     <th>Name apartment</th>
+                    <th>Status</th>
                     <th>Send date</th>
-                    <th>visibility</th>
 
                     <th colspan="3" class="text-center">Actions</th>
                 </tr>
@@ -40,8 +40,8 @@
                         <td>
                             {{ $message->apartment->title }}
                         </td>
-                        <td>
-                            {{ $message->read }}
+                        <td class="text-center @if($message->read == 1) active @else notActive" @endif>
+                            <i class="far fa-check-circle"></i>
                         </td>
                         <td>
                             <div>{{ $message->created_at->format('l d/m/y') }}</div>
@@ -51,8 +51,8 @@
                             <form  action="{{ route('admin.messages.show', $message->id) }}" method="POST">
                                 @csrf
                                 @method('PATCH')
-                                <button class="btn btn-danger" type="submit">
-                                    show
+                                <button class="btn btn-success" type="submit">
+                                    Read
                                 </button>
                             </form>
 

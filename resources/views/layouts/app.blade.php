@@ -60,6 +60,7 @@
      
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/red-circle.css') }}" rel="stylesheet">
 
 
     <!-- Map -->
@@ -111,7 +112,10 @@
                             @endif
                             @else
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('admin.messages.index') }}">My messages</a>
+                                <div class="position-relative">
+                                    <a class="nav-link" href="{{ route('admin.messages.index') }}">My messages</a>
+                                    <div class="num-message">{{ count($unread_messages) }}</div>
+                                </div>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('admin.apartments.create') }}">Create new apartment</a>

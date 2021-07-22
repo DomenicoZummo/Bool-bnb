@@ -1,11 +1,30 @@
 <template>
     <div class="container" v-if="apartment">
+        <!-- Back button -->
+        <router-link
+            :to="{
+                name: 'advancedsearch'
+            }"
+            class="btn btn-danger my-4"
+        >
+            Back
+        </router-link>
+
+        <!-- Title -->
         <h2 class="mt-5">{{ apartment.title }}</h2>
+
+        <!-- Rooms -->
         <div><strong>Camere:</strong> {{ apartment.rooms }}</div>
+
+        <!-- Beds -->
         <div><strong>Letti:</strong> {{ apartment.beds }}</div>
+
+        <!-- Img -->
         <div class="img-wrapper">
             <img :src="apartment.img_path" :alt="apartment.title" />
         </div>
+
+        <!-- Services -->
         <div class="d-flex">
             <div
                 v-for="(service, index) in apartment.services"

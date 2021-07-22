@@ -149,11 +149,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _tom
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-<<<<<<< HEAD
 module.exports = __webpack_require__(/*! C:\Users\Emi\Desktop\Boolean\GitHubCloneRepo\MAINboolbnb\resources\js\tomtom.js */"./resources/js/tomtom.js");
-=======
-module.exports = __webpack_require__(/*! C:\Users\domen\Desktop\Bool-bnb\resources\js\tomtom.js */"./resources/js/tomtom.js");
->>>>>>> ad100cea8b7e73027ce570395bf6214ce28a1ab5
 
 
 /***/ })

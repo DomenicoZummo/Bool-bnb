@@ -10,6 +10,11 @@
 // Bootstrap
 @import "~bootstrap/scss/bootstrap";
 
+.bold{
+    color: #000;
+    font-weight: 600;
+}
+
 .map-displayed {
     margin: 10px 0;
     width: 100%;

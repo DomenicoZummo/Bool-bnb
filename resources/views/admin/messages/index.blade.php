@@ -24,8 +24,8 @@
                     <th>Email</th>
                     <th>Message</th>
                     <th>Name apartment</th>
-                    <th>Status</th>
                     <th>Send date</th>
+                    <th>Read</th>
 
                     <th colspan="3" class="text-center">Actions</th>
                 </tr>
@@ -33,8 +33,8 @@
 
             <tbody>
                 @foreach ($user_messages as $message )
-                    <tr>
-                        <td>
+                    <tr class=" @if($message->read == 0) bold @endif">
+                        <td >
                             {{ $message->name }}
                         </td>
                         <td>
@@ -46,12 +46,12 @@
                         <td>
                             {{ $message->apartment->title }}
                         </td>
-                        <td class="text-center @if($message->read == 1) read-true @endif">
-                            <i class="far fa-check-circle"></i>
-                        </td>
                         <td>
                             <div>{{ $message->created_at->format('l d/m/y') }}</div>
                             <div>{{ $message->created_at->diffForHumans() }}</div>
+                        </td>
+                        <td class="text-center @if($message->read == 1) read-true @endif">
+                            <i class="far fa-check-circle"></i>
                         </td>
                         <td>
                             <form  action="{{ route('admin.messages.show', $message->id) }}" method="POST">

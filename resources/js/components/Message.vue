@@ -141,6 +141,7 @@ export default {
                 .get(`http://127.0.0.1:8000/admin/user`)
                 .then(res => {
                     this.name = res.data.name;
+                    this.surname = res.data.surname;
                     this.email = res.data.email;
                 })
                 .catch(err => {

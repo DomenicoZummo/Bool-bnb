@@ -11,13 +11,31 @@
         </router-link>
 
         <!-- Title -->
-        <h2 class="mt-5">{{ apartment.title }}</h2>
+        <h2 class="my-3 mb-5">
+            <i class="fas fa-house-user"></i> {{ apartment.title }}
+        </h2>
 
-        <!-- Rooms -->
-        <div><strong>Camere:</strong> {{ apartment.rooms }}</div>
+        <div class="d-flex mb-4 justify-content-around">
+            <!-- Rooms -->
+            <div><strong>Camere:</strong> {{ apartment.rooms }}</div>
 
-        <!-- Beds -->
-        <div><strong>Letti:</strong> {{ apartment.beds }}</div>
+            <!-- Beds -->
+            <div>
+                <strong><i class="fas fa-bed"></i></strong> {{ apartment.beds }}
+            </div>
+
+            <!-- Floor -->
+            <div><strong>Piano:</strong> {{ apartment.floor }}</div>
+
+            <!-- Bathrooms -->
+            <div>
+                <strong><i class="fas fa-toilet"></i></strong>
+                {{ apartment.bathrooms }}
+            </div>
+
+            <!-- Mq -->
+            <div><strong>Mq:</strong> {{ apartment.square_meters }} mq</div>
+        </div>
 
         <!-- Img -->
         <div class="img-wrapper">

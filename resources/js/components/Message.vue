@@ -35,7 +35,7 @@
 
             <!-- Email -->
             <div class="form-group">
-                <label for="email">Email</label>
+                <label for="email">Email  *</label>
                 <input
                     v-model="email"
                     type="email"
@@ -53,7 +53,7 @@
 
             <!-- Message -->
             <div class="form-group">
-                <label for="message">Message</label>
+                <label for="message">Message  *</label>
                 <textarea
                     class="max-width"
                     v-model="message"

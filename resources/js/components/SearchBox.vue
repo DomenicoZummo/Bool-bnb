@@ -35,7 +35,7 @@
             <input
                 v-show="this.$route.name == 'advancedsearch'"
                 @click="clickFilter"
-                class="ml-5"
+                class="ml-5 btn btn-primary"
                 type="button"
                 value="Filtri"
             />

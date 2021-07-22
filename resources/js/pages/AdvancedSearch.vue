@@ -18,13 +18,26 @@
 
                     <div class="card-body">
                         <h5 class="card-title">{{ apartment.title }}</h5>
-                        <p class="card-text"><i class="fas fa-map-marker-alt mr-1"></i>{{ apartment.address }}</p>
-                      <div class="descriptions d-flex flex-wrap mb-3">
-                        <p class="card-text ml-3">Floor: {{ apartment.floor }}</p>
-                        <p class="card-text ml-3">Rooms: {{ apartment.rooms }}</p>
-                        <p class="card-text ml-3"><i class="fas fa-bed mr-1"></i> {{ apartment.beds }}</p>
-                        <p class="card-text ml-3"><i class="fas fa-toilet"></i> {{ apartment.bathrooms }}</p>
-                      </div>
+                        <p class="card-text">
+                            <i class="fas fa-map-marker-alt mr-1"></i
+                            >{{ apartment.address }}
+                        </p>
+                        <div class="descriptions d-flex flex-wrap mb-3">
+                            <p class="card-text ml-3">
+                                Floor: {{ apartment.floor }}
+                            </p>
+                            <p class="card-text ml-3">
+                                Rooms: {{ apartment.rooms }}
+                            </p>
+                            <p class="card-text ml-3">
+                                <i class="fas fa-bed mr-1"></i>
+                                {{ apartment.beds }}
+                            </p>
+                            <p class="card-text ml-3">
+                                <i class="fas fa-toilet"></i>
+                                {{ apartment.bathrooms }}
+                            </p>
+                        </div>
                         <h6>Services:</h6>
 
                         <p
@@ -34,7 +47,7 @@
                         >
                             {{ service.name }}
                         </p>
-                       
+
                         <div class="mb-3">
                             <router-link
                                 @click="getApartmentFiltered"
@@ -107,13 +120,14 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
-.card-title{
+.card-title {
     text-transform: capitalize;
 }
 
-.box-apartments{
+.box-apartments {
     overflow-x: auto;
+    scrollbar-width: thin;
+    scrollbar-color: dodgerblue lightblue;
 }
 .card {
     animation: card-effect 0.7s forwards;

@@ -56,10 +56,7 @@ export default {
 <style lang="scss">
 @import "~bootstrap/dist/css/bootstrap.css";
 
-h1{
-    color: #fff;
-    text-shadow: 1px 0px 3px #000;
-}
+
 /* width */
 ::-webkit-scrollbar {
     width: 10px;
@@ -94,12 +91,16 @@ h1{
     }
 }
 
-body{
+body.body{
     min-height: 100vh;
     max-width: 100vw;
     background-image: url('https://images-ext-2.discordapp.net/external/bRQb20q50e53VH1ZTuDbP1qeWhkZE2AnFkARtEDwfIA/https/wallpaperaccess.com/full/1431622.jpg?width=1191&height=670');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: top;
+    h1{
+    color: #fff;
+    text-shadow: 1px 0px 3px #000;
+}
 }
 </style>

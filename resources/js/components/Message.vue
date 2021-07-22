@@ -2,7 +2,7 @@
     <div class="container">
         <h1 class="mb-5">Send us a message</h1>
 
-        <div v-show="success" class="succes-message">
+        <div v-show="success" class="alert alert-success">
             Message sent succesfully
         </div>
         <form @submit.prevent="postForm(apartment.id)">
@@ -177,4 +177,6 @@ export default {
 button:disabled {
     cursor: not-allowed;
 }
+
+
 </style>

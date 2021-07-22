@@ -128,6 +128,7 @@ SearchMarker.prototype.addTo = function (map) {
     return this;
 };
 
+
 SearchMarker.prototype.createMarker = function () {
     var elem = document.createElement("div");
     elem.className = "tt-icon-marker-black tt-search-marker";

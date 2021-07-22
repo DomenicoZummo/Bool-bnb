@@ -116,7 +116,11 @@ eval("var g;\n\n// This works in non-strict mode\ng = (function() {\n\treturn th
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
+<<<<<<< HEAD
+module.exports = __webpack_require__(/*! C:\Users\Emi\Desktop\Boolean\GitHubCloneRepo\MAINboolbnb\node_modules\popper.js\dist\popper.js */"./node_modules/popper.js/dist/popper.js");
+=======
 module.exports = __webpack_require__(/*! C:\Users\domen\Desktop\Bool-bnb\node_modules\popper.js\dist\popper.js */"./node_modules/popper.js/dist/popper.js");
+>>>>>>> ad100cea8b7e73027ce570395bf6214ce28a1ab5
 
 
 /***/ })

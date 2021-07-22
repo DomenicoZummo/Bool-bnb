@@ -9,6 +9,10 @@
         <div><strong>Mq:</strong> {{ apartment.square_meters}} mq</div>
         </div>
         <img :src="apartment.img_path" :alt="apartment.title" />
+        <div><strong>Letti:</strong> {{ apartment.beds }}</div>
+        <div class="img-wrapper">
+            <img :src="apartment.img_path" :alt="apartment.title" />
+        </div>
         <div class="d-flex">
             <div
                 v-for="(service, index) in apartment.services"
@@ -49,27 +53,13 @@ export default {
         return {
             apartment: null,
             clickMessageStatus: false,
-            // latApartment: "",
-            // lonApartment: "",
             marker: "",
-
-            map: tt.map({
-                key: "gHNQlC91c7IVQOAYndiQCxDEAX09ZzVj",
-                container: "map",
-
-                center: [
-                    this.$route.params.longitude,
-                    this.$route.params.latitude
-                ],
-                zoom: 15
-            }),
+            map: "",
             service: tt.setProductInfo("bool", "version2")
         };
     },
     created() {
         this.getApartmentDetails();
-        console.log(this.$route.params.latitude);
-        console.log(this.$route.params.longitude);
     },
     methods: {
         getApartmentDetails() {
@@ -79,11 +69,15 @@ export default {
                 )
                 .then(res => {
                     this.apartment = res.data;
+                    this.map = tt.map({
+                        key: "gHNQlC91c7IVQOAYndiQCxDEAX09ZzVj",
+                        container: "map",
+
+                        center: [res.data.longitude, res.data.latitude],
+                        zoom: 15
+                    });
                     this.marker = new tt.Marker()
-                        .setLngLat([
-                            this.$route.params.longitude,
-                            this.$route.params.latitude
-                        ])
+                        .setLngLat([res.data.longitude, res.data.latitude])
                         .addTo(this.map);
                 })
                 .catch(err => {
@@ -104,12 +98,14 @@ export default {
     width: 50vw;
     height: 50vh;
 }
-.container {
-    width: 100%;
+
+.img-wrapper {
+    width: 500px;
     img {
         width: 100%;
     }
 }
+
 .searchFilter {
     display: flex;
     position: absolute;

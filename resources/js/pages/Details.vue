@@ -1,78 +1,84 @@
 <template>
     <div>
-        <div class="container my-container py-4 text-white" v-if="apartment">
-            <!-- Back button -->
-            <router-link
-                :to="{
-                    name: 'advancedsearch'
-                }"
-                class="arrow-container"
-            >
-                <i class="fas fa-arrow-left back-arrow"></i>
-            </router-link>
-            <!-- Title -->
-            <h2 class="my-3 mb-1">
-                <i class="fas fa-house-user"></i> {{ apartment.title }}
-            </h2>
-            <!-- Address -->
-            <div class="mb-3">
-                <i class="fas fa-map-marker-alt mr-3 user-icon"></i
-                >{{ apartment.address }}
-            </div>
-            <!-- Host d kitemmurt -->
-            <div class="mb-5">
-                <i class="far fa-user-circle mr-2 user-icon"></i
-                >{{ apartment.user.name }}
-            </div>
-            <!-- Img -->
-            <div class="img-wrapper">
-                <img :src="apartment.img_path" :alt="apartment.title" />
-            </div>
-            <div class="d-flex mt-3">
-                <!-- Rooms -->
-                <div class="mr-3">
-                    <strong>Camere:</strong> {{ apartment.rooms }}
-                </div>
-                <!-- Beds -->
-                <div class="mr-3">
-                    <strong><i class="fas fa-bed"></i></strong>
-                    {{ apartment.beds }}
-                </div>
-                <!-- Floor -->
-                <div class="mr-3">
-                    <strong>Piano:</strong> {{ apartment.floor }}
-                </div>
-                <!-- Bathrooms -->
-                <div class="mr-3">
-                    <strong><i class="fas fa-toilet"></i></strong>
-                    {{ apartment.bathrooms }}
-                </div>
-                <!-- Mq -->
-                <div v-if="apartment.square_meters">
-                    <strong>Mq:</strong> {{ apartment.square_meters }} mq
-                </div>
-            </div>
-            <!-- Services -->
-            <div class="d-flex">
-                <div
-                    v-for="(service, index) in apartment.services"
-                    :key="index"
-                    class="d-flex badge badge-primary p-2 m-2"
+        <div class="container d-flex">
+            <div class="my-container py-4 mr-5" v-if="apartment">
+                <!-- Back button -->
+                <router-link
+                    :to="{
+                        name: 'advancedsearch'
+                    }"
+                    class="arrow-container"
                 >
-                    {{ service.name }}
+                    <i class="fas fa-arrow-left back-arrow"></i>
+                </router-link>
+                <!-- Title -->
+                <h2 class="my-3 mb-1">
+                    <i class="fas fa-house-user"></i> {{ apartment.title }}
+                </h2>
+                <!-- Address -->
+                <div class="mb-3">
+                    <i class="fas fa-map-marker-alt mr-3 user-icon"></i
+                    >{{ apartment.address }}
                 </div>
+                <!-- Host d kitemmurt -->
+                <div class="mb-5">
+                    <i class="far fa-user-circle mr-2 user-icon"></i
+                    >{{ apartment.user.name }}
+                </div>
+                <!-- Img -->
+                <div class="img-wrapper">
+                    <img :src="apartment.img_path" :alt="apartment.title" />
+                </div>
+                <div class="d-flex mt-3">
+                    <!-- Rooms -->
+                    <div class="mr-3">
+                        <strong>Camere:</strong> {{ apartment.rooms }}
+                    </div>
+                    <!-- Beds -->
+                    <div class="mr-3">
+                        <strong><i class="fas fa-bed"></i></strong>
+                        {{ apartment.beds }}
+                    </div>
+                    <!-- Floor -->
+                    <div class="mr-3">
+                        <strong>Piano:</strong> {{ apartment.floor }}
+                    </div>
+                    <!-- Bathrooms -->
+                    <div class="mr-3">
+                        <strong><i class="fas fa-toilet"></i></strong>
+                        {{ apartment.bathrooms }}
+                    </div>
+                    <!-- Mq -->
+                    <div v-if="apartment.square_meters">
+                        <strong>Mq:</strong> {{ apartment.square_meters }} mq
+                    </div>
+                </div>
+                <!-- Services -->
+                <div class="d-flex">
+                    <div
+                        v-for="(service, index) in apartment.services"
+                        :key="index"
+                        class="d-flex badge badge-primary p-2 m-2"
+                    >
+                        {{ service.name }}
+                    </div>
+                </div>
+                <!-- Description -->
+                <div class="mb-3 mt-3">
+                    <strong>Description:</strong> {{ apartment.description }}
+                </div>
+                <!-- Send Message -->
+                <input
+                    v-show="this.$route.name == 'apartment-details'"
+                    @click="clickMessage"
+                    class="mt-4 btn btn-warning"
+                    type="button"
+                    value="Invia un messaggio"
+                />
             </div>
-            <!-- Description -->
-            <div class="mb-3 mt-3">
-                <strong>Description:</strong> {{ apartment.description }}
-            </div>
-            <!-- Send Message -->
-            <input
+            <Maps
+                class="my-3"
                 v-show="this.$route.name == 'apartment-details'"
-                @click="clickMessage"
-                class="mt-4 btn btn-warning"
-                type="button"
-                value="Invia un messaggio"
             />
         </div>
         <div v-show="clickMessageStatus" class="searchFilter pt-5">
@@ -86,12 +92,14 @@
 
 <script>
 import Message from "../components/Message.vue";
+import Maps from "../components/Maps.vue";
 import tt from "@tomtom-international/web-sdk-maps";
 
 export default {
     name: "Details",
     components: {
-        Message
+        Message,
+        Maps
     },
     data() {
         return {

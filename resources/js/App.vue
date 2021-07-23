@@ -1,10 +1,9 @@
 <template>
-    <div class="container pt-1">
+    <div class="padding-header-fixed">
         <!-- Header -->
         <Header />
 
         <SearchBox
-            class="mb-3.."
             v-show="
                 this.$route.name == 'advancedsearch' ||
                     this.$route.name == 'home'
@@ -13,11 +12,11 @@
         />
 
         <!-- Main -->
-        <main class="d-flex">
+        <main>
             <router-view :apartments="apartmentsFilter"> </router-view>
             <Maps
                 class="my-3"
-                v-show="this.$route.name == 'apartment-details'"
+                v-show="this.$route.name == 'apartment-details-fake'"
             />
         </main>
         <!-- Footer -->
@@ -78,6 +77,10 @@ export default {
     background: dodgerblue;
 }
 
+.padding-header-fixed {
+    padding-top: 56px;
+}
+
 #searchbox-front {
     margin: 0 20px 0 0;
     width: 500px;
@@ -85,21 +88,8 @@ export default {
         border-radius: 50px;
     }
     .tt-search-box-input-container {
-        border-color: transparent;
+        // border-color: transparent;
         border-radius: 50px;
     }
 }
-
-/* body.body {
-    min-height: 100vh;
-    max-width: 100vw;
-    background-image: url("");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: top;
-    .text-white {
-        color: #fff;
-        text-shadow: 1px 0px 3px #000;
-    }
-} */
 </style>

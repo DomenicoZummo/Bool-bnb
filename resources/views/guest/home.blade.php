@@ -8,6 +8,7 @@
         <title>Boolbnb</title>
        
         <!-- Scripts -->
+        <script src="{{ asset('js/app.js') }}" defer></script>
         <script src="{{ asset('js/search.js') }}" defer></script>
 
 
@@ -34,9 +35,6 @@
         <!-- Styles -->
     </head>
     <body class="body">
-        <div class="container pt-5">
-        </div>
        <div id="root"></div>
-       <script src="{{ asset('js/app.js') }}"></script>
     </body>
 </html>

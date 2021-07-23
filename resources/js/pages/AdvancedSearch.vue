@@ -1,5 +1,5 @@
 <template>
-    <div class="py-5">
+    <div class="py-5 container">
         <div
             v-if="apartments.length > 0"
             class="d-flex container flex-wrap box-apartments"
@@ -12,10 +12,10 @@
                 <div class="card ">
                     <div class="box-img">
                         <img
-                        class="card-img-top"
-                        :src="apartment.img_path"
-                        alt="Card image cap"
-                    />
+                            class="card-img-top"
+                            :src="apartment.img_path"
+                            alt="Card image cap"
+                        />
                     </div>
 
                     <div class="card-body">
@@ -40,20 +40,20 @@
                                 {{ apartment.bathrooms }}
                             </p>
                         </div>
-                    <div class="service">
-                        <h6>Services:</h6>
+                        <div class="service">
+                            <h6>Services:</h6>
 
-                        <p
-                            v-for="(service, key) in apartment.services"
-                            :key="key"
-                            class="card-text badge badge-warning p-2 m-2"
-                        >
-                            {{ service.name }}
-                        </p>
-                    </div>
+                            <p
+                                v-for="(service, key) in apartment.services"
+                                :key="key"
+                                class="card-text badge badge-warning p-2 m-2"
+                            >
+                                {{ service.name }}
+                            </p>
+                        </div>
                     </div>
                     <div class="btn-service ml-5">
-                          <div class="mb-3">
+                        <div class="mb-3">
                             <router-link
                                 @click="getApartmentFiltered"
                                 :apartment="apartment"
@@ -74,7 +74,7 @@
                 </div>
             </div>
         </div>
-        <h1 class="text-white" v-else>No results</h1>
+        <h1 v-else>No results</h1>
     </div>
 </template>
 
@@ -142,11 +142,11 @@ export default {
     max-height: 650px;
     min-width: 250px;
 
-    .box-img{
+    .box-img {
         height: 200px;
         width: 100%;
         overflow: hidden;
-        img{
+        img {
             width: 100%;
             object-fit: cover;
         }

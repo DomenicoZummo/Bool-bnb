@@ -112,9 +112,7 @@
                             @endif
                             @else
                             <li class="nav-item">
-                                <div>
-                                    <a class="nav-link" href="{{ route('admin.messages.index') }}">My messages</a>
-                                </div>
+                                <a class="nav-link" href="{{ route('admin.apartments.create') }}">Create new apartment</a>
                             </li>
                             <li class="nav-item">
                                 <div>
@@ -124,6 +122,7 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('admin.apartments.create') }}">Create new apartment</a>
                             </li>
+                            <li>@include('layouts.mex')</li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('admin.apartments.index') }}">My apartments</a>
                             </li>

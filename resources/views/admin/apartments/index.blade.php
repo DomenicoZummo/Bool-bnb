@@ -20,7 +20,7 @@
                     <th>Apartment name</th>
                     <th>Address</th>
                     <th>Publication Date</th>
-                    <th colspan="3" class="text-center">Actions</th>
+                    <th colspan="4" class="text-center">Actions</th>
                 </tr>
             </thead>
 
@@ -34,6 +34,10 @@
                         <td>
                             <div>{{ $apartament->created_at->format('l d/m/y') }}</div>
                             <div>{{ $apartament->created_at->diffForHumans() }}</div>
+                        </td>
+
+                        <td>
+                            <a class="btn btn-success" href="{{ route('admin.sponsorships.edit' , $apartament->id) }}">Sponsor </a>
                         </td>
 
                         <td>

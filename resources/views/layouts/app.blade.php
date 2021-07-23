@@ -117,6 +117,11 @@
                                 </div>
                             </li>
                             <li class="nav-item">
+                                <div>
+                                    <a class="nav-link" href="{{ route('admin.sponsorships.index') }}">Sponsorships</a>
+                                </div>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" href="{{ route('admin.apartments.create') }}">Create new apartment</a>
                             </li>
                             <li class="nav-item">

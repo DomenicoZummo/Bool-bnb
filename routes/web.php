@@ -33,7 +33,11 @@ Route::prefix('admin')
         // Messages Route
         Route::resource('/messages', 'MessagesController');
         
+        // User Route
         Route::resource('/user', 'UserController');
+
+        // Sponsor Route
+        Route::resource('/sponsorships', 'SponsorshipController');
     });
 
 // Front-Office

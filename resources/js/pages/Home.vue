@@ -1,14 +1,45 @@
 <template>
     <div class="full-screen">
-        <div class="container text-white">
+        <div class="container">
             <h1>Home</h1>
+            <SearchBoxVue />
         </div>
     </div>
 </template>
 
 <script>
+import SearchBoxVue from "../components/SearchBoxVue.vue";
+import tt from "@tomtom-international/web-sdk-maps";
+import { services } from "@tomtom-international/web-sdk-services";
+import SearchBox from "@tomtom-international/web-sdk-plugin-searchbox";
+
 export default {
-    name: "Home"
+    name: "Home",
+    components: {
+        SearchBoxVue
+    },
+    data() {
+        return {
+            service: tt.setProductInfo("bool", "version2")
+        };
+    },
+    mounted() {
+        this.getSearchBox();
+    },
+    methods: {
+        getSearchBox() {
+            var options = {
+                searchOptions: {
+                    key: "gKIZzIyagJPsNGDOLL9WGenkQlFeapDb",
+                    language: "it-IT",
+                    limit: 5
+                }
+            };
+            var searchBox = new SearchBox(services, options);
+            // var searchBoxHTML = searchBox.getSearchBoxHTML();
+            // document.getElementById("searchbox-front").prepend(searchBoxHTML);
+        }
+    }
 };
 </script>
 
@@ -20,9 +51,5 @@ export default {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-}
-.text-white {
-    color: #fff;
-    text-shadow: 1px 0px 3px #000;
 }
 </style>

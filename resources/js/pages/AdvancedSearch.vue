@@ -1,5 +1,6 @@
 <template>
     <div class="py-5 container">
+        <SearchBoxVue @getApartmentFiltered="setFirstApartments" />
         <div
             v-if="apartments.length > 0"
             class="d-flex container flex-wrap box-apartments"
@@ -55,8 +56,6 @@
                     <div class="btn-service ml-5">
                         <div class="mb-3">
                             <router-link
-                                @click="getApartmentFiltered"
-                                :apartment="apartment"
                                 :to="{
                                     name: 'apartment-details',
                                     params: {
@@ -79,18 +78,46 @@
 </template>
 
 <script>
+import SearchBoxVue from "../components/SearchBoxVue.vue";
+import tt from "@tomtom-international/web-sdk-maps";
+import { services } from "@tomtom-international/web-sdk-services";
+import SearchBox from "@tomtom-international/web-sdk-plugin-searchbox";
+
 export default {
     name: "AdvancedSearch",
-    props: {
-        apartments: Array
+    components: {
+        SearchBoxVue
     },
     data() {
         return {
-            apartmentsFilter: []
+            apartmentsFilter: [],
+            apartments: [],
+            service: tt.setProductInfo("bool", "version2")
         };
     },
-
+    mounted() {
+        this.getSearchBox();
+    },
     methods: {
+        setFirstApartments(apartmentsEmitted) {
+            console.log("ciao", apartmentsEmitted);
+            this.apartments = apartmentsEmitted;
+        },
+
+        getSearchBox() {
+            console.log("eccolo", this.$route.params.apartments);
+            var options = {
+                searchOptions: {
+                    key: "gKIZzIyagJPsNGDOLL9WGenkQlFeapDb",
+                    language: "it-IT",
+                    limit: 5
+                }
+            };
+            var searchBox = new SearchBox(services, options);
+            var searchBoxHTML = searchBox.getSearchBoxHTML();
+            // document.getElementById("searchbox-front").prepend(searchBoxHTML);
+        },
+
         getApartmentFiltered() {
             this.apartmentsFilter = [];
             axios
@@ -118,7 +145,7 @@ export default {
                     console.log(error);
                 });
 
-            this.$emit("getApartmentFiltered", this.apartmentsFilter);
+            // this.$emit("getApartmentFiltered", this.apartmentsFilter);
         }
     }
 };

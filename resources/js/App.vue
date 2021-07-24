@@ -3,17 +3,17 @@
         <!-- Header -->
         <Header />
 
-        <SearchBox
+        <!-- <SearchBoxVue
             v-show="
                 this.$route.name == 'advancedsearch' ||
                     this.$route.name == 'home'
             "
             @getApartmentFiltered="getApartmentFiltered"
-        />
+        /> -->
 
         <!-- Main -->
         <main>
-            <router-view :apartments="apartmentsFilter"> </router-view>
+            <router-view> </router-view>
             <Maps
                 class="my-3"
                 v-show="this.$route.name == 'apartment-details-fake'"
@@ -27,7 +27,7 @@
 <script>
 import Header from "./components/Header.vue";
 import Footer from "./components/Footer.vue";
-import SearchBox from "./components/SearchBox.vue";
+import SearchBoxVue from "./components/SearchBoxVue.vue";
 import Maps from "./components/Maps.vue";
 
 export default {
@@ -35,19 +35,18 @@ export default {
     components: {
         Header,
         Footer,
-        SearchBox,
+        SearchBoxVue,
         Maps
     },
     data() {
         return {
-            apartmentsFilter: []
+            // apartmentsFilter: []
         };
     },
-
     methods: {
-        getApartmentFiltered(e) {
-            this.apartmentsFilter = e;
-        }
+        // getApartmentFiltered(e) {
+        //     this.apartmentsFilter = e;
+        // }
     }
 };
 </script>

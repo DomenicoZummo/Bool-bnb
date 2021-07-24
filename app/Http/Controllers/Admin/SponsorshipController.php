@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 use App\Apartment;
 use Illuminate\Support\Facades\Auth;
 use App\Sponsorship;
+use Braintree;
+
+
+
+
 
 
 
@@ -55,24 +60,28 @@ class SponsorshipController extends Controller
      */
     public function show($id)
     {
-        // $apartment = Apartment::find($id);
-        // $user_log = Auth::user();
+        
+        $apartment = Apartment::find($id);
+        $user_log = Auth::user();
+
+
+        $user_id = $user_log['id'];
 
         
+        
+        if ($apartment == null) {
+            return abort(404);
+        } elseif ($apartment != null && $apartment['user_id'] == $user_id) {
 
-        // $user_id = $user_log['id'];
+            
+            return view('admin.sponsorships.show', compact('apartment'));
+        }
+
+        abort(404);
 
 
 
-        // if ($apartment == null) {
-        //     return abort(404);
-        // } elseif ($apartment != null && $apartment['user_id'] == $user_id) {
-        //     return view('admin.sponsorships.show', compact('apartment'));
-        // }
 
-        // abort(404);
-
-        // return view('admin.sponsorships.show', $id);
     }
 
     /**
@@ -114,7 +123,75 @@ class SponsorshipController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data =  $request->all();
+        $apartment = Apartment::find($id);
+
+        $apartment->update($data);
+
+        // dd($request->_token);
+
+            $gateway = new Braintree\Gateway([
+            'environment' => 'sandbox',
+            'merchantId' => '6bzmxnhthw48jtq8',
+            'publicKey' => 'nqgtdy3vspxznd5r',
+            'privateKey' => 'f1cdb48bea89bfcfa8fc60941eb2aebd'
+            ]);
+
+
+
+            $amount = $request->amount;
+            $nonce = $request->payment_method_nonce;
+
+            $result = $gateway->transaction()->sale([
+            'amount' => $amount,    
+            'paymentMethodNonce' => $nonce,
+            'customer' => [
+                'firstName' => 'Tony', // Dati statici da cambiare in base all'user
+                'lastName' => 'Stark',
+                'email' => 'tony@avengers.com',
+            ],
+            'options' => [
+                'submitForSettlement' => true
+            ]
+    ]);
+
+        
+    if ($result->success) {
+        $transaction = $result->transaction;
+        // header("Location: transaction.php?id=" . $transaction->id);
+
+        // dd($transaction);
+        // dump($transaction);
+        // dump($transaction->id);
+        // dump($transaction->customerDetails->firstName);
+        // dump($transaction->customerDetails->lastName);
+        // dump($transaction->customerDetails->email);
+
+        
+        
+        
+
+        return redirect()->route('admin.sponsorships.show', $apartment->id);
+        
+
+
+        // return back()->with('success_message', 'Transaction successful. The ID is:'. $transaction->id);
+    } else {
+        $errorString = "";
+
+        foreach ($result->errors->deepAll() as $error) {
+            $errorString .= 'Error: ' . $error->code . ": " . $error->message . "\n";
+        }
+
+        // $_SESSION["errors"] = $errorString;
+        // header("Location: index.php");
+        return back()->withErrors('An error occurred with the message: '.$result->message);
+    }
+
+        
+        
+        
+        // return redirect()->route('admin.sponsorships.show', $apartment->id, $result);
     }
 
     /**

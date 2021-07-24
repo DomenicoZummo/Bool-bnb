@@ -13,7 +13,7 @@
             </div>
         @endif
 
-        <table class="table mt-5">
+        <table class="table table-hover mt-5">
             <thead>
                 <tr>
                     <th>User</th>
@@ -26,8 +26,8 @@
 
             <tbody>
                 @foreach ($apartments as $apartament )
-                    <tr>
-                        <td>{{ $user['name'] }}</td>
+                    <tr style="transform: rotate(0);">
+                        <th scope="row"><a href="{{ route('admin.apartments.show' , $apartament->id) }}" class="stretched-link">{{ $user['name'] }}</a></th>
                         <td>{{ $apartament->title }}</td>
                         <td>{{ $apartament->address }}</td>
 

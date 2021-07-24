@@ -17,7 +17,7 @@
                 Succesfully deleted item.
             </div>
         @endif
-        <table class="table mt-5">
+        <table class="table table-hover mt-5">
             <thead>
                 <tr>
                     <th>Guest</th>
@@ -33,10 +33,8 @@
 
             <tbody>
                 @foreach ($user_messages as $message )
-                    <tr class=" @if($message->read == 0) bold @endif">
-                        <td >
-                            {{ $message->name }}
-                        </td>
+                    <tr style="transform: rotate(0);" class="@if($message->read == 0) bold @endif">
+                        <th scope="row"><a href="{{ route('admin.messages.show', $message->id) }}" class="stretched-link">{{ $message->name }}</a></th>
                         <td>
                             {{ $message->email }}
                         </td>

@@ -3,13 +3,13 @@
 @section('content')
     <div class="container">
         <h1 class="mr-5">Your messages</h1>
-        <div class="new-message ">
+        {{-- <div class="new-message ">
             @if (count($unread_messages))
-            <h3 class="badge badge-primary ">Unread messages<span class="num-message">{{ count($unread_messages) }}</span></h3>
+            <span class="fs-6 alert alert-success">Unread messages<span class="num-message">{{ count($unread_messages) }}</span></span>
         @else
-            <p class="badge badge-dark p-2"><strong>No new messages</strong></p>
+            <span class="fs-6 alert alert-secondary">No new messages</span>
         @endif
-        </div>
+        </div> --}}
 
         @if (session('deleted'))
             <div class="alert alert-success">

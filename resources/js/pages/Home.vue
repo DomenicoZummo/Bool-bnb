@@ -2,7 +2,11 @@
     <div class="full-screen">
         <div class="container">
             <h1>Home</h1>
-            <SearchBoxVue />
+            <SearchBoxVue
+                :searchLat="searchLat"
+                :searchLng="searchLng"
+                :searchAddress="searchAddress"
+            />
         </div>
     </div>
 </template>
@@ -20,7 +24,10 @@ export default {
     },
     data() {
         return {
-            service: tt.setProductInfo("bool", "version2")
+            service: tt.setProductInfo("bool", "version2"),
+            searchLat: null,
+            searchLng: null,
+            searchAddress: null
         };
     },
     mounted() {
@@ -35,9 +42,30 @@ export default {
                     limit: 5
                 }
             };
-            var searchBox = new SearchBox(services, options);
-            // var searchBoxHTML = searchBox.getSearchBoxHTML();
-            // document.getElementById("searchbox-front").prepend(searchBoxHTML);
+
+            const ttSearchBox = new SearchBox(services, options);
+            var searchBoxHTML = ttSearchBox.getSearchBoxHTML();
+            document.getElementById("searchbox-front").prepend(searchBoxHTML);
+            ttSearchBox.on(
+                "tomtom.searchbox.resultselected",
+                this.handleResultSelection
+            );
+        },
+
+        handleResultSelection(event) {
+            var result = event.data.result;
+            // console.log("event", event);
+            // console.log("eventresult", result.position.lat);
+            // console.log("eventresult", result.position.lng);
+            this.searchLat = result.position.lat;
+            this.searchLng = result.position.lng;
+            this.searchAddress = result.address.freeformAddress;
+            console.log("searchlat", this.searchLat);
+            console.log("searchlng", this.searchLng);
+            console.log("searchaddress", this.searchAddress);
+            if (result.type === "category" || result.type === "brand") {
+                return;
+            }
         }
     }
 };

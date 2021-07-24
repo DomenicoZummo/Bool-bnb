@@ -1,6 +1,11 @@
 <template>
     <div class="py-5 container">
-        <SearchBoxVue @getApartmentFiltered="setFirstApartments" />
+        <SearchBoxVue
+            @getApartmentFiltered="setFirstApartments"
+            @loading="isLoading"
+            :searchLat="searchLat"
+            :searchLng="searchLng"
+        />
         <div
             v-if="apartments.length > 0"
             class="d-flex container flex-wrap box-apartments"
@@ -60,8 +65,11 @@
                                     name: 'apartment-details',
                                     params: {
                                         slug: apartment.slug,
-                                        latitude: apartment.latitude,
-                                        longitude: apartment.longitude
+                                        lat: searchLat || $route.params.lat,
+                                        lng: searchLng || $route.params.lng,
+                                        address:
+                                            searchAddress ||
+                                            $route.params.address
                                     }
                                 }"
                                 class="btn btn-primary"
@@ -73,7 +81,7 @@
                 </div>
             </div>
         </div>
-        <h1 v-else>No results</h1>
+        <h1 v-else>{{ this.noApartments }}</h1>
     </div>
 </template>
 
@@ -90,22 +98,32 @@ export default {
     },
     data() {
         return {
+            // paramsLat: this.searchLat || this.$route.params.lat,
+            // paramsLng: this.searchLng || this.$route.params.lng,
             apartmentsFilter: [],
             apartments: [],
-            service: tt.setProductInfo("bool", "version2")
+            service: tt.setProductInfo("bool", "version2"),
+            noApartments: "",
+            searchLat: null,
+            searchLng: null,
+            searchAddress: null
         };
     },
     mounted() {
         this.getSearchBox();
     },
     methods: {
-        setFirstApartments(apartmentsEmitted) {
-            console.log("ciao", apartmentsEmitted);
-            this.apartments = apartmentsEmitted;
+        isLoading(string) {
+            this.noApartments = string;
+        },
+
+        setFirstApartments(dataEmitted) {
+            this.apartments = dataEmitted;
+            this.noApartments = "No results";
         },
 
         getSearchBox() {
-            console.log("eccolo", this.$route.params.apartments);
+            // console.log(this.paramsLat);
             var options = {
                 searchOptions: {
                     key: "gKIZzIyagJPsNGDOLL9WGenkQlFeapDb",
@@ -113,40 +131,71 @@ export default {
                     limit: 5
                 }
             };
-            var searchBox = new SearchBox(services, options);
-            var searchBoxHTML = searchBox.getSearchBoxHTML();
-            // document.getElementById("searchbox-front").prepend(searchBoxHTML);
+
+            const ttSearchBox = new SearchBox(services, options);
+            var searchBoxHTML = ttSearchBox.getSearchBoxHTML();
+            document.getElementById("searchbox-front").prepend(searchBoxHTML);
+            var inputSearchBox = document.querySelector(".tt-search-box-input");
+            inputSearchBox.value = this.$route.params.address || "";
+            ttSearchBox.on(
+                "tomtom.searchbox.resultselected",
+                this.handleResultSelection
+            );
         },
 
-        getApartmentFiltered() {
-            this.apartmentsFilter = [];
-            axios
-                .get(
-                    `http://127.0.0.1:8000/api/filterapartments?address=${window.address}&lat=${window.lat}&lng=${window.lng}&range=${this.range}&rooms=${this.minRooms}&beds=${this.minBeds}&services=${this.servicesChecked}`
-                )
-                .then(result => {
-                    result.data.filter(element => {
-                        if (element.visibility) {
-                            let distance = Math.sqrt(
-                                (element.latitude - window.lat) *
-                                    (element.latitude - window.lat) +
-                                    (element.longitude - window.lng) *
-                                        (element.longitude - window.lng)
-                            );
-                            element["distance"] = distance;
-                            this.apartmentsFilter.push(element);
-                        }
-                    });
-                    this.apartmentsFilter.sort((a, b) =>
-                        a.distance > b.distance ? 1 : -1
-                    );
-                })
-                .catch(error => {
-                    console.log(error);
-                });
-
-            // this.$emit("getApartmentFiltered", this.apartmentsFilter);
+        handleResultSelection(event) {
+            var result = event.data.result;
+            var inputSearchBox = document.querySelector(".tt-search-box-input");
+            inputSearchBox.value = result.address;
+            console.log("event", result);
+            // console.log("eventresult", result.position.lat);
+            // console.log("eventresult", result.position.lng);
+            this.searchLat = result.position.lat;
+            this.searchLng = result.position.lng;
+            this.searchAddress = result.address.freeformAddress;
+            console.log("searchlat", this.searchLat);
+            console.log("searchlng", this.searchLng);
+            if (result.type === "category" || result.type === "brand") {
+                return;
+            }
         }
+
+        // getApartmentFiltered() {
+        //     this.apartmentsFilter = [];
+        //     axios
+        //         .get(
+        //             `http://127.0.0.1:8000/api/filterapartments?address=${
+        //                 window.address
+        //             }&lat=${this.$route.params.lat || this.searchLat}&lng=${this
+        //                 .$route.params.lng || this.searchLng}&range=${
+        //                 this.range
+        //             }&rooms=${this.minRooms}&beds=${this.minBeds}&services=${
+        //                 this.servicesChecked
+        //             }`
+        //         )
+        //         .then(result => {
+        //             result.data.filter(element => {
+        //                 if (element.visibility) {
+        //                     let distance = Math.sqrt(
+        //                         (element.latitude - window.lat) *
+        //                             (element.latitude - window.lat) +
+        //                             (element.longitude - window.lng) *
+        //                                 (element.longitude - window.lng)
+        //                     );
+        //                     element["distance"] = distance;
+        //                     this.apartmentsFilter.push(element);
+        //                 }
+        //             });
+        //             this.apartmentsFilter.sort((a, b) =>
+        //                 a.distance > b.distance ? 1 : -1
+        //             );
+        //         })
+        //         .catch(error => {
+        //             console.log(error);
+        //         });
+
+        //     // this.$emit("getApartmentFiltered", this.apartmentsFilter);
+        // }
     }
 };
 </script>

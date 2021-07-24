@@ -14,10 +14,10 @@
         <!-- Main -->
         <main>
             <router-view> </router-view>
-            <Maps
+            <!-- <Maps
                 class="my-3"
                 v-show="this.$route.name == 'apartment-details-fake'"
-            />
+            /> -->
         </main>
         <!-- Footer -->
         <Footer />

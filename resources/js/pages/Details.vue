@@ -5,7 +5,12 @@
                 <!-- Back button -->
                 <router-link
                     :to="{
-                        name: 'advancedsearch'
+                        name: 'advancedsearch',
+                        params: {
+                            lat: $route.params.lat || apartment.latitude,
+                            lng: $route.params.lng || apartment.longitude,
+                            address: $route.params.address || apartment.address
+                        }
                     }"
                     class="arrow-container"
                 >
@@ -107,7 +112,8 @@ export default {
             clickMessageStatus: false,
             marker: "",
             map: "",
-            service: tt.setProductInfo("bool", "version2")
+            service: tt.setProductInfo("bool", "version2"),
+            mainAddress: null
         };
     },
     created() {
@@ -121,6 +127,7 @@ export default {
                 )
                 .then(res => {
                     this.apartment = res.data;
+                    console.log("data", res.data);
                     this.map = tt.map({
                         key: "gHNQlC91c7IVQOAYndiQCxDEAX09ZzVj",
                         container: "map",

@@ -18,6 +18,8 @@ function handleResultsFound(event) {
 
 function handleResultSelection(event) {
     var result = event.data.result;
+    // console.log("event", event);
+    // console.log("eventresult", result.position.lat);
     if (result.type === "category" || result.type === "brand") {
         return;
     }

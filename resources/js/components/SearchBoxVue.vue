@@ -5,15 +5,16 @@
             <div id="searchbox-front" class="mb-3"></div>
             <!-- Search button -->
 
-            <div
-                v-if="this.$route.name == 'home'"
-                @click="getApartmentFiltered"
-            >
+            <div v-if="this.$route.name == 'home'">
                 <router-link
                     class="btn btn-success "
                     :to="{
                         name: 'advancedsearch',
-                        params: { apartments: apartmentsFilter }
+                        params: {
+                            lat: searchLat,
+                            lng: searchLng,
+                            address: searchAddress
+                        }
                     }"
                     >Cerca</router-link
                 >
@@ -41,7 +42,7 @@
             class="d-flex box-input align-items-center justify-content-center"
         >
             <!-- Radius -->
-            <!-- <input
+            <input
                 @change="setRange(range)"
                 v-model="range"
                 min="5"
@@ -54,7 +55,7 @@
             />
             <label value="20" class="mx-5 range" for="range"
                 >{{ range }} km</label
-            > -->
+            >
 
             <!-- Active services badge -->
             <div
@@ -137,15 +138,21 @@
 import axios from "axios";
 export default {
     name: "SearchBoxVue",
+    props: {
+        searchLat: Number,
+        searchLng: Number,
+        searchAddress: String
+    },
     data() {
         return {
-            apartmentsFilter: [1, 2],
+            apartmentsFilter: [],
             servicesChecked: [],
             services: [],
             range: "20",
             clickFilterStatus: false,
             minRooms: "1",
-            minBeds: "1"
+            minBeds: "1",
+            loading: "Loading..."
         };
     },
     created() {
@@ -165,7 +172,12 @@ export default {
                 .catch(error => {
                     console.log(error);
                 });
-            if (window.lat && window.lng) {
+            // console.log("esselu", this.$route.params.address);
+            if (this.$route.params.lat && this.$route.params.lng) {
+                // var inputSearchBox = document.querySelector(
+                //     ".tt-search-box-input"
+                // );
+                // inputSearchBox.value = this.$route.params.address;
                 this.getApartmentFiltered();
             }
         },
@@ -178,23 +190,60 @@ export default {
         // Axios call to get the apartments with filters if they exist
         getApartmentFiltered() {
             this.apartmentsFilter = [];
+            this.$emit("loading", this.loading);
             axios
                 .get(
-                    `http://127.0.0.1:8000/api/filterapartments?address=${window.address}&lat=${window.lat}&lng=${window.lng}&range=${this.range}&rooms=${this.minRooms}&beds=${this.minBeds}&services=${this.servicesChecked}`
+                    `http://127.0.0.1:8000/api/filterapartments?address=${
+                        window.address
+                    }&lat=${this.searchLat || this.$route.params.lat}&lng=${this
+                        .searchLng || this.$route.params.lng}&range=${
+                        this.range
+                    }&rooms=${this.minRooms}&beds=${this.minBeds}&services=${
+                        this.servicesChecked
+                    }`
                 )
                 .then(result => {
-                    console.log("result", result);
-                    console.log(
-                        `http://127.0.0.1:8000/api/filterapartments?address=${window.address}&lat=${window.lat}&lng=${window.lng}&range=${this.range}&rooms=${this.minRooms}&beds=${this.minBeds}&services=${this.servicesChecked}`
-                    );
+                    // console.log("result", result);
+                    // console.log(
+                    //     `http://127.0.0.1:8000/api/filterapartments?address=${
+                    //         window.address
+                    //     }&lat=${this.searchLat ||
+                    //         this.$route.params.lat}&lng=${this.searchLng ||
+                    //         this.$route.params.lng}&range=${
+                    //         this.range
+                    //     }&rooms=${this.minRooms ||
+                    //         this.$route.params.rooms}&beds=${this.minBeds ||
+                    //         this.$route.params.beds}&services=${this
+                    //         .servicesChecked || this.$route.params.services}`
+                    // );
+                    // console.log(
+                    //     `http://127.0.0.1:8000/api/filterapartments?address=${
+                    //         window.address
+                    //     }&lat=${this.searchLat ||
+                    //         this.$route.params.lat}&lng=${this.searchLng ||
+                    //         this.$route.params.lng}&range=${
+                    //         this.range
+                    //     }&rooms=${this.$route.params.rooms ||
+                    //         this.minRooms}&beds=${this.$route.params.beds ||
+                    //         this.minBeds}&services=${this.$route.params
+                    //         .services || this.servicesChecked}`
+                    // );
                     result.data.filter(element => {
                         console.log("element", element);
                         if (element.visibility) {
                             let distance = Math.sqrt(
-                                (element.latitude - window.lat) *
-                                    (element.latitude - window.lat) +
-                                    (element.longitude - window.lng) *
-                                        (element.longitude - window.lng)
+                                (element.latitude -
+                                    (this.searchLat ||
+                                        this.$route.params.lat)) *
+                                    (element.latitude -
+                                        (this.searchLat ||
+                                            this.$route.params.lat)) +
+                                    (element.longitude -
+                                        (this.searchLng ||
+                                            this.$route.params.lng)) *
+                                        (element.longitude -
+                                            (this.searchLng ||
+                                                this.$route.params.lng))
                             );
                             element["distance"] = distance;
                             this.apartmentsFilter.push(element);
@@ -203,13 +252,14 @@ export default {
                     this.apartmentsFilter.sort((a, b) =>
                         a.distance > b.distance ? 1 : -1
                     );
-                    console.log(this.apartmentsFilter);
+                    // console.log(this.apartmentsFilter);
                 })
                 .catch(error => {
                     console.log(error);
+                })
+                .finally(() => {
+                    this.$emit("getApartmentFiltered", this.apartmentsFilter);
                 });
-
-            this.$emit("getApartmentFiltered", this.apartmentsFilter);
         },
 
         // Set the radius of the research dynamically

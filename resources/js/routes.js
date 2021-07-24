@@ -19,8 +19,8 @@ const router = new VueRouter({
         {
             path: "/",
             name: "home",
-            component: Home,
-            props: true
+            props: true,
+            component: Home
         },
         {
             path: "/advancedsearch",
@@ -31,6 +31,7 @@ const router = new VueRouter({
         {
             path: "/details/:slug",
             name: "apartment-details",
+            props: true,
             component: Details
         }
     ]

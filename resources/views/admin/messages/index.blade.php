@@ -33,8 +33,8 @@
 
             <tbody>
                 @foreach ($user_messages as $message )
-                    <tr style="transform: rotate(0);" class="@if($message->read == 0) bold @endif">
-                        <th scope="row"><a href="{{ route('admin.messages.show', $message->id) }}" class="stretched-link">{{ $message->name }}</a></th>
+                    <tr class="@if($message->read == 0) bold @endif">
+                        <td>{{ $message->name }}</td>
                         <td>
                             {{ $message->email }}
                         </td>

@@ -26,8 +26,8 @@
 
             <tbody>
                 @foreach ($apartments as $apartament )
-                    <tr style="transform: rotate(0);">
-                        <th scope="row"><a href="{{ route('admin.apartments.show' , $apartament->id) }}" class="stretched-link">{{ $user['name'] }}</a></th>
+                    <tr>
+                        <td>{{ $user['name'] }}</td>
                         <td>{{ $apartament->title }}</td>
                         <td>{{ $apartament->address }}</td>
 

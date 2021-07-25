@@ -24,6 +24,9 @@ class SponsorshipController extends Controller
      */
     public function index()
     {
+
+
+
         return view('admin.sponsorships.index');
     }
 
@@ -68,13 +71,15 @@ class SponsorshipController extends Controller
         $user_id = $user_log['id'];
 
         
+
+        
         
         if ($apartment == null) {
             return abort(404);
         } elseif ($apartment != null && $apartment['user_id'] == $user_id) {
 
             
-            return view('admin.sponsorships.show', compact('apartment'));
+            return view('admin.sponsorships.show', compact('apartment', 'transaction'));
         }
 
         abort(404);
@@ -97,10 +102,7 @@ class SponsorshipController extends Controller
         $user_log = Auth::user();
         $sponsorships = Sponsorship::all();
 
-        
-
         $user_id = $user_log['id'];
-
 
 
         if ($apartment == null) {
@@ -110,8 +112,6 @@ class SponsorshipController extends Controller
         }
 
         abort(404);
-
-        
     }
 
     /**
@@ -125,10 +125,12 @@ class SponsorshipController extends Controller
     {
         $data =  $request->all();
         $apartment = Apartment::find($id);
+        $user_log = Auth::user();
+
+        $sponsorships = Sponsorship::find($_POST['Sponsorship']);
 
         $apartment->update($data);
 
-        // dd($request->_token);
 
             $gateway = new Braintree\Gateway([
             'environment' => 'sandbox',
@@ -137,18 +139,18 @@ class SponsorshipController extends Controller
             'privateKey' => 'f1cdb48bea89bfcfa8fc60941eb2aebd'
             ]);
 
+            
+            $amount = $sponsorships->price ;
 
-
-            $amount = $request->amount;
             $nonce = $request->payment_method_nonce;
 
             $result = $gateway->transaction()->sale([
             'amount' => $amount,    
             'paymentMethodNonce' => $nonce,
             'customer' => [
-                'firstName' => 'Tony', // Dati statici da cambiare in base all'user
-                'lastName' => 'Stark',
-                'email' => 'tony@avengers.com',
+                'firstName' => $user_log['name'], // Dati statici da cambiare in base all'user
+                'lastName' => $user_log['surname'],
+                'email' => $user_log['email'],
             ],
             'options' => [
                 'submitForSettlement' => true
@@ -160,18 +162,7 @@ class SponsorshipController extends Controller
         $transaction = $result->transaction;
         // header("Location: transaction.php?id=" . $transaction->id);
 
-        // dd($transaction);
-        // dump($transaction);
-        // dump($transaction->id);
-        // dump($transaction->customerDetails->firstName);
-        // dump($transaction->customerDetails->lastName);
-        // dump($transaction->customerDetails->email);
-
-        
-        
-        
-
-        return redirect()->route('admin.sponsorships.show', $apartment->id);
+        return view('admin.sponsorships.show', compact('apartment', 'transaction', 'sponsorships'));
         
 
 
@@ -188,10 +179,6 @@ class SponsorshipController extends Controller
         return back()->withErrors('An error occurred with the message: '.$result->message);
     }
 
-        
-        
-        
-        // return redirect()->route('admin.sponsorships.show', $apartment->id, $result);
     }
 
     /**

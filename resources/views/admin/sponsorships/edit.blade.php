@@ -12,15 +12,7 @@
             <p><strong>Address:</strong> {{ $apartment->address }}</p>
         <div>
         
-        @foreach ($sponsorships as $sponsorship )
-            <input id= "{{$sponsorship->type}}" name="Sponsorship" type="radio" value="{{$sponsorship->type}}">
-            <label for="{{$sponsorship->type}}">
-                <span class="mr-1">{{$sponsorship->type}}</span>
-                <span class="mr-1">{{$sponsorship->price}}</span>
-                <span class="mr-1">{{$sponsorship->duration}}</span>
-            </label><br>
-            
-        @endforeach
+
         
         </div>
              <div class="d-flex action-show">
@@ -33,12 +25,17 @@
                     @method('PATCH')
                     
                     <section>
-                        <label for="amount">
-                            <span class="input-label">Amount</span>
-                            <div class="input-wrapper amount-wrapper">
-                                <input id="amount" name="amount" type="tel" min="1" placeholder="Amount" value="10">
-                            </div>
-                        </label>
+
+
+                @foreach ($sponsorships as $sponsorship )
+                    <input id= "{{$sponsorship->id}}" name="Sponsorship" type="radio" value="{{$sponsorship->id}}">
+                    <label for="{{$sponsorship->type}}">
+                        <span class="mr-1">{{$sponsorship->type}}</span>
+                        <span class="mr-1">{{$sponsorship->price}}</span>
+                        <span class="mr-1">{{$sponsorship->duration}}</span>
+                    </label><br>
+                    
+                @endforeach
 
                         <div class="bt-drop-in-wrapper">
                             <div id="bt-dropin"></div>

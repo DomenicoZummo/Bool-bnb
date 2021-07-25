@@ -100,7 +100,6 @@ export default {
         return {
             // paramsLat: this.searchLat || this.$route.params.lat,
             // paramsLng: this.searchLng || this.$route.params.lng,
-            apartmentsFilter: [],
             apartments: [],
             service: tt.setProductInfo("bool", "version2"),
             noApartments: "",
@@ -118,11 +117,16 @@ export default {
         },
 
         setFirstApartments(dataEmitted) {
-            this.apartments = dataEmitted;
-            this.noApartments = "No results";
+            if (dataEmitted != null && dataEmitted.length > 0) {
+                this.apartments = dataEmitted;
+                console.log("emittedHERE", this.apartments);
+            } else {
+                this.noApartments = "No results";
+            }
         },
 
         getSearchBox() {
+            console.log("apartments", this.apartments);
             // console.log(this.paramsLat);
             var options = {
                 searchOptions: {
@@ -147,7 +151,7 @@ export default {
             var result = event.data.result;
             var inputSearchBox = document.querySelector(".tt-search-box-input");
             inputSearchBox.value = result.address;
-            console.log("event", result);
+            // console.log("event", result);
             // console.log("eventresult", result.position.lat);
             // console.log("eventresult", result.position.lng);
             this.searchLat = result.position.lat;

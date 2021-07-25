@@ -6,6 +6,8 @@
    
         <div class="text-img col-xs-12 col-md-6">
 
+ 
+
             <h1>{{ $apartment->title }}</h1>
 
             <h3>Transaction successful. The ID is: {{$transaction->id}}</h3>

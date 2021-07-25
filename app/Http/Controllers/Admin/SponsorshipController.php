@@ -8,6 +8,8 @@ use App\Apartment;
 use Illuminate\Support\Facades\Auth;
 use App\Sponsorship;
 use Braintree;
+use Carbon\Carbon;
+
 
 
 
@@ -49,21 +51,38 @@ class SponsorshipController extends Controller
     public function store(Request $request)
     {
         $data =  $request->all();
+
+        
         
 
         
 
         $apartment_id = $data['apartment'];
+        // dump($apartment_id);
 
         $sponsorship_id = $data['Sponsorship'];
+        // dump($sponsorship_id);
+
         
 
        
         $user_log = Auth::user();
 
         $sponsorships = Sponsorship::find($sponsorship_id);
+        // dump($sponsorships);
+
 
         $apartment = Apartment::find($apartment_id);
+
+
+        
+
+        $apartment_sponsored = Apartment::with('sponsorships')->get();
+        // dd($apartment_sponsored['sponsorships']);
+
+        // $apartment_spon = $apartment->with('sponsorships')->get();
+
+
 
         
 
@@ -100,15 +119,28 @@ class SponsorshipController extends Controller
         $transaction = $result->transaction;
         // header("Location: transaction.php?id=" . $transaction->id);
 
-        
+        foreach($apartment_sponsored as $sponsored){
+               
+                if($sponsored->id == $apartment_id){
 
-        if(array_key_exists('sponsorships', $data)){
-            $apartment->sponsorships()->attach($sponsorship_id);
-        }
+               $countSpons = $sponsored->sponsorships;
+                }
+              
 
 
+      }
 
+      $errorMessage = ['Sponsorship already exists'];
 
+        if(count($countSpons) === 0){
+                    $apartment->sponsorships()->attach($sponsorship_id, ['created_at' => Carbon::now(), 'updated_at' => Carbon::now()->addHours($sponsorships['duration'])]);
+
+               }else{
+                   return view('admin.sponsorships.edit', compact('errorMessage'));
+               }
+    
+
+    // return redirect()->route('admin.sponsorships.show', $apartment->id)->with('sponsorships');
 
         return view('admin.sponsorships.show', compact('transaction', 'sponsorships', 'apartment'));
         
@@ -136,7 +168,7 @@ class SponsorshipController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($apartment)
+    public function show($apartment,$id)
     {
         
         $apartment = Apartment::all();
@@ -145,16 +177,16 @@ class SponsorshipController extends Controller
 
         $user_id = $user_log['id'];
 
-        
+        $sponsorship= Sponsorship::find($id);
 
-        
-        
+        dd($sponsorship);
+
         if ($apartment == null) {
             return abort(404);
         } elseif ($apartment != null && $apartment['user_id'] == $user_id) {
 
             
-            return view('admin.sponsorships.show', compact('apartment', 'transaction'));
+            return view('admin.sponsorships.show', compact('apartment', 'transaction','sponsorships'));
         }
 
         abort(404);

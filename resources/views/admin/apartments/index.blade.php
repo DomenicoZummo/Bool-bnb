@@ -4,6 +4,8 @@
 
 
     <div class="container">
+
+        
         <h1>Your apartments</h1>
 
         @if (session('deleted'))
@@ -26,6 +28,8 @@
 
             <tbody>
                 @foreach ($apartments as $apartment )
+
+                    
                     <tr>
                         <td>{{ $user['name'] }}</td>
                         <td>{{ $apartment->title }}</td>

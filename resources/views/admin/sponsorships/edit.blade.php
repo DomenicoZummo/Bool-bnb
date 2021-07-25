@@ -2,6 +2,11 @@
 
 @section('content')
     <div class="container d-flex">
+
+    
+            @if($errorMessage != null && count($errorMessage))
+            <h2>{{$errorMessage[0]}}</h2>
+            @endif
        
         <div class="box-img col-xs-12 col-md-6">
             <img src="{{ asset('storage/' . $apartment->img_path) }}" alt="{{ $apartment->title }}">

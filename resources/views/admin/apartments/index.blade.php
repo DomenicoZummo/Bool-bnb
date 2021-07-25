@@ -4,7 +4,7 @@
 
 
     <div class="container">
-        <h1>Your apartaments</h1>
+        <h1>Your apartments</h1>
 
         @if (session('deleted'))
             <div class="alert alert-success">
@@ -25,32 +25,32 @@
             </thead>
 
             <tbody>
-                @foreach ($apartments as $apartament )
+                @foreach ($apartments as $apartment )
                     <tr>
                         <td>{{ $user['name'] }}</td>
-                        <td>{{ $apartament->title }}</td>
-                        <td>{{ $apartament->address }}</td>
+                        <td>{{ $apartment->title }}</td>
+                        <td>{{ $apartment->address }}</td>
 
                         <td>
-                            <div>{{ $apartament->created_at->format('l d/m/y') }}</div>
-                            <div>{{ $apartament->created_at->diffForHumans() }}</div>
+                            <div>{{ $apartment->created_at->format('l d/m/y') }}</div>
+                            <div>{{ $apartment->created_at->diffForHumans() }}</div>
                         </td>
 
                         <td>
-                            <a class="btn btn-success" href="{{ route('admin.sponsorships.edit' , $apartament->id) }}">Sponsor </a>
+                            <a class="btn btn-success" href="{{ route('admin.sponsorships.edit', $apartment->id) }}">Sponsor </a>
                         </td>
 
                         <td>
-                            <a class="btn btn-success" href="{{ route('admin.apartments.show' , $apartament->id) }}">Show</a>
+                            <a class="btn btn-success" href="{{ route('admin.apartments.show' , $apartment->id) }}">Show</a>
                         </td>
 
 
                         <td>
-                            <a class="btn btn-warning" href="{{ route('admin.apartments.edit', $apartament->id) }}">EDIT</a>
+                            <a class="btn btn-warning" href="{{ route('admin.apartments.edit', $apartment->id) }}">EDIT</a>
                         </td>
 
                         <td>
-                            <form class="delete-apartment-form" action="{{ route('admin.apartments.destroy', $apartament->id) }}" method="POST">
+                            <form class="delete-apartment-form" action="{{ route('admin.apartments.destroy', $apartment->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button class="btn btn-danger" type="submit">

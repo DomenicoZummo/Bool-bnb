@@ -35,11 +35,9 @@ class SponsorshipController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        // $sponsorships = Sponsorship::all();
-
-        // return view('admin.sponsorships.create', compact('$sponsorships'));
+        
     }
 
     /**
@@ -50,7 +48,84 @@ class SponsorshipController extends Controller
      */
     public function store(Request $request)
     {
-            //Validazione
+        $data =  $request->all();
+        
+
+        
+
+        $apartment_id = $data['apartment'];
+
+        $sponsorship_id = $data['Sponsorship'];
+        
+
+       
+        $user_log = Auth::user();
+
+        $sponsorships = Sponsorship::find($sponsorship_id);
+
+        $apartment = Apartment::find($apartment_id);
+
+        
+
+        
+
+
+            $gateway = new Braintree\Gateway([
+            'environment' => 'sandbox',
+            'merchantId' => '6bzmxnhthw48jtq8',
+            'publicKey' => 'nqgtdy3vspxznd5r',
+            'privateKey' => 'f1cdb48bea89bfcfa8fc60941eb2aebd'
+            ]);
+
+            
+            $amount = $sponsorships->price ;
+
+            $nonce = $request->payment_method_nonce;
+
+            $result = $gateway->transaction()->sale([
+            'amount' => $amount,    
+            'paymentMethodNonce' => $nonce,
+            'customer' => [
+                'firstName' => $user_log['name'], // Dati statici da cambiare in base all'user
+                'lastName' => $user_log['surname'],
+                'email' => $user_log['email'],
+            ],
+            'options' => [
+                'submitForSettlement' => true
+            ]
+    ]);
+
+        
+    if ($result->success) {
+        $transaction = $result->transaction;
+        // header("Location: transaction.php?id=" . $transaction->id);
+
+        
+
+        if(array_key_exists('sponsorships', $data)){
+            $apartment->sponsorships()->attach($sponsorship_id);
+        }
+
+
+
+
+
+        return view('admin.sponsorships.show', compact('transaction', 'sponsorships', 'apartment'));
+        
+
+
+        // return back()->with('success_message', 'Transaction successful. The ID is:'. $transaction->id);
+    } else {
+        $errorString = "";
+
+        foreach ($result->errors->deepAll() as $error) {
+            $errorString .= 'Error: ' . $error->code . ": " . $error->message . "\n";
+        }
+
+        // $_SESSION["errors"] = $errorString;
+        // header("Location: index.php");
+        return back()->withErrors('An error occurred with the message: '.$result->message);
+    }
 
         
     }
@@ -61,10 +136,10 @@ class SponsorshipController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($apartment)
     {
         
-        $apartment = Apartment::find($id);
+        $apartment = Apartment::all();
         $user_log = Auth::user();
 
 
@@ -123,61 +198,61 @@ class SponsorshipController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data =  $request->all();
-        $apartment = Apartment::find($id);
-        $user_log = Auth::user();
+    //     $data =  $request->all();
+    //     $apartment = Apartment::find($id);
+    //     $user_log = Auth::user();
 
-        $sponsorships = Sponsorship::find($_POST['Sponsorship']);
+    //     $sponsorships = Sponsorship::find($_POST['Sponsorship']);
 
-        $apartment->update($data);
+    //     $apartment->update($data);
 
 
-            $gateway = new Braintree\Gateway([
-            'environment' => 'sandbox',
-            'merchantId' => '6bzmxnhthw48jtq8',
-            'publicKey' => 'nqgtdy3vspxznd5r',
-            'privateKey' => 'f1cdb48bea89bfcfa8fc60941eb2aebd'
-            ]);
+    //         $gateway = new Braintree\Gateway([
+    //         'environment' => 'sandbox',
+    //         'merchantId' => '6bzmxnhthw48jtq8',
+    //         'publicKey' => 'nqgtdy3vspxznd5r',
+    //         'privateKey' => 'f1cdb48bea89bfcfa8fc60941eb2aebd'
+    //         ]);
 
             
-            $amount = $sponsorships->price ;
+    //         $amount = $sponsorships->price ;
 
-            $nonce = $request->payment_method_nonce;
+    //         $nonce = $request->payment_method_nonce;
 
-            $result = $gateway->transaction()->sale([
-            'amount' => $amount,    
-            'paymentMethodNonce' => $nonce,
-            'customer' => [
-                'firstName' => $user_log['name'], // Dati statici da cambiare in base all'user
-                'lastName' => $user_log['surname'],
-                'email' => $user_log['email'],
-            ],
-            'options' => [
-                'submitForSettlement' => true
-            ]
-    ]);
+    //         $result = $gateway->transaction()->sale([
+    //         'amount' => $amount,    
+    //         'paymentMethodNonce' => $nonce,
+    //         'customer' => [
+    //             'firstName' => $user_log['name'], // Dati statici da cambiare in base all'user
+    //             'lastName' => $user_log['surname'],
+    //             'email' => $user_log['email'],
+    //         ],
+    //         'options' => [
+    //             'submitForSettlement' => true
+    //         ]
+    // ]);
 
         
-    if ($result->success) {
-        $transaction = $result->transaction;
-        // header("Location: transaction.php?id=" . $transaction->id);
+    // if ($result->success) {
+    //     $transaction = $result->transaction;
+    //     // header("Location: transaction.php?id=" . $transaction->id);
 
-        return view('admin.sponsorships.show', compact('apartment', 'transaction', 'sponsorships'));
+    //     return view('admin.sponsorships.show', compact('apartment', 'transaction', 'sponsorships'));
         
 
 
-        // return back()->with('success_message', 'Transaction successful. The ID is:'. $transaction->id);
-    } else {
-        $errorString = "";
+    //     // return back()->with('success_message', 'Transaction successful. The ID is:'. $transaction->id);
+    // } else {
+    //     $errorString = "";
 
-        foreach ($result->errors->deepAll() as $error) {
-            $errorString .= 'Error: ' . $error->code . ": " . $error->message . "\n";
-        }
+    //     foreach ($result->errors->deepAll() as $error) {
+    //         $errorString .= 'Error: ' . $error->code . ": " . $error->message . "\n";
+    //     }
 
-        // $_SESSION["errors"] = $errorString;
-        // header("Location: index.php");
-        return back()->withErrors('An error occurred with the message: '.$result->message);
-    }
+    //     // $_SESSION["errors"] = $errorString;
+    //     // header("Location: index.php");
+    //     return back()->withErrors('An error occurred with the message: '.$result->message);
+    // }
 
     }
 

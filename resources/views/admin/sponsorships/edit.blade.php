@@ -19,12 +19,14 @@
                  <a class="btn btn-success mt-5 mr-5" href="{{ route('admin.apartments.index') }}">Back</a>
             </div>
             <div class="content">
-                <form method="POST" id="payment-form" action="{{ route('admin.sponsorships.update', $apartment->id)}}">
+                <form method="POST" id="payment-form" action="{{ route('admin.sponsorships.store', $apartment->id)}}">
                     
                     @csrf
-                    @method('PATCH')
+                    @method('POST')
                     
                     <section>
+
+                <input type="hidden" name="apartment" value="{{$apartment->id}}">
 
 
                 @foreach ($sponsorships as $sponsorship )

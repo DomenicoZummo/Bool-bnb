@@ -8,6 +8,7 @@ use App\Apartment;
 use Illuminate\Support\Facades\Auth;
 use App\Sponsorship;
 use Braintree;
+use Carbon\Carbon;
 
 
 
@@ -50,9 +51,7 @@ class SponsorshipController extends Controller
     {
         $data =  $request->all();
         
-
-        
-
+        $sponsorship = Sponsorship::find($data['Sponsorship']);
         $apartment_id = $data['apartment'];
 
         $sponsorship_id = $data['Sponsorship'];
@@ -64,11 +63,6 @@ class SponsorshipController extends Controller
         $sponsorships = Sponsorship::find($sponsorship_id);
 
         $apartment = Apartment::find($apartment_id);
-
-        
-
-        
-
 
             $gateway = new Braintree\Gateway([
             'environment' => 'sandbox',
@@ -100,19 +94,12 @@ class SponsorshipController extends Controller
         $transaction = $result->transaction;
         // header("Location: transaction.php?id=" . $transaction->id);
 
+        /**
+         * relation in pivot table with duration
+         */
+        $apartment->sponsorships()->attach($sponsorship_id, ['created_at' => Carbon::now(), 'end_time' => Carbon::now()->addHours($sponsorship['duration'])]);
         
-
-        if(array_key_exists('sponsorships', $data)){
-            $apartment->sponsorships()->attach($sponsorship_id);
-        }
-
-
-
-
-
         return view('admin.sponsorships.show', compact('transaction', 'sponsorships', 'apartment'));
-        
-
 
         // return back()->with('success_message', 'Transaction successful. The ID is:'. $transaction->id);
     } else {

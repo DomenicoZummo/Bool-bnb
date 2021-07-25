@@ -16,7 +16,6 @@ use Carbon\Carbon;
 
 
 
-
 class SponsorshipController extends Controller
 {
     /**
@@ -54,9 +53,7 @@ class SponsorshipController extends Controller
 
         
         
-
-        
-
+        $sponsorship = Sponsorship::find($data['Sponsorship']);
         $apartment_id = $data['apartment'];
         // dump($apartment_id);
 
@@ -143,8 +140,6 @@ class SponsorshipController extends Controller
     // return redirect()->route('admin.sponsorships.show', $apartment->id)->with('sponsorships');
 
         return view('admin.sponsorships.show', compact('transaction', 'sponsorships', 'apartment'));
-        
-
 
         // return back()->with('success_message', 'Transaction successful. The ID is:'. $transaction->id);
     } else {

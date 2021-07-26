@@ -1,10 +1,12 @@
 <template>
     <div class="full-screen">
             <h1 class="text-center my-3">Appartamenti sponsorizzati</h1>
-        <div class="container d-flex flex-wrap">
+        <div class="container d-flex flex-wrap justify-content-between mt-3">
             <div v-for="(apartment,key) in apartmentSponsored" :key="key"
-             class="card m-3" style="width: 18rem;">
-                <img class="card-img-top" :src="apartment.img_path" alt="Card image cap">
+             class="card mt-4" style="width: 18rem">
+                <div class="box-img">
+                    <img class="card-img-top" :src="apartment.img_path" alt="Card image cap">
+                </div>
                 <div class="card-body">
                     <h5 class="card-title">{{ apartment.title }}</h5>
                     <p class="card-text"></p>
@@ -59,7 +61,6 @@ export default {
 <style scoped lang="scss">
 .full-screen {
     height: 1000px;
-    width: 100vw;
     background-image: url("https://images-ext-2.discordapp.net/external/bRQb20q50e53VH1ZTuDbP1qeWhkZE2AnFkARtEDwfIA/https/wallpaperaccess.com/full/1431622.jpg");
     background-size: cover;
     background-repeat: no-repeat;
@@ -69,4 +70,15 @@ export default {
     color: #fff;
     text-shadow: 1px 0px 3px #000;
 }
+
+ .box-img {
+        height: 150px;
+        width: 100%;
+        overflow: hidden;
+        img {
+            width: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+    }
 </style>

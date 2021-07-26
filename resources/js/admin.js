@@ -1,3 +1,5 @@
+require("./bootstrap");
+
 const delForm = document.querySelectorAll(".delete-apartment-form");
 
 delForm.forEach(form => {

@@ -8,6 +8,7 @@
         <div class="box-img col-xs-12 col-md-6">
             <img src="{{ asset('storage/' . $apartment->img_path) }}" alt="{{ $apartment->title }}">
         </div>
+
    
         <div class="text-img col-xs-12 col-md-6">
             <h1>{{ $apartment->title }}</h1>

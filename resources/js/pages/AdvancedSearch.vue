@@ -8,8 +8,11 @@
                 v-for="(apartment, key) in apartments"
                 :key="key"
                 class=" my-3 px-3 col-xs-12 col-md-4"
+                
             >
-                <div class="card ">
+                <div 
+                :class="{'sponsor' : (apartment.sponsorships).length > 0}"
+                class="card ">
                     <div class="box-img">
                         <img
                             class="card-img-top"
@@ -40,8 +43,8 @@
                                 {{ apartment.bathrooms }}
                             </p>
                         </div>
-                        <div class="service">
                             <h6>Services:</h6>
+                        <div class="service">
 
                             <p
                                 v-for="(service, key) in apartment.services"
@@ -52,8 +55,8 @@
                             </p>
                         </div>
                     </div>
-                    <div class="btn-service ml-5">
-                        <div class="mb-3">
+                    <div class="btn-service ">
+                        <div>
                             <router-link
                                 :to="{
                                     name: 'apartment-details',
@@ -105,17 +108,18 @@ export default {
     opacity: 0;
     transform: scale(0.1);
     overflow: auto;
-    min-height: 650px;
-    max-height: 650px;
+    min-height: 530px;
+    max-height: 530px;
     min-width: 250px;
 
     .box-img {
-        height: 200px;
+        height: 150px;
         width: 100%;
         overflow: hidden;
         img {
             width: 100%;
             object-fit: cover;
+            object-position: center;
         }
     }
 }
@@ -129,5 +133,20 @@ export default {
         opacity: 1;
         transform: scale(1);
     }
+}
+
+.sponsor {
+    box-shadow: 1px 0px 10px goldenrod;
+}
+
+.service{
+    height: 100px;
+    width: 100%;
+    overflow-y: auto;
+}
+
+.btn-service{
+    margin: 0 auto;
+    margin-bottom: 20px;
 }
 </style>

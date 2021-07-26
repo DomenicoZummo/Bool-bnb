@@ -128,6 +128,7 @@ export default {
         return {
             apartmentsFilter: [],
             servicesChecked: [],
+            apartamentFilterSponsor:[],
             services: [],
             range: "20",
             clickFilterStatus: false,
@@ -162,6 +163,7 @@ export default {
         // Axios call to get the apartments with filters if they exist
         getApartmentFiltered() {
             this.apartmentsFilter = [];
+            this.apartamentFilterSponsor = [];
             axios
                 .get(
                     `http://127.0.0.1:8000/api/filterapartments?address=${window.address}&lat=${window.lat}&lng=${window.lng}&range=${this.range}&rooms=${this.minRooms}&beds=${this.minBeds}&services=${this.servicesChecked}`
@@ -169,7 +171,15 @@ export default {
                 .then(result => {
                     result.data.filter(element => {
                         if (element.visibility) {
-                            let distance = Math.sqrt(
+
+                            let sponsor = element.sponsorships;
+
+                            console.log(sponsor.length);
+
+                            if(sponsor.length > 0 ){
+                                this.apartamentFilterSponsor.push(element)
+                            }else{
+                                 let distance = Math.sqrt(
                                 (element.latitude - window.lat) *
                                     (element.latitude - window.lat) +
                                     (element.longitude - window.lng) *
@@ -178,10 +188,22 @@ export default {
                             element["distance"] = distance;
                             this.apartmentsFilter.push(element);
                         }
+                            }
+
+
+                           
+
+
                     });
                     this.apartmentsFilter.sort((a, b) =>
                         a.distance > b.distance ? 1 : -1
                     );
+
+                    this.apartamentFilterSponsor.forEach(element => {
+                        this.apartmentsFilter.unshift(element);
+                    });
+
+                    
                 })
                 .catch(error => {
                     console.log(error);

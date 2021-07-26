@@ -22,7 +22,7 @@
                     <th>Apartment name</th>
                     <th>Address</th>
                     <th >Publication Date</th>
-                    <th>Sponsor</th>
+                    <th class="text-center">Sponsor</th>
                     <th colspan="3" class="text-center">Actions</th>
                 </tr>
             </thead>

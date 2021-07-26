@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('script')
+<script src="{{ asset('js/tomtom.js') }}" defer></script>
+@endsection
+
 @section('content')
 <div class="container">
     <h1>EDIT</h1>

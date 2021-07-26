@@ -273,8 +273,30 @@ export default {
     font-size: 16px;
 }
 
+//  input[type='range'] {
+//       overflow: hidden;
+//       width: 80px;
+//       -webkit-appearance: none;
+//       background-color: #9a905d;
+//     }
+    
+//     input[type='range']::-webkit-slider-runnable-track {
+//       height: 10px;
+//       -webkit-appearance: none;
+//       color: #13bba4;
+//       margin-top: -1px;
+//     }
+    
+//     input[type='range']::-webkit-slider-thumb {
+//       width: 10px;
+//       -webkit-appearance: none;
+//       height: 10px;
+//       cursor: ew-resize;
+//       box-shadow: -80px 0 0 80px #43e5f7;
+//     }
+
 .searchbox-container {
-    height: 500px;
+    height: 650px;
     background: url('https://a0.muscache.com/im/pictures/258b129d-d1cd-48b5-86d4-86206c13ebf7.jpg?im_w=1440');
     display: flex;
     justify-content: center;
@@ -283,6 +305,7 @@ export default {
     background-size: cover;
     background-repeat: no-repeat;
 }
+
 
 
 </style>

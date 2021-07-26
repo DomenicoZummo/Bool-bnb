@@ -1,5 +1,5 @@
 <template>
-    <div class="full-screen">
+    <div>
             <h1 class="text-center my-3">Appartamenti sponsorizzati</h1>
         <div class="container d-flex flex-wrap justify-content-between mt-3">
             <div v-for="(apartment,key) in apartmentSponsored" :key="key"
@@ -59,18 +59,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.full-screen {
-    height: 1000px;
-    background-image: url("https://images-ext-2.discordapp.net/external/bRQb20q50e53VH1ZTuDbP1qeWhkZE2AnFkARtEDwfIA/https/wallpaperaccess.com/full/1431622.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-}
-.text-white {
-    color: #fff;
-    text-shadow: 1px 0px 3px #000;
-}
-
  .box-img {
         height: 150px;
         width: 100%;

@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="searchbox-container">
        <div class="d-flex align-items-center justify-content-center">
             <!-- Search-bar -->
         <div id="searchbox-front" class="mb-3 "></div>
@@ -8,9 +8,9 @@
                 <router-link
                     @click="getApartmentFiltered"
                     :apartmentFiltered="apartmentsFilter"
-                    class="btn btn-success "
+                    class="btn-custom"
                     :to="{ name: 'advancedsearch' }"
-                    >Cerca</router-link
+                    ><i class="fas fa-search"></i></router-link
                 >
             </div>
             <!-- Filters button -->
@@ -278,4 +278,15 @@ export default {
     font-weight: 500;
     font-size: 16px;
 }
+
+.searchbox-container{
+    height: 300px;
+    background: rgb(218, 98, 98);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
 </style>

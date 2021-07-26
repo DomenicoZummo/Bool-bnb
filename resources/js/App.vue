@@ -92,4 +92,35 @@ export default {
         border-radius: 50px;
     }
 }
+
+.btn-custom{
+    background-color:#FF385C ;
+    padding: 5px 8px;
+    border-radius: 50%;
+    color: #fff;
+    border: 1px solid transparent;
+    transition: all 0.3s;
+    text-decoration: none;
+   position: relative;
+   left: -70px;
+
+    &:hover{
+        background-color: #fff;
+        color: #FF385C;
+        border-color: #FF385C ;
+         text-decoration: none;
+    }
+}
+
+.tt-search-box-input-container{
+
+    position: relative;
+    div{
+        svg{
+            display: none;
+        }
+    }
+
+}
+
 </style>

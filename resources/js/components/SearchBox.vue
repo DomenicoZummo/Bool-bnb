@@ -1,17 +1,17 @@
 <template>
     <div>
-       <div class="d-flex align-items-center justify-content-center">
+        <div class="d-flex align-items-center justify-content-center">
             <!-- Search-bar -->
-        <div id="searchbox-front" class="mb-3 "></div>
-        <!-- Search button -->
+            <div id="searchbox-front" class="mb-3 "></div>
+            <!-- Search button -->
             <div @click="getApartmentFiltered">
                 <router-link
                     @click="getApartmentFiltered"
                     :apartmentFiltered="apartmentsFilter"
                     class="btn btn-success "
                     :to="{ name: 'advancedsearch' }"
-                    >Cerca</router-link
-                >
+                    ><i class="fas fa-search"></i
+                ></router-link>
             </div>
             <!-- Filters button -->
             <input
@@ -21,10 +21,12 @@
                 type="button"
                 value="Filtri"
             />
-       </div>
+        </div>
 
-        <div v-if="this.$route.name == 'advancedsearch'"
-        class="d-flex box-input align-items-center justify-content-center">
+        <div
+            v-if="this.$route.name == 'advancedsearch'"
+            class="d-flex box-input align-items-center justify-content-center"
+        >
             <!-- Radius -->
 
             <input
@@ -41,9 +43,6 @@
             <label value="20" class="mx-5 range" for="range"
                 >{{ range }} km</label
             >
-           
-
-            
 
             <!-- Active services badge -->
             <div
@@ -57,65 +56,67 @@
             </div>
 
             <!-- Number of results finded -->
-            <div v-show="apartmentsFilter.length > 0"
+            <div
+                v-show="apartmentsFilter.length > 0"
                 class="m-2 p-2 badge badge-success"
             >
                 Risultati: {{ apartmentsFilter.length }}
             </div>
-             <!-- Filters menu -->
-        <div v-show="clickFilterStatus" class="searchFilter">
-            <div class="box-search py-2 d-flex">
-                <div class="box-check mr-3">
-                    <div
-                    v-for="(service, index) in services"
-                    :key="index"
-                    class="checkbox-service ml-3"
-                >
-                    <label :for="service.name">{{ service.name }}</label>
-                    <input
-                        type="checkbox"
-                        :name="service.name"
-                        :id="service.name"
-                        :value="service.id"
-                        v-model="servicesChecked"
-                    />
-                </div>
-                </div>
-                <span class="close" @click="clickFilter">Close</span>
-                <div class="room-bed">
-                     
-            <!-- Numbers of beds -->
-            <div class="mt-3 mr-3">
-                <label class="form-label" for="beds">Beds</label>
-                <input
-                    id="beds"
-                    name="beds"
-                    min="1"
-                    max="20"
-                    required
-                    type="number"
-                    v-model.number="minBeds"
-                    value="minBeds"
-                />
-            </div>
+            <!-- Filters menu -->
+            <div v-show="clickFilterStatus" class="searchFilter">
+                <div class="box-search py-2 d-flex">
+                    <div class="box-check mr-3">
+                        <div
+                            v-for="(service, index) in services"
+                            :key="index"
+                            class="checkbox-service ml-3"
+                        >
+                            <label :for="service.name">{{
+                                service.name
+                            }}</label>
+                            <input
+                                type="checkbox"
+                                :name="service.name"
+                                :id="service.name"
+                                :value="service.id"
+                                v-model="servicesChecked"
+                            />
+                        </div>
+                    </div>
+                    <span class="close" @click="clickFilter">Close</span>
+                    <div class="room-bed">
+                        <!-- Numbers of beds -->
+                        <div class="mt-3 mr-3">
+                            <label class="form-label" for="beds">Beds</label>
+                            <input
+                                id="beds"
+                                name="beds"
+                                min="1"
+                                max="20"
+                                required
+                                type="number"
+                                v-model.number="minBeds"
+                                value="minBeds"
+                            />
+                        </div>
 
-            <!-- Numbers of rooms -->
-            <div class="mt-3 mr-3">
-                <label class="form-label" for="rooms">Rooms </label>
-                <input
-                    id="rooms"
-                    name="rooms"
-                    required
-                    min="1"
-                    max="20"
-                    type="number"
-                    v-model.number="minRooms"
-                    value="minRooms"
-                />
-            </div>
+                        <!-- Numbers of rooms -->
+                        <div class="mt-3 mr-3">
+                            <label class="form-label" for="rooms">Rooms </label>
+                            <input
+                                id="rooms"
+                                name="rooms"
+                                required
+                                min="1"
+                                max="20"
+                                type="number"
+                                v-model.number="minRooms"
+                                value="minRooms"
+                            />
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
         </div>
     </div>
 </template>
@@ -128,7 +129,7 @@ export default {
         return {
             apartmentsFilter: [],
             servicesChecked: [],
-            apartamentFilterSponsor:[],
+            apartamentFilterSponsor: [],
             services: [],
             range: "20",
             clickFilterStatus: false,
@@ -171,29 +172,23 @@ export default {
                 .then(result => {
                     result.data.filter(element => {
                         if (element.visibility) {
-
                             let sponsor = element.sponsorships;
 
                             console.log(sponsor.length);
 
-                            if(sponsor.length > 0 ){
-                                this.apartamentFilterSponsor.push(element)
-                            }else{
-                                 let distance = Math.sqrt(
-                                (element.latitude - window.lat) *
-                                    (element.latitude - window.lat) +
-                                    (element.longitude - window.lng) *
-                                        (element.longitude - window.lng)
-                            );
-                            element["distance"] = distance;
-                            this.apartmentsFilter.push(element);
-                        }
+                            if (sponsor.length > 0) {
+                                this.apartamentFilterSponsor.push(element);
+                            } else {
+                                let distance = Math.sqrt(
+                                    (element.latitude - window.lat) *
+                                        (element.latitude - window.lat) +
+                                        (element.longitude - window.lng) *
+                                            (element.longitude - window.lng)
+                                );
+                                element["distance"] = distance;
+                                this.apartmentsFilter.push(element);
                             }
-
-
-                           
-
-
+                        }
                     });
                     this.apartmentsFilter.sort((a, b) =>
                         a.distance > b.distance ? 1 : -1
@@ -202,8 +197,6 @@ export default {
                     this.apartamentFilterSponsor.forEach(element => {
                         this.apartmentsFilter.unshift(element);
                     });
-
-                    
                 })
                 .catch(error => {
                     console.log(error);
@@ -221,8 +214,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
-
 .searchFilter {
     display: flex;
     position: absolute;
@@ -234,8 +225,6 @@ export default {
     bottom: 0;
     justify-content: center;
     align-items: center;
-
-    
 
     .box-search {
         position: relative;

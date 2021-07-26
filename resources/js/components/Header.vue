@@ -24,12 +24,14 @@
                 >
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <router-link class="nav-link" :to="{ name: 'home' }"
+                            <router-link id="text-header"
+                             class="nav-link" :to="{ name: 'home' }"
                                 >Home</router-link
                             >
                         </li>
                         <li class="nav-item">
                             <router-link
+                            id="text-header"
                                 class="nav-link"
                                 :to="{ name: 'advancedsearch' }"
                                 >Advanced Search</router-link
@@ -67,6 +69,7 @@ export default {
             align-items: center;
             height: 50px;
             width: 150px;
+            color: #fff;
             border: 1px solid #fff;
             border-radius: 30px;
             padding: 0 10px 0 10px;

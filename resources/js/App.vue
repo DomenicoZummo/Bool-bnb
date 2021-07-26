@@ -115,6 +115,7 @@ export default {
     text-decoration: none;
    position: relative;
    left: -70px;
+   bottom: 1px;
 
     &:hover{
         background-color: #fff;
@@ -151,5 +152,32 @@ export default {
     }
 
 }
+
+#searchbox-front{
+    transition: transform 0.3s;
+    &:hover{
+        transform: scale(1.02);
+    }
+    
+}
+#searchbox-front .tt-search-box-input-container:hover{
+    box-shadow: 1px 1px 5px #FF385C;
+}
+#text-header{
+    color: rgb(230, 222, 222);
+    border: 2px solid transparent;
+    margin: 0 5px;
+    border-radius: 20px;
+
+    &:hover{
+        color: #fff;
+    }
+}
+
+#text-header.active{
+    color: #fff;
+    border-bottom: 2px solid #fff;
+}
+
 
 </style>

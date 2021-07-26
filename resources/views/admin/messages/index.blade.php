@@ -42,7 +42,9 @@
                             {{Str::limit($message->message, 30, ' ...')}}
                         </td>
                         <td>
-                            {{ $message->apartment->title }}
+                            @if (isset($message->apartment->title))
+                                {{ $message->apartment->title }}
+                            @endif
                         </td>
                         <td>
                             <div>{{ $message->created_at->format('l d/m/y') }}</div>
@@ -55,9 +57,11 @@
                             <form  action="{{ route('admin.messages.show', $message->id) }}" method="POST">
                                 @csrf
                                 @method('PATCH')
-                                <button class="btn btn-success" type="submit">
-                                    Read
-                                </button>
+                                @if (isset($message->apartment->title))
+                                    <button class="btn btn-success" type="submit">
+                                        Read
+                                    </button>
+                                @endif 
                             </form>
 
                         </td>

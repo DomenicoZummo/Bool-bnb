@@ -26,11 +26,14 @@ class MessagesController extends Controller
 
         foreach ($messages as $message) {
             // dd($message->apartment['user_id']);
-            if ($user_id == $message->apartment['user_id']) {
-                $user_messages[] = $message;
-
-                if ($message->read == 0) {
-                    $unread_messages[] = $message;
+            if(isset($message->apartment['user_id'])) {
+                
+                if ($user_id == $message->apartment['user_id']) {
+                    $user_messages[] = $message;
+    
+                    if ($message->read == 0) {
+                        $unread_messages[] = $message;
+                    }
                 }
             }
         }

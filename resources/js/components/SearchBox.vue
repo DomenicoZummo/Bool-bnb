@@ -17,7 +17,7 @@
             <input
                 v-show="this.$route.name == 'advancedsearch'"
                 @click="clickFilter"
-                class="ml-2 mr-5 btn btn-warning"
+                class=" mr-5 btn-custom-white"
                 type="button"
                 value="Filtri"
             />
@@ -27,22 +27,7 @@
             v-if="this.$route.name == 'advancedsearch'"
             class="d-flex box-input align-items-center justify-content-center"
         >
-            <!-- Radius -->
-
-            <input
-                @change="setRange(range)"
-                v-model="range"
-                min="5"
-                max="100"
-                value="range"
-                step="5"
-                type="range"
-                name="range"
-                id="range"
-            />
-            <label value="20" class="mx-5 range" for="range"
-                >{{ range }} km</label
-            >
+            
 
             <!-- Active services badge -->
             <div
@@ -50,7 +35,7 @@
                     servicesChecked.length > 0 &&
                         this.$route.name == 'advancedsearch'
                 "
-                class="badge badge-primary p-2 m-2"
+                class="btn-custom-white p-2 m-2"
             >
                 Filtri attivi : {{ servicesChecked.length }}
             </div>
@@ -58,7 +43,7 @@
             <!-- Number of results finded -->
             <div
                 v-show="apartmentsFilter.length > 0"
-                class="m-2 p-2 badge badge-success"
+                class="m-2 p-2 btn-custom-white"
             >
                 Risultati: {{ apartmentsFilter.length }}
             </div>
@@ -113,6 +98,26 @@
                                 v-model.number="minRooms"
                                 value="minRooms"
                             />
+                        </div>
+
+                        <!-- Radius -->
+                        <div class="range-box mt-4">
+
+                            <div>Change km</div>
+                             <input
+                            @change="setRange(range)"
+                            v-model="range"
+                            min="5"
+                            max="100"
+                            value="range"
+                            step="5"
+                            type="range"
+                            name="range"
+                            id="range"
+                        />
+                        <label value="20" class="mx-5 range" for="range"
+                            >{{ range }} km</label
+                        >
                         </div>
                     </div>
                 </div>
@@ -172,7 +177,7 @@ export default {
                     `http://127.0.0.1:8000/api/filterapartments?address=${window.address}&lat=${window.lat}&lng=${window.lng}&range=${this.range}&rooms=${this.minRooms}&beds=${this.minBeds}&services=${this.servicesChecked}`
                 )
                 .then(result => {
-                    result.data.data.filter(element => {
+                    result.data.filter(element => {
                         if (element.visibility) {
                             let sponsor = element.sponsorships;
                             if (sponsor.length > 0) {
@@ -269,10 +274,15 @@ export default {
 }
 
 .searchbox-container {
-    height: 300px;
-    background: rgb(138, 69, 69);
+    height: 500px;
+    background: url('https://a0.muscache.com/im/pictures/258b129d-d1cd-48b5-86d4-86206c13ebf7.jpg?im_w=1440');
     display: flex;
     justify-content: center;
     align-items: center;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
+
+
 </style>

@@ -1,11 +1,11 @@
 <template>
-    <div class="full-screen">
-        <h1 class="text-center my-3">Appartamenti sponsorizzati</h1>
-        <div class="container d-flex flex-wrap justify-content-between mt-3">
+    <div class="container">
+        <h2 class="my-3 title">Featured Apartments</h2>
+        <div class="container d-flex flex-wrap mt-3 mb-5">
             <div
                 v-for="(apartment, key) in apartmentSponsored"
                 :key="key"
-                class="card mt-4"
+                class="card mt-4 cards"
                 style="width: 18rem"
             >
                 <div class="box-img">
@@ -17,24 +17,32 @@
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">{{ apartment.title }}</h5>
+                    <h6 class="card-title">
+                        <i class="fas fa-map-marker-alt mr-1"></i
+                        >{{ apartment.address }}
+                    </h6>
                     <p class="card-text"></p>
-                    <router-link
-                        :to="{
-                            name: 'apartment-details',
-                            params: {
-                                slug: apartment.slug,
-                                latitude: apartment.latitude,
-                                longitude: apartment.longitude,
-                                currentRoute: 'home'
-                            }
-                        }"
-                        class="btn btn-primary"
-                    >
-                        View more
-                    </router-link>
+                    <div class="d-flex justify-content-center">
+                        <router-link
+                            :to="{
+                                name: 'apartment-details',
+                                params: {
+                                    slug: apartment.slug,
+                                    latitude: apartment.latitude,
+                                    longitude: apartment.longitude,
+                                    currentRoute: 'home'
+                                }
+                            }"
+                            class="btn brand"
+                        >
+                            View more
+                        </router-link>
+                    </div>
                 </div>
             </div>
         </div>
+
+        <h2 class="title">Our Cities</h2>
     </div>
 </template>
 
@@ -56,6 +64,7 @@ export default {
                 .get("http://127.0.0.1:8000/api/sponsorship")
                 .then(result => {
                     this.apartmentSponsored = result.data;
+                    console.log(result.data);
                 })
                 .catch(error => {
                     console.log(error);
@@ -66,12 +75,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.full-screen {
-    height: 1000px;
-    background-image: url("https://images-ext-2.discordapp.net/external/bRQb20q50e53VH1ZTuDbP1qeWhkZE2AnFkARtEDwfIA/https/wallpaperaccess.com/full/1431622.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
+.title {
+    letter-spacing: 1px;
 }
 .text-white {
     color: #fff;
@@ -79,13 +84,38 @@ export default {
 }
 
 .box-img {
-    height: 150px;
+    height: 200px;
     width: 100%;
     overflow: hidden;
     img {
+        padding: 2px;
         width: 100%;
+        height: 100%;
         object-fit: cover;
-        object-position: center;
+        object-position: bottom;
+        border-radius: 20px 20px 0 0;
+    }
+}
+
+.cards {
+    border-radius: 20px;
+    flex-basis: calc(100% / 3 - 20px);
+    margin: 0 10px;
+    transition: all 0.3s;
+    &:hover {
+        transform: scale(1.1);
+    }
+}
+
+.brand {
+    background: #ff385c;
+    outline: none;
+    border: 1px solid #fff;
+    color: #fff;
+    transition: 0.2s;
+    border-radius: 25px;
+    &:hover {
+        background: #e0183dcc;
     }
 }
 </style>

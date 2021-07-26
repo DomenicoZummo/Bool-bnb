@@ -26,7 +26,7 @@ class ApartmentController extends Controller
 
         $apartments = Apartment::where('user_id', $user_id)
         ->with('sponsorships')
-        ->get();
+        ->paginate(7);
 
        
 

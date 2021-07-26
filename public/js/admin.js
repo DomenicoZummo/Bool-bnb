@@ -504,7 +504,7 @@ eval("window._ = __webpack_require__(/*! lodash */ \"./node_modules/lodash/lodas
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\Emi\Desktop\Boolean\GitHubCloneRepo\MAINboolbnb\resources\js\admin.js */"./resources/js/admin.js");
+module.exports = __webpack_require__(/*! C:\Users\invac\Desktop\Bool-bnb\resources\js\admin.js */"./resources/js/admin.js");
 
 
 /***/ })

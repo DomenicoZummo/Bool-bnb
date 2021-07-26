@@ -25,20 +25,20 @@
                     
                     @csrf
                     @method('POST')
-                    
                     <section>
 
                 <input type="hidden" name="apartment" value="{{$apartment->id}}">
 
 
                 @foreach ($sponsorships as $sponsorship )
-                    <input id= "{{$sponsorship->id}}" name="Sponsorship" type="radio" value="{{$sponsorship->id}}">
-                    <label for="{{$sponsorship->type}}">
-                        <span class="mr-1">{{$sponsorship->type}}</span>
-                        <span class="mr-1">{{$sponsorship->price}}</span>
-                        <span class="mr-1">{{$sponsorship->duration}}</span>
-                    </label><br>
-                    
+                    <div class="">
+                      <input id= "{{$sponsorship->id}}" name="Sponsorship" type="radio" value="{{$sponsorship->id}}">
+                      <label for="{{$sponsorship->type}}">
+                          <div class="mr-1">{{$sponsorship->type}}</div>
+                          <div class="mr-1">{{$sponsorship->price}}</div>
+                          <div class="mr-1">{{$sponsorship->duration}}</div>
+                      </label><br>
+                    </div>
                 @endforeach
 
                         <div class="bt-drop-in-wrapper">
@@ -51,6 +51,8 @@
                 </form>
             </div>
         </div>
+
+        
     <script src="https://js.braintreegateway.com/web/dropin/1.13.0/js/dropin.min.js"></script>
     <script>
         var form = document.querySelector('#payment-form');
@@ -58,9 +60,6 @@
         braintree.dropin.create({
           authorization: client_token,
           selector: '#bt-dropin',
-          paypal: {
-            flow: 'vault'
-          }
         }, function (createErr, instance) {
           if (createErr) {
             console.log('Create Error', createErr);

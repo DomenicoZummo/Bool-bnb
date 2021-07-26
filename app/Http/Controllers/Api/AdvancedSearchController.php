@@ -35,8 +35,7 @@ class AdvancedSearchController extends Controller
             ->whereBetween('longitude', [[($lng - $range / 100), ($lng + $range / 100)]])
             ->where('rooms', '>=',  $rooms)
             ->where('beds', '>=',  $beds)
-            ->with('user', 'services', 'sponsorships')
-            ->paginate(20);
+            ->with('user', 'services', 'sponsorships')->get();
 
 
 

@@ -172,7 +172,7 @@ export default {
                     `http://127.0.0.1:8000/api/filterapartments?address=${window.address}&lat=${window.lat}&lng=${window.lng}&range=${this.range}&rooms=${this.minRooms}&beds=${this.minBeds}&services=${this.servicesChecked}`
                 )
                 .then(result => {
-                    result.data.data.filter(element => {
+                    result.data.filter(element => {
                         if (element.visibility) {
                             let sponsor = element.sponsorships;
                             if (sponsor.length > 0) {

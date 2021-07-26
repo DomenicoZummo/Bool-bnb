@@ -3,26 +3,17 @@
 @section('content')
     <div class="container d-flex">
 
-    
        
-        <div class="box-img col-xs-12 col-md-6">
-            <img src="{{ asset('storage/' . $apartment->img_path) }}" alt="{{ $apartment->title }}">
-        </div>
-   
-        <div class="text-img col-xs-12 col-md-6">
-            <h1>{{ $apartment->title }}</h1>
-            <p><strong>Address:</strong> {{ $apartment->address }}</p>
-        <div>
+      <div class="box-img col-xs-12 col-md-6">
+          <img src="{{ asset('storage/' . $apartment->img_path) }}" alt="{{ $apartment->title }}">
+          <h1>{{ $apartment->title }}</h1>
+          <p><strong>Address:</strong> {{ $apartment->address }}</p>
+      </div>
         
 
-        
-        </div>
-             <div class="d-flex action-show">
-                 <a class="btn btn-success mt-5 mr-5" href="{{ route('admin.apartments.index') }}">Back</a>
-            </div>
-            <div class="content">
-                <form method="POST" id="payment-form" action="{{ route('admin.sponsorships.store', $apartment->id)}}">
-                    
+      <div class="content container col-xs-12 col-md-6">
+            <form method="POST" id="payment-form" action="{{ route('admin.sponsorships.store', $apartment->id)}}">
+                
                     @csrf
                     @method('POST')
                     <section>
@@ -30,54 +21,66 @@
                 <input type="hidden" name="apartment" value="{{$apartment->id}}">
 
 
-                @foreach ($sponsorships as $sponsorship )
-                    <div class="">
-                      <input id= "{{$sponsorship->id}}" name="Sponsorship" type="radio" value="{{$sponsorship->id}}">
-                      <label for="{{$sponsorship->type}}">
-                          <div class="mr-1">{{$sponsorship->type}}</div>
-                          <div class="mr-1">{{$sponsorship->price}}</div>
-                          <div class="mr-1">{{$sponsorship->duration}}</div>
-                      </label><br>
-                    </div>
-                @endforeach
-
-                        <div class="bt-drop-in-wrapper">
-                            <div id="bt-dropin"></div>
+                <div class="d-flex justify-content-center align-items-center">
+                  @foreach ($sponsorships as $sponsorship )
+                    <div class="card p-3 d-flex justify-content-center align-items-center">
+                      <i class="fas fa-medal @if ($sponsorship->type === 'silver')
+                        silver
+                        @elseif ($sponsorship->type === 'gold')
+                        gold
+                        @else
+                        platinum
+                        @endif card-img-top text-center"></i>
+                        <div class="card-body">
+                          <label for="{{$sponsorship->type}}">
+                            <p>Type: {{$sponsorship->type}}</p>
+                            <p>Price: {{$sponsorship->price}}€</p>
+                            <p>Duration: {{$sponsorship->duration}} Hours</p>
+                          </label>
                         </div>
-                    </section>
+                        <input id= "{{$sponsorship->id}}" checked name="Sponsorship" type="radio" value="{{$sponsorship->id}}">
+                      </div>
+                  @endforeach
+                </div>
 
-                    <input id="nonce" name="payment_method_nonce" type="hidden" />
-                    <button class="button" type="submit"><span>Test Transaction</span></button>
-                </form>
+                <div class="bt-drop-in-wrapper">
+                    <div id="bt-dropin"></div>
+                </div>
+
+                <input id="nonce" name="payment_method_nonce" type="hidden" />
+                <button class="button" type="submit"><span>Test Transaction</span></button>
+            </form>
+            <div class="d-flex action-show">
+                  <a class="btn btn-success mt-5 mr-5" href="{{ route('admin.apartments.index') }}">Back</a>
             </div>
         </div>
 
         
-    <script src="https://js.braintreegateway.com/web/dropin/1.13.0/js/dropin.min.js"></script>
-    <script>
-        var form = document.querySelector('#payment-form');
-        var client_token = "sandbox_d55cvtp8_6bzmxnhthw48jtq8";
-        braintree.dropin.create({
-          authorization: client_token,
-          selector: '#bt-dropin',
-        }, function (createErr, instance) {
-          if (createErr) {
-            console.log('Create Error', createErr);
-            return;
-          }
-          form.addEventListener('submit', function (event) {
-            event.preventDefault();
-            instance.requestPaymentMethod(function (err, payload) {
-              if (err) {
-                console.log('Request Payment Method Error', err);
-                return;
-              }
-              // Add the nonce to the form and submit
-              document.querySelector('#nonce').value = payload.nonce;
-              form.submit();
+      <script src="https://js.braintreegateway.com/web/dropin/1.13.0/js/dropin.min.js"></script>
+      <script>
+          var form = document.querySelector('#payment-form');
+          var client_token = "sandbox_d55cvtp8_6bzmxnhthw48jtq8";
+          braintree.dropin.create({
+            authorization: client_token,
+            selector: '#bt-dropin',
+          }, function (createErr, instance) {
+            if (createErr) {
+              console.log('Create Error', createErr);
+              return;
+            }
+            form.addEventListener('submit', function (event) {
+              event.preventDefault();
+              instance.requestPaymentMethod(function (err, payload) {
+                if (err) {
+                  console.log('Request Payment Method Error', err);
+                  return;
+                }
+                // Add the nonce to the form and submit
+                document.querySelector('#nonce').value = payload.nonce;
+                form.submit();
+              });
             });
           });
-        });
-    </script>
+      </script>
     </div>
 @endsection

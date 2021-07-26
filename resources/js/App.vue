@@ -124,6 +124,23 @@ export default {
     }
 }
 
+
+.btn-custom-white{
+    background-color:#fff ;
+    padding: 5px 15px;
+    border-radius: 50px;
+    color: #FF385C;
+    border: 1px solid transparent;
+    font-weight: 500;
+    transition: all 0.3s;
+    text-decoration: none;
+
+    &:hover{
+        border-color: #FF385C ;
+         text-decoration: none;
+    }
+}
+
 .tt-search-box-input-container{
 
     position: relative;

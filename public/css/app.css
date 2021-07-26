@@ -10942,6 +10942,10 @@ a.text-dark:focus {
   }
 }
 
+* {
+  font-family: "Roboto", sans-serif;
+}
+
 .bold {
   color: #000;
   font-weight: 600;

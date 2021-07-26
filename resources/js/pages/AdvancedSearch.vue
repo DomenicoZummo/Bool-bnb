@@ -8,11 +8,11 @@
                 v-for="(apartment, key) in apartments"
                 :key="key"
                 class=" my-3 px-3 col-xs-12 col-md-4"
-                
             >
-                <div 
-                :class="{'sponsor' : (apartment.sponsorships).length > 0}"
-                class="card ">
+                <div
+                    :class="{ sponsor: apartment.sponsorships.length > 0 }"
+                    class="card "
+                >
                     <div class="box-img">
                         <img
                             class="card-img-top"
@@ -43,9 +43,8 @@
                                 {{ apartment.bathrooms }}
                             </p>
                         </div>
-                            <h6>Services:</h6>
+                        <h6>Services:</h6>
                         <div class="service">
-
                             <p
                                 v-for="(service, key) in apartment.services"
                                 :key="key"
@@ -75,7 +74,7 @@
                 </div>
             </div>
         </div>
-        <h1 v-else>No results</h1>
+        <h1 v-else>{{ isLoading ? isLoading : this.noApartments }}</h1>
     </div>
 </template>
 
@@ -83,14 +82,14 @@
 export default {
     name: "AdvancedSearch",
     props: {
-        apartments: Array
+        apartments: Array,
+        isLoading: String
     },
     data() {
         return {
-            
+            noApartments: ""
         };
-    },
-
+    }
 };
 </script>
 
@@ -103,6 +102,7 @@ export default {
     scrollbar-width: thin;
     scrollbar-color: dodgerblue lightblue;
 }
+
 .card {
     animation: card-effect 0.7s forwards;
     opacity: 0;
@@ -139,13 +139,13 @@ export default {
     box-shadow: 1px 0px 10px goldenrod;
 }
 
-.service{
+.service {
     height: 100px;
     width: 100%;
     overflow-y: auto;
 }
 
-.btn-service{
+.btn-service {
     margin: 0 auto;
     margin-bottom: 20px;
 }

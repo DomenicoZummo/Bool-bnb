@@ -1,5 +1,5 @@
 // Fonts
-@import url("https://fonts.googleapis.com/css?family=Nunito");
+@import url("https://fonts.googleapis.com/css2?family=Roboto");
 
 // Variables
 @import "variables";
@@ -10,11 +10,20 @@
 // Bootstrap
 @import "~bootstrap/scss/bootstrap";
 
-*{
-    font-family: 'Roboto', sans-serif;
+* {
+    font-family: "Roboto", sans-serif;
 }
 
-.bold{
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: 700;
+}
+
+.bold {
     color: #000;
     font-weight: 600;
 }
@@ -53,13 +62,13 @@ form {
     }
 }
 
-.new-message{
+.new-message {
     margin-top: 30px;
-    h3{
+    h3 {
         font-size: 16px;
         font-weight: 400;
         position: relative;
-        .num-message{
+        .num-message {
             position: absolute;
             font-size: 14px;
             top: -10px;
@@ -75,17 +84,16 @@ form {
     }
 }
 
-.fas.fa-medal{
+.fas.fa-medal {
     font-size: 40px;
 }
 
-
-.silver{
+.silver {
     color: silver;
 }
-.gold{
+.gold {
     color: goldenrod;
 }
-.platinum{
+.platinum {
     color: paleturquoise;
 }

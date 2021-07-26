@@ -33,7 +33,7 @@
                                     currentRoute: 'home'
                                 }
                             }"
-                            class="btn brand"
+                            class="btn btn-details"
                         >
                             View more
                         </router-link>
@@ -42,7 +42,7 @@
             </div>
         </div>
 
-        <h2 class="title">Our Cities</h2>
+        <!-- <h2 class="title">Our Cities</h2> -->
     </div>
 </template>
 
@@ -64,7 +64,6 @@ export default {
                 .get("http://127.0.0.1:8000/api/sponsorship")
                 .then(result => {
                     this.apartmentSponsored = result.data;
-                    console.log(result.data);
                 })
                 .catch(error => {
                     console.log(error);
@@ -77,6 +76,7 @@ export default {
 <style scoped lang="scss">
 .title {
     letter-spacing: 1px;
+    font-weight: 700;
 }
 .text-white {
     color: #fff;
@@ -106,16 +106,17 @@ export default {
     }
 }
 
-.brand {
+.btn-details {
     background: #ff385c;
     outline: none;
-    border: 1px solid #fff;
     color: #fff;
-    transition: 0.2s;
     border-radius: 25px;
+    border: 1px solid transparent;
+    transition: color 0.3s, background-color 0.4s, border-color 0.4s;
     &:hover {
-        background: #e0183dcc;
+        color: #ff385c;
+        border-color: #ff385c;
+        background: #fff;
     }
 }
-
 </style>

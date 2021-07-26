@@ -1,13 +1,10 @@
 <template>
     <div class="py-5 container">
-        <div
-            v-if="apartments.length > 0"
-            class="d-flex container flex-wrap box-apartments"
-        >
+        <div v-if="apartments.length > 0" class="d-flex container flex-wrap">
             <div
                 v-for="(apartment, key) in apartments"
                 :key="key"
-                class=" my-3 px-3 col-xs-12 col-md-4"
+                class=" my-3 px-3 col-xs-12 col-md-4 my-col"
             >
                 <div
                     :class="{ sponsor: apartment.sponsorships.length > 0 }"
@@ -22,17 +19,17 @@
                     </div>
 
                     <div class="card-body">
-                        <h5 class="card-title">{{ apartment.title }}</h5>
-                        <p class="card-text">
-                            <i class="fas fa-map-marker-alt mr-1"></i
+                        <h4 class="card-title">{{ apartment.title }}</h4>
+                        <p class="card-text address">
+                            <i class="fas fa-map-marker-alt mr-2"></i
                             >{{ apartment.address }}
                         </p>
-                        <div class="descriptions d-flex flex-wrap mb-3">
-                            <p class="card-text ml-3">
-                                Floor: {{ apartment.floor }}
+                        <div class="descriptions d-flex flex-wrap">
+                            <p class="card-text">
+                                <span>Floor:</span> {{ apartment.floor }}
                             </p>
                             <p class="card-text ml-3">
-                                Rooms: {{ apartment.rooms }}
+                                <span>Rooms:</span> {{ apartment.rooms }}
                             </p>
                             <p class="card-text ml-3">
                                 <i class="fas fa-bed mr-1"></i>
@@ -43,18 +40,17 @@
                                 {{ apartment.bathrooms }}
                             </p>
                         </div>
-                        <h6>Services:</h6>
                         <div class="service">
                             <p
                                 v-for="(service, key) in apartment.services"
                                 :key="key"
-                                class="card-text badge badge-warning p-2 m-2"
+                                class="card-text badge badge-boolbnb p-2 m-2"
                             >
                                 {{ service.name }}
                             </p>
                         </div>
                     </div>
-                    <div class="btn-service ">
+                    <div class="btn-details-center">
                         <div>
                             <router-link
                                 :to="{
@@ -65,7 +61,7 @@
                                         longitude: apartment.longitude
                                     }
                                 }"
-                                class="btn btn-primary"
+                                class="btn btn-details"
                             >
                                 View more
                             </router-link>
@@ -98,9 +94,27 @@ export default {
     text-transform: capitalize;
 }
 
-.box-apartments {
-    scrollbar-width: thin;
-    scrollbar-color: dodgerblue lightblue;
+.card-text span {
+    color: #212529;
+    font-weight: 700;
+}
+
+p.card-text {
+    margin-bottom: 10px;
+}
+
+.badge-boolbnb {
+    color: #ff385c;
+    background: #fff;
+    border: 1px solid #ff385c;
+}
+
+.my-col {
+    transition: transform 0.3s 0.2s;
+    &:hover {
+        transform: perspective(1px) translate3d(0px, -15px, 0px);
+        z-index: 1;
+    }
 }
 
 .card {
@@ -111,9 +125,8 @@ export default {
     min-height: 530px;
     max-height: 530px;
     min-width: 250px;
-
     .box-img {
-        height: 150px;
+        height: 200px;
         width: 100%;
         overflow: hidden;
         img {
@@ -136,17 +149,33 @@ export default {
 }
 
 .sponsor {
-    box-shadow: 1px 0px 10px goldenrod;
+    box-shadow: 0px 0px 5px 4px #ff385c;
 }
 
 .service {
-    height: 100px;
+    height: 92px;
     width: 100%;
     overflow-y: auto;
+    p {
+        cursor: pointer;
+    }
 }
 
-.btn-service {
+.btn-details-center {
     margin: 0 auto;
-    margin-bottom: 20px;
+    .btn-details {
+        background: #ff385c;
+        outline: none;
+        color: #fff;
+        border-radius: 25px;
+        border: 1px solid transparent;
+        transition: color 0.3s, background-color 0.4s, border-color 0.4s;
+        &:hover {
+            color: #ff385c;
+            border-color: #ff385c;
+            background: #fff;
+        }
+        margin-bottom: 20px;
+    }
 }
 </style>

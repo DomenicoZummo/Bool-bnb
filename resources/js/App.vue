@@ -74,19 +74,14 @@ export default {
 
 /* Track */
 ::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 20px;
+    background: #212529a6;
+    border-radius: 10px;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: rgb(45, 109, 173);
-    border-radius: 20px;
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-    background: dodgerblue;
+    background: #212529;
+    border-radius: 10px;
 }
 
 .padding-header-fixed {
@@ -105,79 +100,69 @@ export default {
     }
 }
 
-.btn-custom{
-    background-color:#FF385C ;
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #212529 #212529a6;
+}
+
+.btn-custom {
+    background-color: #ff385c;
     padding: 5px 8px;
     border-radius: 50%;
     color: #fff;
     border: 1px solid transparent;
     transition: all 0.3s;
     text-decoration: none;
-   position: relative;
-   left: -70px;
-   bottom: 1px;
+    position: relative;
+    left: -70px;
+    bottom: 1px;
 
-    &:hover{
+    &:hover {
         background-color: #fff;
-        color: #FF385C;
-        border-color: #FF385C ;
-         text-decoration: none;
+        color: #ff385c;
+        border-color: #ff385c;
+        text-decoration: none;
     }
 }
 
-
-.btn-custom-white{
-    background-color:#fff ;
+.btn-custom-white {
+    background-color: #fff;
     padding: 5px 15px;
     border-radius: 50px;
-    color: #FF385C;
+    color: #ff385c;
     border: 1px solid transparent;
     font-weight: 500;
     transition: all 0.3s;
     text-decoration: none;
 
-    &:hover{
-        border-color: #FF385C ;
-         text-decoration: none;
+    &:hover {
+        border-color: #ff385c;
+        text-decoration: none;
     }
 }
 
-.tt-search-box-input-container{
-
+.tt-search-box-input-container {
     position: relative;
-    div{
-        svg{
+    div {
+        svg {
             display: none;
         }
     }
-
 }
 
-#searchbox-front{
-    transition: transform 0.3s;
-    &:hover{
-        transform: scale(1.02);
-    }
-    
-}
-#searchbox-front .tt-search-box-input-container:hover{
-    box-shadow: 1px 1px 5px #FF385C;
-}
-#text-header{
+#text-header {
     color: rgb(230, 222, 222);
     border: 2px solid transparent;
     margin: 0 5px;
     border-radius: 20px;
 
-    &:hover{
+    &:hover {
         color: #fff;
     }
 }
 
-#text-header.active{
+#text-header.active {
     color: #fff;
     border-bottom: 2px solid #fff;
 }
-
-
 </style>

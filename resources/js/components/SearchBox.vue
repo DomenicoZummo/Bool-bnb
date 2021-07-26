@@ -271,7 +271,7 @@ export default {
 
 .searchbox-container {
     height: 300px;
-    background: rgb(218, 98, 98);
+    background: rgb(138, 69, 69);
     display: flex;
     justify-content: center;
     align-items: center;

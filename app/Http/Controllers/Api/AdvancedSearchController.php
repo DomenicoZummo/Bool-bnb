@@ -36,7 +36,7 @@ class AdvancedSearchController extends Controller
             ->where('rooms', '>=',  $rooms)
             ->where('beds', '>=',  $beds)
             ->with('user', 'services', 'sponsorships')
-            ->get();
+            ->paginate(20);
 
 
 

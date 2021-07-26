@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="searchbox-container">
         <div class="d-flex align-items-center justify-content-center">
             <!-- Search-bar -->
             <div id="searchbox-front" class="mb-3 "></div>
@@ -8,7 +8,7 @@
                 <router-link
                     @click="getApartmentFiltered"
                     :apartmentFiltered="apartmentsFilter"
-                    class="btn btn-success "
+                    class="btn-custom"
                     :to="{ name: 'advancedsearch' }"
                     ><i class="fas fa-search"></i
                 ></router-link>
@@ -134,7 +134,8 @@ export default {
             range: "20",
             clickFilterStatus: false,
             minRooms: "1",
-            minBeds: "1"
+            minBeds: "1",
+            isLoading: "Loading..."
         };
     },
     created() {
@@ -165,6 +166,7 @@ export default {
         getApartmentFiltered() {
             this.apartmentsFilter = [];
             this.apartamentFilterSponsor = [];
+            this.$emit("isLoading", this.isLoading);
             axios
                 .get(
                     `http://127.0.0.1:8000/api/filterapartments?address=${window.address}&lat=${window.lat}&lng=${window.lng}&range=${this.range}&rooms=${this.minRooms}&beds=${this.minBeds}&services=${this.servicesChecked}`
@@ -173,8 +175,6 @@ export default {
                     result.data.filter(element => {
                         if (element.visibility) {
                             let sponsor = element.sponsorships;
-
-                            console.log(sponsor.length);
 
                             if (sponsor.length > 0) {
                                 this.apartamentFilterSponsor.push(element);
@@ -200,9 +200,10 @@ export default {
                 })
                 .catch(error => {
                     console.log(error);
+                })
+                .finally(() => {
+                    this.$emit("getApartmentFiltered", this.apartmentsFilter);
                 });
-
-            this.$emit("getApartmentFiltered", this.apartmentsFilter);
         },
 
         // Set the radius of the research dynamically
@@ -266,5 +267,13 @@ export default {
     color: #000;
     font-weight: 500;
     font-size: 16px;
+}
+
+.searchbox-container {
+    height: 300px;
+    background: rgb(218, 98, 98);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 </style>

@@ -16,7 +16,7 @@ class MessagesController extends Controller
         $user = Auth::user();
         $user_id = $user['id'];
 
-        $messages = Message::with('apartment')->orderBy('created_at', 'desc')->get();
+        $messages = Message::with('apartment')->orderBy('created_at', 'desc')->paginate(7);
         // dd($messages);
         // $unviewedMessagesCount = Message::where('read', '0')
         //     ->count();
@@ -36,7 +36,7 @@ class MessagesController extends Controller
         }
 
 
-        return view('admin.messages.index', compact('user_messages', 'unread_messages'));
+        return view('admin.messages.index', compact('user_messages', 'unread_messages', 'messages'));
     }
 
 

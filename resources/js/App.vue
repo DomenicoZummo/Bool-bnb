@@ -9,11 +9,13 @@
                     this.$route.name == 'home'
             "
             @getApartmentFiltered="getApartmentFiltered"
+            @isLoading="getLoading"
         />
 
         <!-- Main -->
         <main>
-            <router-view :apartments="apartmentsFilter"> </router-view>
+            <router-view :apartments="apartmentsFilter" :isLoading="isLoading">
+            </router-view>
             <Maps
                 class="my-3"
                 v-show="this.$route.name == 'apartment-details-fake'"
@@ -40,13 +42,23 @@ export default {
     },
     data() {
         return {
-            apartmentsFilter: []
+            apartmentsFilter: [],
+            isLoading: ""
         };
     },
 
     methods: {
         getApartmentFiltered(e) {
-            this.apartmentsFilter = e;
+            if (e != null && e.length > 0) {
+                this.apartmentsFilter = e;
+            } else {
+                this.apartmentsFilter = [];
+                this.isLoading = "No results";
+            }
+        },
+
+        getLoading(string) {
+            this.isLoading = string;
         }
     }
 };
@@ -92,4 +104,35 @@ export default {
         border-radius: 50px;
     }
 }
+
+.btn-custom{
+    background-color:#FF385C ;
+    padding: 5px 8px;
+    border-radius: 50%;
+    color: #fff;
+    border: 1px solid transparent;
+    transition: all 0.3s;
+    text-decoration: none;
+   position: relative;
+   left: -70px;
+
+    &:hover{
+        background-color: #fff;
+        color: #FF385C;
+        border-color: #FF385C ;
+         text-decoration: none;
+    }
+}
+
+.tt-search-box-input-container{
+
+    position: relative;
+    div{
+        svg{
+            display: none;
+        }
+    }
+
+}
+
 </style>

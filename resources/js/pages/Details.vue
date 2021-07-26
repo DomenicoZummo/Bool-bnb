@@ -3,7 +3,18 @@
         <div class="container d-flex">
             <div class="my-container py-4 mr-5" v-if="apartment">
                 <!-- Back button -->
-                <router-link
+                <router-link v-if="this.$route.params.currentRoute == 'home' "
+                
+                    :to="{
+                        name: 'home'
+                    }"
+                    class="arrow-container"
+                >
+                    <i class="fas fa-arrow-left back-arrow"></i>
+                </router-link>
+
+                <router-link v-else
+                
                     :to="{
                         name: 'advancedsearch'
                     }"

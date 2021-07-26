@@ -16,7 +16,12 @@ class UpdateApartmentSponsorshipTable extends Migration
         Schema::table('apartment_sponsorship', function (Blueprint $table) {
             $table->dateTime('end_time')
                 ->nullable()
-                ->after('updated_at');
+                ->after('sponsorship_id');
+
+            $table->dateTime('start_time')
+                ->nullable()
+                ->after('sponsorship_id');
+
         });
         
     }
@@ -29,6 +34,7 @@ class UpdateApartmentSponsorshipTable extends Migration
     public function down()
     {
         Schema::table('apartment_sponsorship', function (Blueprint $table) {
+            $table->dropColumn('start_time');
             $table->dropColumn('end_time');
         });
     }

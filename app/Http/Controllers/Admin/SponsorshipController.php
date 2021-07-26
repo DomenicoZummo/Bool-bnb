@@ -10,12 +10,6 @@ use App\Sponsorship;
 use Braintree;
 use Carbon\Carbon;
 
-
-
-
-
-
-
 class SponsorshipController extends Controller
 {
     /**
@@ -25,10 +19,23 @@ class SponsorshipController extends Controller
      */
     public function index()
     {
+        $user = Auth::user();
+        $user_id = $user['id'];
+
+        $apartments =  Apartment::where('user_id', $user_id)
+        ->with('sponsorships')->get();
+
+        $apartments_sponsored = [];
+
+        foreach ($apartments  as  $apartment) {
+        $count = $apartment->sponsorships;
+        if(count($count) > 0){
+            $apartments_sponsored[] = $apartment;
+        }
+        }
 
 
-
-        return view('admin.sponsorships.index');
+        return view('admin.sponsorships.index',compact('apartments_sponsored'));
     }
 
     /**
@@ -111,11 +118,12 @@ class SponsorshipController extends Controller
             ]
     ]);
 
+
+
         
     if ($result->success) {
         $transaction = $result->transaction;
         // header("Location: transaction.php?id=" . $transaction->id);
-
         foreach($apartment_sponsored as $sponsored){
                
                 if($sponsored->id == $apartment_id){
@@ -124,16 +132,16 @@ class SponsorshipController extends Controller
                 }
               
 
-
       }
 
-      $errorMessage = ['Sponsorship already exists'];
+      
+      
 
         if(count($countSpons) === 0){
-                    $apartment->sponsorships()->attach($sponsorship_id, ['created_at' => Carbon::now(), 'updated_at' => Carbon::now()->addHours($sponsorships['duration'])]);
+                    $apartment->sponsorships()->attach($sponsorship_id, ['start_time' => Carbon::now(), 'end_time' => Carbon::now()->addHours($sponsorships['duration'])]);
 
                }else{
-                   return view('admin.sponsorships.edit', compact('errorMessage'));
+                   return view('admin.sponsorships.edit');
                }
     
 

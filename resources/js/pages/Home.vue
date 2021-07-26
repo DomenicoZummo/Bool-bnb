@@ -1,14 +1,58 @@
 <template>
     <div class="full-screen">
-        <div class="container text-white">
-            <h1>Home</h1>
+            <h1 class="text-center my-3">Appartamenti sponsorizzati</h1>
+        <div class="container d-flex flex-wrap">
+            <div v-for="(apartment,key) in apartmentSponsored" :key="key"
+             class="card m-3" style="width: 18rem;">
+                <img class="card-img-top" :src="apartment.img_path" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">{{ apartment.title }}</h5>
+                    <p class="card-text"></p>
+                      <router-link
+                                :to="{
+                                    name: 'apartment-details',
+                                    params: {
+                                        slug: apartment.slug,
+                                        latitude: apartment.latitude,
+                                        longitude: apartment.longitude,
+                                        currentRoute: 'home' 
+                                    }
+                                }"
+                                class="btn btn-primary"
+                            >
+                                View more
+                            </router-link>
+                </div>
+        </div>
         </div>
     </div>
 </template>
 
 <script>
+import axios from 'axios';
 export default {
-    name: "Home"
+    name: "Home",
+    data(){
+        return {
+            apartmentSponsored: [],
+        }
+    },
+    created(){
+        this.getApartmentsSposored();
+    },
+    methods:{
+        getApartmentsSposored(){
+
+            axios.get('http://127.0.0.1:8000/api/sponsorship')
+            .then(result => {
+                this.apartmentSponsored = result.data;
+                console.log(result.data);
+            } )
+            .catch(error =>{
+                console.log(error);
+            });
+        }
+    }
 };
 </script>
 

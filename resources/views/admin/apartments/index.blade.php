@@ -5,6 +5,7 @@
 
     <div class="container">
 
+       
         
         <h1>Your apartments</h1>
 
@@ -18,20 +19,18 @@
         <table class="table table-hover mt-5">
             <thead>
                 <tr>
-                    <th>User</th>
                     <th>Apartment name</th>
                     <th>Address</th>
-                    <th>Publication Date</th>
-                    <th colspan="4" class="text-center">Actions</th>
+                    <th >Publication Date</th>
+                    <th>Sponsor</th>
+                    <th colspan="3" class="text-center">Actions</th>
                 </tr>
             </thead>
 
             <tbody>
                 @foreach ($apartments as $apartment )
-
                     
                     <tr>
-                        <td>{{ $user['name'] }}</td>
                         <td>{{ $apartment->title }}</td>
                         <td>{{ $apartment->address }}</td>
 
@@ -40,8 +39,18 @@
                             <div>{{ $apartment->created_at->diffForHumans() }}</div>
                         </td>
 
-                        <td>
+                        <td class="text-center">
+                            @if (count($apartment->sponsorships) > 0)
+                            <i class="fas fa-medal @if ($apartment->sponsorships[0]['id'] == 1)
+                                silver
+                                @elseif ($apartment->sponsorships[0]['id'] == 2)
+                                gold
+                                @else
+                                platinum
+                            @endif"></i>
+                            @else    
                             <a class="btn btn-success" href="{{ route('admin.sponsorships.edit', $apartment->id) }}">Sponsor </a>
+                            @endif
                         </td>
 
                         <td>

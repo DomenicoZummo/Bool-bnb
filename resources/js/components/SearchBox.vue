@@ -26,7 +26,8 @@
         <div v-if="this.$route.name == 'advancedsearch'"
         class="d-flex box-input align-items-center justify-content-center">
             <!-- Radius -->
-            <!-- <input
+
+            <input
                 @change="setRange(range)"
                 v-model="range"
                 min="5"
@@ -39,7 +40,7 @@
             />
             <label value="20" class="mx-5 range" for="range"
                 >{{ range }} km</label
-            > -->
+            >
            
 
             

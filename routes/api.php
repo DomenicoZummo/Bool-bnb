@@ -32,4 +32,8 @@ Route::namespace('Api')
 
         // Save messages
         Route::post('messages', 'MessagesController@store');
+
+
+        // Get apartments sponsored
+        Route::get('sponsorship', 'SponsorshipsApartments@index');
     });

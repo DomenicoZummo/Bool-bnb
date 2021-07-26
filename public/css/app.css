@@ -10999,3 +10999,19 @@ form label {
   background-color: red;
 }
 
+.fas.fa-medal {
+  font-size: 40px;
+}
+
+.silver {
+  color: silver;
+}
+
+.gold {
+  color: goldenrod;
+}
+
+.platinum {
+  color: paleturquoise;
+}
+

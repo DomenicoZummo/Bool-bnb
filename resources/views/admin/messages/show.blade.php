@@ -5,7 +5,7 @@
 
     <div class="container d-flex">
         <div class="box-img col-xs-12 col-md-6">
-            <img src="{{ asset('storage/' . $message->apartment->img_path) }}" alt="{{ $message->apartment->img_path }}">
+            <img class="img-bord" src="{{ asset('storage/' . $message->apartment->img_path) }}" alt="{{ $message->apartment->img_path }}">
         </div>
    
         <div class="text-img col-xs-12 col-md-6">
@@ -21,11 +21,11 @@
         <p>{{ $message->message}}</p>
 
             <div class="d-flex action-show">
-                <a class="btn btn-success mt-5 mr-5" href="{{ route('admin.messages.index') }}">Back</a>
+                <a class="btn btn-success-details mt-5 mr-5" href="{{ route('admin.messages.index') }}">Back</a>
                 <form class="mt-5 delete-apartment-form " action="{{ route('admin.messages.destroy', $message->id) }}" method="POST">
                     @csrf
                     @method('DELETE')
-                    <button class="btn btn-danger" type="submit">
+                    <button class="btn btn-danger-delete" type="submit">
                         DELETE
                     </button>
                 </form>

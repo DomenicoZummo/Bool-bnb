@@ -149,15 +149,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _tom
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-<<<<<<< HEAD
-module.exports = __webpack_require__(/*! C:\Users\Emi\Desktop\Boolean\GitHubCloneRepo\MAINboolbnb\resources\js\search.js */"./resources/js/search.js");
-=======
-<<<<<<< HEAD
 module.exports = __webpack_require__(/*! C:\Users\Domenico\Desktop\Bool-bnb\resources\js\search.js */"./resources/js/search.js");
-=======
-module.exports = __webpack_require__(/*! /home/giuseppem/Scrivania/Final/Bool-bnb/resources/js/search.js */"./resources/js/search.js");
->>>>>>> 5c87b64d4683be37296675911cf89b9e1fdff7f7
->>>>>>> b4b4acee85e36dfc087db76cd0c5d084fc72c612
 
 
 /***/ })

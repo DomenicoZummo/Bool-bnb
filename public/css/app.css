@@ -11108,11 +11108,11 @@ form label {
 
 .card-back.card-apartment {
   position: relative;
-  height: 450px;
+  height: 480px;
 }
 
 .img-box {
-  height: 120px;
+  height: 220px;
   width: 100%;
   overflow: hidden;
 }
@@ -11207,5 +11207,9 @@ form label {
 .btn-warning-edit:hover {
   color: #fff;
   background-color: #111;
+}
+
+.img-bord {
+  border-radius: 10px;
 }
 

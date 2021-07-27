@@ -32,7 +32,7 @@
             </thead>
 
             <tbody>
-                @foreach ($messages as $message )
+                @foreach ($user_messages as $message )
                     <tr class="@if($message->read == 0) bold @endif">
                         <td>{{ $message->name }}</td>
                         <td>

@@ -160,7 +160,7 @@ p.card-text {
     top: 8px;
     right: 8px;
     font-weight: 400;
-    padding: 0 2px 3px;
+    padding: 0 3px;
     color: #fff;
     font-size: 13px;
     text-transform: uppercase;

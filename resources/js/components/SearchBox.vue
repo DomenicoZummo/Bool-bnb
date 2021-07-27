@@ -254,6 +254,7 @@ export default {
         transform: scale(0.1);
         opacity: 0;
         padding: 15px 15px;
+        border-radius: 5px;
         animation: box-search-in 0.3s forwards;
 
         @keyframes box-search-in {

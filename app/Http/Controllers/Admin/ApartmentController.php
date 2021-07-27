@@ -111,20 +111,18 @@ class ApartmentController extends Controller
      */
     public function show($id)
     {
-        $apartment = Apartment::find($id);
+        $apartment = Apartment::findOrFail($id);
         $user_log = Auth::user();
 
         $user_id = $user_log['id'];
 
 
-
-        if ($apartment == null) {
-            return abort(404);
-        } elseif ($apartment != null && $apartment['user_id'] == $user_id) {
+        if ($apartment['user_id'] == $user_id) {
             return view('admin.apartments.show', compact('apartment'));
         }
 
-        abort(404);
+        return abort(403,__('Error , you don\'t have permission'));
+
     }
 
     /**

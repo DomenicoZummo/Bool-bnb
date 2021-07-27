@@ -19,6 +19,7 @@ class SponsorshipController extends Controller
      */
     public function index()
     {
+
         $user = Auth::user();
         $user_id = $user['id'];
 
@@ -27,7 +28,11 @@ class SponsorshipController extends Controller
 
         $apartments_sponsored = [];
 
+
         foreach ($apartments  as  $apartment) {
+
+
+
         $count = $apartment->sponsorships;
         if(count($count) > 0){
             $apartments_sponsored[] = $apartment;

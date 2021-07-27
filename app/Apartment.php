@@ -56,7 +56,7 @@ class Apartment extends Model
      // Gestione relazione con tabella Sponsorships
     
     public function sponsorships(){
-        return $this->belongsToMany('App\Sponsorship');
+        return $this->belongsToMany('App\Sponsorship')->withPivot(['start_time','end_time']);
     }
     
 }

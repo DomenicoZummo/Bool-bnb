@@ -58,7 +58,7 @@
                                 @csrf
                                 @method('PATCH')
                                 @if (isset($message->apartment->title))
-                                    <button class="btn btn-success" type="submit">
+                                    <button class="btn btn-success-details" type="submit">
                                         Read
                                     </button>
                                 @endif 
@@ -70,7 +70,7 @@
                             <form class="delete-apartment-form" action="{{ route('admin.messages.destroy', $message->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button class="btn btn-danger" type="submit">
+                                <button class="btn btn-danger-delete" type="submit">
                                     DELETE
                                 </button>
                             </form>

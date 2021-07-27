@@ -6,8 +6,8 @@
        
       <div class="box-img col-xs-12 col-md-6">
           <img src="{{ asset('storage/' . $apartment->img_path) }}" alt="{{ $apartment->title }}">
-          <h1>{{ $apartment->title }}</h1>
-          <p><strong>Address:</strong> {{ $apartment->address }}</p>
+          <h1 class="mt-4">{{ $apartment->title }}</h1>
+          <p><i class="fas fa-map-marker-alt mr-2"></i> {{ $apartment->address }}</p>
       </div>
         
 
@@ -51,7 +51,7 @@
                 <div class="pay text-center"><button class="btn-pay" type="submit"><span>Pay now</span></button></div>
             </form>
             <div class="d-flex action-show">
-                  <a class="btn btn-success mt-5 mr-5" href="{{ route('admin.apartments.index') }}">Back</a>
+                  <a class="btn btn-success-details mt-5 mr-5" href="{{ route('admin.apartments.index') }}">Back</a>
             </div>
         </div>
 

@@ -25,22 +25,22 @@ class ApartmentController extends Controller
 
 
         $apartments = Apartment::where('user_id', $user_id)
-        ->with('sponsorships')
-        ->paginate(7);
+            ->with('sponsorships')
+            ->paginate(6);
 
-       
+
 
         $apartments_sponsored = [];
 
         foreach ($apartments  as  $apartment) {
-        $count = $apartment->sponsorships;
-        if(count($count) > 0){
-            $apartments_sponsored[] = $apartment;
-        }
+            $count = $apartment->sponsorships;
+            if (count($count) > 0) {
+                $apartments_sponsored[] = $apartment;
+            }
         }
 
 
-        return view('admin.apartments.index', compact('apartments', 'user','apartments_sponsored'));
+        return view('admin.apartments.index', compact('apartments', 'user', 'apartments_sponsored'));
     }
 
     /**

@@ -136,7 +136,7 @@
 
 
             <div class="text-center final-button">
-                <input type="submit" value="Create" class="btn btn-success">
+                <input type="submit" value="Create" class="btn btn-success-details">
             </div>
         </div>
 

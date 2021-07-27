@@ -11020,6 +11020,15 @@ form label {
   font-size: 26px;
 }
 
+.fas.fa-medal.ind.medal-apartment {
+  font-size: 45px;
+  background: #00000052;
+  width: 60px;
+  text-align: center;
+  border-radius: 10px;
+  padding: 4px 0;
+}
+
 .silver {
   color: silver;
 }
@@ -11097,6 +11106,11 @@ form label {
   border-radius: 20px 20px 0 0;
 }
 
+.card-back.card-apartment {
+  position: relative;
+  height: 450px;
+}
+
 .img-box {
   height: 120px;
   width: 100%;
@@ -11105,5 +11119,93 @@ form label {
 
 .tit {
   display: inline-block;
+}
+
+.p-no-mb {
+  margin-bottom: 0;
+}
+
+.no-line-spacing {
+  line-height: 1;
+}
+
+.absolute-delete {
+  position: absolute;
+  bottom: 20px;
+  right: 25px;
+}
+
+.absolute-edit {
+  position: absolute;
+  bottom: 20px;
+  right: 50%;
+  transform: translateX(50%);
+}
+
+.absolute-details {
+  position: absolute;
+  bottom: 20px;
+  left: 25px;
+}
+
+.absolute-sponsor {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.btn-success-sponsor {
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  font-weight: 600;
+  border: 1px solid #fff;
+  transition: all 0.4s;
+}
+
+.btn-success-sponsor:hover {
+  color: #fff;
+  background-color: #111;
+}
+
+.btn-danger-delete {
+  border-radius: 10px;
+  background-color: #ff385d;
+  color: #fff;
+  font-weight: 600;
+  border: 2px solid transparent;
+  transition: all 0.3s;
+}
+
+.btn-danger-delete:hover {
+  color: #fff;
+  background-color: #ca2e4b;
+}
+
+.btn-success-details {
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  font-weight: 600;
+  border: 2px solid transparent;
+  transition: all 0.3s;
+}
+
+.btn-success-details:hover {
+  color: #fff;
+  background-color: #111;
+}
+
+.btn-warning-edit {
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  font-weight: 600;
+  border: 2px solid transparent;
+  transition: all 0.3s;
+}
+
+.btn-warning-edit:hover {
+  color: #fff;
+  background-color: #111;
 }
 

@@ -118,6 +118,7 @@ p.card-text {
 }
 
 .card {
+    position: relative;
     animation: card-effect 0.7s forwards;
     opacity: 0;
     transform: scale(0.1);
@@ -148,8 +149,18 @@ p.card-text {
     }
 }
 
-.sponsor {
-    box-shadow: 0px 0px 5px 4px #ff385c;
+.sponsor::after {
+    // box-shadow: 0px 0px 5px 4px #ff385c;
+    content: "Sponsored";
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-weight: 600;
+    padding: 0 2px 3px;
+    color: #212529;
+    border: 2px solid #212529;
+    border-radius: 8px;
+    background: rgb(231, 231, 231);
 }
 
 .service {

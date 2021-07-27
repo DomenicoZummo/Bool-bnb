@@ -84,9 +84,9 @@ export default {
     border-radius: 10px;
 }
 
-.padding-header-fixed {
-    padding-top: 56px;
-}
+// .padding-header-fixed {
+//     padding-top: 56px;
+// }
 
 #searchbox-front {
     margin: 0 20px 0 0;

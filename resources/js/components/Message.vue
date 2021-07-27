@@ -1,13 +1,13 @@
 <template>
     <div class="container">
-        <h1 class="mb-5">Send us a message</h1>
+        <h1 class="mb-3 title">Send a message to the host</h1>
         <div v-show="success" class="alert alert-success">
             Message sent succesfully
         </div>
         <form @submit.prevent="postForm(apartment.id)">
             <!-- Name -->
             <div class="form-group">
-                <label for="name">Name</label>
+                <label for="name" class="title">Name</label>
                 <input v-model="name" type="text" id="name" class="max-width" />
                 <div
                     class="error-message"
@@ -19,7 +19,7 @@
             </div>
             <!-- Surname -->
             <div class="form-group">
-                <label for="surname">Surname</label>
+                <label for="surname" class="title">Surname</label>
                 <input
                     v-model="surname"
                     type="text"
@@ -36,7 +36,7 @@
             </div>
             <!-- Email -->
             <div class="form-group">
-                <label for="email">Email *</label>
+                <label for="email" class="title">Email *</label>
                 <input
                     v-model="email"
                     type="email"
@@ -53,7 +53,7 @@
             </div>
             <!-- Message -->
             <div class="form-group">
-                <label for="message">Message *</label>
+                <label for="message" class="title">Message *</label>
                 <textarea
                     class="max-width"
                     v-model="message"
@@ -75,7 +75,7 @@
                 <button
                     type="submit"
                     :disabled="sending"
-                    class="btn btn-success"
+                    class="btn btn-boolbnb"
                 >
                     {{ sending ? "Sending..." : "Send" }}
                 </button>
@@ -153,6 +153,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.title {
+    font-weight: 600;
+}
+
 .max-width {
     width: 100%;
 }
@@ -170,6 +174,22 @@ export default {
     }
     .error-message {
         color: red;
+    }
+}
+
+.btn-boolbnb {
+    background: #ff385c;
+    outline: none;
+    color: #fff;
+    font-size: 18px;
+    padding: 5px 20px;
+    border-radius: 25px;
+    border: 1px solid transparent;
+    transition: color 0.3s, background-color 0.4s, border-color 0.4s;
+    &:hover {
+        color: #ff385c;
+        border-color: #ff385c;
+        background: #fff;
     }
 }
 

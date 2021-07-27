@@ -1,10 +1,10 @@
 <template>
-    <div>
+    <div class="padding-header-fixed">
         <div class="container d-flex">
             <div class="my-container py-4 mr-5" v-if="apartment">
                 <!-- Back button -->
-                <router-link v-if="this.$route.params.currentRoute == 'home' "
-                
+                <router-link
+                    v-if="this.$route.params.currentRoute == 'home'"
                     :to="{
                         name: 'home'
                     }"
@@ -13,8 +13,8 @@
                     <i class="fas fa-arrow-left back-arrow"></i>
                 </router-link>
 
-                <router-link v-else
-                
+                <router-link
+                    v-else
                     :to="{
                         name: 'advancedsearch'
                     }"
@@ -23,7 +23,7 @@
                     <i class="fas fa-arrow-left back-arrow"></i>
                 </router-link>
                 <!-- Title -->
-                <h2 class="my-3 mb-1">
+                <h2 class="my-3 title">
                     <i class="fas fa-house-user"></i> {{ apartment.title }}
                 </h2>
                 <!-- Address -->
@@ -32,7 +32,7 @@
                     >{{ apartment.address }}
                 </div>
                 <!-- Host d kitemmurt -->
-                <div class="mb-5">
+                <div class="mb-3">
                     <i class="far fa-user-circle mr-2 user-icon"></i
                     >{{ apartment.user.name }}
                 </div>
@@ -40,7 +40,7 @@
                 <div class="img-wrapper">
                     <img :src="apartment.img_path" :alt="apartment.title" />
                 </div>
-                <div class="d-flex mt-3">
+                <div class="d-flex my-3">
                     <!-- Rooms -->
                     <div class="mr-3">
                         <strong>Camere:</strong> {{ apartment.rooms }}
@@ -65,11 +65,11 @@
                     </div>
                 </div>
                 <!-- Services -->
-                <div class="d-flex">
+                <div class="d-flex flex-wrap">
                     <div
                         v-for="(service, index) in apartment.services"
                         :key="index"
-                        class="d-flex badge badge-primary p-2 m-2"
+                        class="d-flex badge badge-boolbnb p-2 m-2"
                     >
                         {{ service.name }}
                     </div>
@@ -79,13 +79,15 @@
                     <strong>Description:</strong> {{ apartment.description }}
                 </div>
                 <!-- Send Message -->
-                <input
-                    v-show="this.$route.name == 'apartment-details'"
-                    @click="clickMessage"
-                    class="mt-4 btn btn-warning"
-                    type="button"
-                    value="Invia un messaggio"
-                />
+                <div class="d-flex justify-content-center">
+                    <input
+                        v-show="this.$route.name == 'apartment-details'"
+                        @click="clickMessage"
+                        class="mt-4 btn btn-boolbnb"
+                        type="button"
+                        value="Invia un messaggio"
+                    />
+                </div>
             </div>
             <Maps
                 class="my-3"
@@ -170,21 +172,30 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.padding-header-fixed {
+    padding-top: 100px;
+}
+
 .my-container {
     position: relative;
+}
+
+.title {
+    font-weight: 600;
 }
 
 .img-wrapper {
     width: 500px;
     img {
         width: 100%;
+        border-radius: 10px;
     }
 }
 
 .searchFilter {
     display: flex;
     position: absolute;
-    z-index: 10;
+    z-index: 1031;
     background: rgba(#000000, 0.3);
     top: 0;
     left: 0;
@@ -196,6 +207,7 @@ export default {
     .box-search {
         position: relative;
         width: 50vw;
+        border-radius: 5px;
         background: #fff;
         color: #000;
         overflow-y: auto;
@@ -226,18 +238,38 @@ export default {
     }
 }
 
+.btn-boolbnb {
+    background: #ff385c;
+    outline: none;
+    color: #fff;
+    border-radius: 25px;
+    border: 1px solid transparent;
+    transition: color 0.3s, background-color 0.4s, border-color 0.4s;
+    &:hover {
+        color: #ff385c;
+        border-color: #ff385c;
+        background: #fff;
+    }
+}
+
+.badge-boolbnb {
+    color: #ff385c;
+    background: #fff;
+    border: 1px solid #ff385c;
+}
+
 .arrow-container {
     position: absolute;
     left: -55px;
     top: 45px;
     .back-arrow {
         font-size: 35px;
-        color: rgba(30, 143, 255, 0.685);
+        color: #ff385dad;
         cursor: pointer;
         transition: transform 0.3s;
         &:hover {
             transform: translateX(-10px);
-            color: rgb(30, 143, 255);
+            color: #ff385c;
         }
     }
 }

@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <h2 class="my-3 title">Featured Apartments</h2>
+        <h2 class="mt-5 mb-3 title">Featured Apartments</h2>
         <div class="container d-flex flex-wrap mt-3 mb-5">
             <div
                 v-for="(apartment, key) in apartmentSponsored"

@@ -6,7 +6,7 @@
           <div class="container d-flex flex-wrap justify-content-center">
             @foreach ($apartments as $apartment )
             <div class="card card-back card-apartment mt-3 mb-3 pb-2">
-                <div class="inmg-box"><img src="{{ asset('storage/' . $apartment->img_path) }}" alt="{{ $apartment->title }}"></div>
+                <div class="img-box"><img src="{{ asset('storage/' . $apartment->img_path) }}" alt="{{ $apartment->title }}"></div>
                 <div class="card-body">
                     <h4 class="card-title tit">{{$apartment->title}}</h4>
                     <p><i class="fas fa-map-marker-alt mr-2"></i>{{$apartment->address}}</p>

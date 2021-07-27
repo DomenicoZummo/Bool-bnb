@@ -504,7 +504,15 @@ eval("window._ = __webpack_require__(/*! lodash */ \"./node_modules/lodash/lodas
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
+<<<<<<< HEAD
 module.exports = __webpack_require__(/*! C:\Users\Emi\Desktop\Boolean\GitHubCloneRepo\MAINboolbnb\resources\js\admin.js */"./resources/js/admin.js");
+=======
+<<<<<<< HEAD
+module.exports = __webpack_require__(/*! C:\Users\Domenico\Desktop\Bool-bnb\resources\js\admin.js */"./resources/js/admin.js");
+=======
+module.exports = __webpack_require__(/*! /home/giuseppem/Scrivania/Final/Bool-bnb/resources/js/admin.js */"./resources/js/admin.js");
+>>>>>>> 5c87b64d4683be37296675911cf89b9e1fdff7f7
+>>>>>>> b4b4acee85e36dfc087db76cd0c5d084fc72c612
 
 
 /***/ })

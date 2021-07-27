@@ -14,7 +14,6 @@ class UserController extends Controller
 
         if(Auth::check()){
         return response()->json($user);
-
         }
         // dd($user);
 

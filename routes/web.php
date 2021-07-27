@@ -38,6 +38,7 @@ Route::prefix('admin')
 
         // Sponsor Route
         Route::resource('/sponsorships', 'SponsorshipController');
+
     });
 
 // Front-Office

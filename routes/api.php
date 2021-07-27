@@ -36,4 +36,6 @@ Route::namespace('Api')
 
         // Get apartments sponsored
         Route::get('sponsorship', 'SponsorshipsApartments@index');
+
+
     });

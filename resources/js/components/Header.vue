@@ -130,6 +130,7 @@ header {
     &.fixedHeader {
         background: #ff385c;
         box-shadow: none;
+        height: 80px;
     }
     #host {
         display: flex;

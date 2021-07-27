@@ -26,9 +26,14 @@
             <h3>Price: {{ $transaction->amount}} {{$transaction->currencyIsoCode}}</h3>
 
         
-             <div class="d-flex action-show">
-                 <a class="btn btn-success mt-5 mr-5" href="{{ route('admin.apartments.index') }}">Back</a>
-            </div>
+             <div class="d-flex align-items-center mt-3">
+                 <div class="d-flex">
+                     <a class="btn btn-success mr-5" href="{{ route('admin.apartments.index') }}">Back</a>
+                </div>
+                 <div class="d-flex">
+                     <a class="home-btn" href="{{ url('/') }}"><i class="fas fa-home"></i></a>
+                </div>
+             </div>
         </div>
     </div>
 @endsection

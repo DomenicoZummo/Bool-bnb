@@ -3,9 +3,11 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        {{-- Fav Icons --}}
+        <link rel="icon" href={{ asset('AirFav.ico') }}>
 
         {{-- Window title --}}
-        <title>Boolbnb</title>
+        <title>Airbnb</title>
        
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>

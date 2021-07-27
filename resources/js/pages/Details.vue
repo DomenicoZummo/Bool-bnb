@@ -43,7 +43,7 @@
                 <div class="d-flex my-3">
                     <!-- Rooms -->
                     <div class="mr-3">
-                        <strong>Camere:</strong> {{ apartment.rooms }}
+                        <strong>Rooms:</strong> {{ apartment.rooms }}
                     </div>
                     <!-- Beds -->
                     <div class="mr-3">
@@ -52,7 +52,7 @@
                     </div>
                     <!-- Floor -->
                     <div class="mr-3">
-                        <strong>Piano:</strong> {{ apartment.floor }}
+                        <strong>Floor:</strong> {{ apartment.floor }}
                     </div>
                     <!-- Bathrooms -->
                     <div class="mr-3">
@@ -85,7 +85,7 @@
                         @click="clickMessage"
                         class="mt-4 btn btn-boolbnb"
                         type="button"
-                        value="Invia un messaggio"
+                        value="Contact Host"
                     />
                 </div>
             </div>

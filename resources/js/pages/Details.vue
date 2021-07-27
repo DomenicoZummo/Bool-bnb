@@ -85,7 +85,7 @@
                         @click="clickMessage"
                         class="mt-4 btn btn-boolbnb"
                         type="button"
-                        value="Invia un messaggio"
+                        value="Contact Host"
                     />
                 </div>
             </div>

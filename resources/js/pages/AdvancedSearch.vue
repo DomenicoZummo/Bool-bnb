@@ -8,7 +8,7 @@
             >
                 <div
                     :class="{ sponsor: apartment.sponsorships.length > 0 }"
-                    class="card "
+                    class="card"
                 >
                     <div class="box-img">
                         <img
@@ -119,21 +119,25 @@ p.card-text {
 
 .card {
     position: relative;
-    animation: card-effect 0.7s forwards;
+    animation: card-effect 0.3s forwards;
     opacity: 0;
     transform: scale(0.1);
     overflow: auto;
-    min-height: 530px;
-    max-height: 530px;
+    min-height: 500px;
+    max-height: 500px;
     min-width: 250px;
+    border-radius: 20px;
+
     .box-img {
         height: 200px;
         width: 100%;
         overflow: hidden;
         img {
             width: 100%;
+            height: 100%;
             object-fit: cover;
-            object-position: center;
+            object-position: bottom;
+            border-radius: 20px 20px 0 0;
         }
     }
 }
@@ -153,14 +157,17 @@ p.card-text {
     // box-shadow: 0px 0px 5px 4px #ff385c;
     content: "Sponsored";
     position: absolute;
-    top: 10px;
-    right: 10px;
-    font-weight: 600;
+    top: 8px;
+    right: 8px;
+    font-weight: 400;
     padding: 0 2px 3px;
-    color: #212529;
-    border: 2px solid #212529;
-    border-radius: 8px;
-    background: rgb(231, 231, 231);
+    color: #fff;
+    font-size: 13px;
+    text-transform: uppercase;
+    border-bottom: 1px solid #fff;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.25);
+    letter-spacing: 1px;
 }
 
 .service {

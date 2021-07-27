@@ -48,12 +48,13 @@
                 </div>
 
                 <input id="nonce" name="payment_method_nonce" type="hidden" />
-                <button class="button" type="submit"><span>Test Transaction</span></button>
+                <div class="pay text-center"><button class="btn-pay" type="submit"><span>Pay now</span></button></div>
             </form>
             <div class="d-flex action-show">
                   <a class="btn btn-success mt-5 mr-5" href="{{ route('admin.apartments.index') }}">Back</a>
             </div>
         </div>
+
 
         
       <script src="https://js.braintreegateway.com/web/dropin/1.13.0/js/dropin.min.js"></script>

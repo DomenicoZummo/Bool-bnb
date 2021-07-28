@@ -11213,3 +11213,20 @@ form label {
   border-radius: 10px;
 }
 
+.pagination {
+  color: #111;
+}
+
+.page-item .page-link {
+  background-color: #fff;
+  color: #111;
+  outline: none;
+  box-shadow: none;
+}
+
+.page-item.active .page-link {
+  background-color: #fff;
+  border-color: #ff385d;
+  color: #ff385d;
+}
+

@@ -3,6 +3,15 @@
 @section('content')
       <div class="container">
           <h1>Your apartments</h1>
+
+          @if (session('deleted'))
+            <div class="alert alert-success">
+                <strong>{{ session('deleted') }}</strong>
+                Succesfully deleted item.
+            </div>
+        @endif
+
+
           <div class="container d-flex flex-wrap justify-content-center">
             @foreach ($apartments as $apartment )
             <div class="card card-back card-apartment mt-3 mb-3 pb-2">
@@ -42,7 +51,10 @@
                 </div>
               </div>
             @endforeach
-              </div>
+        </div>
+        <div class="d-flex justify-content-center">
+            {{ $apartments->links() }}
+        </div>
       </div>
 
     {{-- <div class="container">
@@ -51,12 +63,7 @@
         
         <h1>Your apartments</h1>
 
-        @if (session('deleted'))
-            <div class="alert alert-success">
-                <strong>{{ session('deleted') }}</strong>
-                Succesfully deleted item.
-            </div>
-        @endif
+        
 
         <table class="table table-hover mt-5">
             <thead>
@@ -118,7 +125,7 @@
             </tbody>
         </table> --}}
 
-        {{ $apartments->links() }}
+        
 
     </div>
 @endsection

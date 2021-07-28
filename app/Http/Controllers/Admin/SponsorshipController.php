@@ -143,7 +143,7 @@ class SponsorshipController extends Controller
       
 
         if(count($countSpons) === 0){
-                    $apartment->sponsorships()->attach($sponsorship_id, ['start_time' => Carbon::now(), 'end_time' => Carbon::now()->addHours($sponsorships['duration'])]);
+                    $apartment->sponsorships()->attach($sponsorship_id, ['start_time' => Carbon::now(), 'end_time' => Carbon::now()->addSeconds($sponsorships['duration'])]);
 
                }else{
                    return view('admin.sponsorships.edit');

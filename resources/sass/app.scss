@@ -24,7 +24,7 @@ h6 {
 }
 
 .bold {
-    color: #000;
+    color: #212529;
     font-weight: 600;
 }
 
@@ -115,7 +115,7 @@ form {
 
 .host-header {
     display: inline-block;
-    border-left: 1px solid black;
+    border-left: 1px solid #212529;
     padding-left: 8px;
     font-size: 20px;
 }
@@ -159,7 +159,7 @@ form {
 }
 
 .card-back {
-    border-radius: 20px;
+    border-radius: 10px;
     flex-basis: calc(100% / 3 - 20px);
     height: 400px;
     margin: 0 10px;
@@ -229,7 +229,7 @@ form {
     transition: all 0.4s;
     &:hover {
         color: #fff;
-        background-color: #111;
+        background-color: #212529;
     }
 }
 
@@ -255,7 +255,7 @@ form {
     transition: all 0.3s;
     &:hover {
         color: #fff;
-        background-color: #111;
+        background-color: #212529;
     }
 }
 
@@ -268,29 +268,64 @@ form {
     transition: all 0.3s;
     &:hover {
         color: #fff;
-        background-color: #111;
+        background-color: #212529;
     }
 }
 
-
-.img-bord{
+.img-bord {
     border-radius: 10px;
 }
 
-.pagination{
-    color: #111;
+.pagination {
+    color: #212529;
 }
 
-.page-item .page-link{
-    background-color: #fff;   
-    color:#111 ;
+.page-item .page-link {
+    background-color: #fff;
+    color: #212529;
     outline: none;
     box-shadow: none;
 }
 
-
-.page-item.active .page-link{
-    background-color: #fff;   
+.page-item.active .page-link {
+    background-color: #fff;
     border-color: #ff385d;
-    color:#ff385d ;
+    color: #ff385d;
+}
+
+.dash-card {
+    border-radius: 10px;
+    flex-basis: calc(100% / 4 - 20px);
+    height: 300px;
+    margin: 0 10px;
+    cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
+        rgba(0, 0, 0, 0.22) 0px 10px 10px;
+    transition: transform 0.3s;
+    &:hover {
+        transform: perspective(1px) translate3d(0px, -10px, 0px);
+        z-index: 1;
+    }
+    &:active {
+        transform: translateY(5px);
+    }
+}
+
+.dash-anchor {
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    color: inherit;
+    &:hover {
+        text-decoration: none;
+        color: inherit;
+    }
+}
+
+.color-b {
+    color: #212529;
+}
+
+.word-wrap {
+    word-wrap: anywhere;
 }

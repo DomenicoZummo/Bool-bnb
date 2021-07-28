@@ -75,7 +75,7 @@
                     </div>
                 </div>
                 <!-- Description -->
-                <div class="mb-3 mt-3">
+                <div class="mb-3 mt-3 word-wrap">
                     <strong>Description:</strong> {{ apartment.description }}
                 </div>
                 <!-- Send Message -->
@@ -279,5 +279,9 @@ export default {
 .user-icon {
     font-size: 20px;
     margin-left: 9px;
+}
+
+.word-wrap {
+    word-wrap: anywhere;
 }
 </style>

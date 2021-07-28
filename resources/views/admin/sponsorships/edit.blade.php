@@ -12,7 +12,7 @@
         
 
       <div class="content container col-xs-12 col-md-6">
-            <form method="POST" id="payment-form" action="{{ route('admin.sponsorships.store', $apartment->id)}}">
+            <form method="POST" id="payment-form" action="{{ route('admin.sponsorships.store')}}">
                 
                     @csrf
                     @method('POST')

@@ -24,7 +24,7 @@
                     <p><strong>Square meters:</strong> {{ $apartment->square_meters }}</p>
                 @endif
             </div>
-            <div><strong>Descrizione:</strong></div> <p>{{ $apartment->description }}</p>
+            <div><strong>Descrizione:</strong></div> <p class="word-wrap">{{ $apartment->description }}</p>
             
             @if(count($apartment->services) > 0)
                 @foreach ($apartment->services as $service)

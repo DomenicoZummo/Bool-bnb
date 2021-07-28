@@ -25,7 +25,7 @@
         {{-- Description --}}
         <div class="mt-3">
             <label class="form-label" for="description">Description  *</label>
-            <textarea name="description" class=" @error('description') is-invalid @enderror" required id="description" cols="50" rows="10">{{ old('description') }}</textarea>
+            <textarea name="description" class="form-control @error('description') is-invalid @enderror" required id="description" cols="50" rows="10">{{ old('description') }}</textarea>
             @error('description')
             <span class="invalid-feedback">{{ $message  }}</span>
             @enderror

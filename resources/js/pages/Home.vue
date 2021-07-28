@@ -151,13 +151,19 @@ export default {
     data() {
         return {
             apartmentSponsored: [],
-            palermo:`http://127.0.0.1:8000/api/filterapartments?address=Palermo&lat=38.11566&lng=13.36147&range=20&rooms=1&beds=1&services=`,
-            puglia: 'http://127.0.0.1:8000/api/filterapartments?address=Canosa di Puglia&lat=41.2225&lng=16.06603&range=20&rooms=1&beds=1&services=',
-            catania:'http://127.0.0.1:8000/api/filterapartments?address=Catania&lat=37.50248&lng=15.08783&range=20&rooms=1&beds=1&services=',
-            milano: 'http://127.0.0.1:8000/api/filterapartments?address=Milano&lat=45.46362&lng=9.18812&range=20&rooms=1&beds=1&services=',
-            bologna:'http://127.0.0.1:8000/api/filterapartments?address=Bologna&lat=44.49419&lng=11.34652&range=20&rooms=1&beds=1&services=',
-            sardegna:'http://127.0.0.1:8000/api/filterapartments?address=Sardegna&lat=40.08578&lng=9.03311&range=20&rooms=1&beds=1&services=',
-            napoli: 'http://127.0.0.1:8000/api/filterapartments?address=Napoli&lat=40.83998&lng=14.25254&range=20&rooms=1&beds=1&services=',
+            palermo: `http://127.0.0.1:8000/api/filterapartments?address=Palermo&lat=38.11566&lng=13.36147&range=20&rooms=1&beds=1&services=`,
+            puglia:
+                "http://127.0.0.1:8000/api/filterapartments?address=Canosa-di-Puglia&lat=41.2225&lng=16.06603&range=20&rooms=1&beds=1&services=",
+            catania:
+                "http://127.0.0.1:8000/api/filterapartments?address=Catania&lat=37.50248&lng=15.08783&range=20&rooms=1&beds=1&services=",
+            milano:
+                "http://127.0.0.1:8000/api/filterapartments?address=Milano&lat=45.46362&lng=9.18812&range=20&rooms=1&beds=1&services=",
+            bologna:
+                "http://127.0.0.1:8000/api/filterapartments?address=Bologna&lat=44.49419&lng=11.34652&range=20&rooms=1&beds=1&services=",
+            sardegna:
+                "http://127.0.0.1:8000/api/filterapartments?address=Sardegna&lat=40.08578&lng=9.03311&range=20&rooms=1&beds=1&services=",
+            napoli:
+                "http://127.0.0.1:8000/api/filterapartments?address=Napoli&lat=40.83998&lng=14.25254&range=20&rooms=1&beds=1&services="
         };
     },
     created() {
@@ -173,8 +179,7 @@ export default {
                 .catch(error => {
                     console.log(error);
                 });
-        },
-       
+        }
     }
 };
 </script>
@@ -226,27 +231,20 @@ export default {
     }
 }
 
-
-
-.img-box{
+.img-box {
     height: 70px;
     width: 70px;
     overflow: hidden;
     border-radius: 20px;
 
-    img{
+    img {
         max-width: 100%;
         object-fit: cover;
     }
 }
 
-.box-dintorni  a{
+.box-dintorni a {
     text-decoration: none;
     color: #000;
-
 }
-
-
-
-
 </style>

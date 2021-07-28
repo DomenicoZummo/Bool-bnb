@@ -24,7 +24,7 @@ class SponsorshipController extends Controller
         $user_id = $user['id'];
 
         $apartments =  Apartment::where('user_id', $user_id)
-        ->with('sponsorships')->get();
+            ->with('sponsorships')->get();
 
         $apartments_sponsored = [];
 
@@ -33,14 +33,14 @@ class SponsorshipController extends Controller
 
 
 
-        $count = $apartment->sponsorships;
-        if(count($count) > 0){
-            $apartments_sponsored[] = $apartment;
-        }
+            $count = $apartment->sponsorships;
+            if (count($count) > 0) {
+                $apartments_sponsored[] = $apartment;
+            }
         }
 
 
-        return view('admin.sponsorships.index',compact('apartments_sponsored'));
+        return view('admin.sponsorships.index', compact('apartments_sponsored'));
     }
 
     /**
@@ -50,7 +50,6 @@ class SponsorshipController extends Controller
      */
     public function create($id)
     {
-        
     }
 
     /**
@@ -63,8 +62,8 @@ class SponsorshipController extends Controller
     {
         $data =  $request->all();
 
-        
-        
+
+
         $sponsorship = Sponsorship::find($data['Sponsorship']);
         $apartment_id = $data['apartment'];
         // dump($apartment_id);
@@ -72,9 +71,9 @@ class SponsorshipController extends Controller
         $sponsorship_id = $data['Sponsorship'];
         // dump($sponsorship_id);
 
-        
 
-       
+
+
         $user_log = Auth::user();
 
         $sponsorships = Sponsorship::find($sponsorship_id);
@@ -84,7 +83,7 @@ class SponsorshipController extends Controller
         $apartment = Apartment::find($apartment_id);
 
 
-        
+
 
         $apartment_sponsored = Apartment::with('sponsorships')->get();
         // dd($apartment_sponsored['sponsorships']);
@@ -93,25 +92,25 @@ class SponsorshipController extends Controller
 
 
 
-        
-
-        
 
 
-            $gateway = new Braintree\Gateway([
+
+
+
+        $gateway = new Braintree\Gateway([
             'environment' => 'sandbox',
             'merchantId' => '6bzmxnhthw48jtq8',
             'publicKey' => 'nqgtdy3vspxznd5r',
             'privateKey' => 'f1cdb48bea89bfcfa8fc60941eb2aebd'
-            ]);
+        ]);
 
-            
-            $amount = $sponsorships->price ;
 
-            $nonce = $request->payment_method_nonce;
+        $amount = $sponsorships->price;
 
-            $result = $gateway->transaction()->sale([
-            'amount' => $amount,    
+        $nonce = $request->payment_method_nonce;
+
+        $result = $gateway->transaction()->sale([
+            'amount' => $amount,
             'paymentMethodNonce' => $nonce,
             'customer' => [
                 'firstName' => $user_log['name'], // Dati statici da cambiare in base all'user
@@ -121,53 +120,48 @@ class SponsorshipController extends Controller
             'options' => [
                 'submitForSettlement' => true
             ]
-    ]);
+        ]);
 
 
 
-        
-    if ($result->success) {
-        $transaction = $result->transaction;
-        // header("Location: transaction.php?id=" . $transaction->id);
-        foreach($apartment_sponsored as $sponsored){
-               
-                if($sponsored->id == $apartment_id){
 
-               $countSpons = $sponsored->sponsorships;
+        if ($result->success) {
+            $transaction = $result->transaction;
+            // header("Location: transaction.php?id=" . $transaction->id);
+            foreach ($apartment_sponsored as $sponsored) {
+
+                if ($sponsored->id == $apartment_id) {
+
+                    $countSpons = $sponsored->sponsorships;
                 }
-              
+            }
 
-      }
 
-      
-      
 
-        if(count($countSpons) === 0){
-                    $apartment->sponsorships()->attach($sponsorship_id, ['start_time' => Carbon::now(), 'end_time' => Carbon::now()->addSeconds($sponsorships['duration'])]);
 
-               }else{
-                   return view('admin.sponsorships.edit');
-               }
-    
+            if (count($countSpons) === 0) {
+                $apartment->sponsorships()->attach($sponsorship_id, ['start_time' => Carbon::now(), 'end_time' => Carbon::now()->addSeconds($sponsorships['duration'])]);
+            } else {
+                return view('admin.sponsorships.edit');
+            }
 
-    // return redirect()->route('admin.sponsorships.show', $apartment->id)->with('sponsorships');
 
-        return view('admin.sponsorships.show', compact('transaction', 'sponsorships', 'apartment'));
+            // return redirect()->route('admin.sponsorships.show', $apartment->id)->with('sponsorships');
 
-        // return back()->with('success_message', 'Transaction successful. The ID is:'. $transaction->id);
-    } else {
-        $errorString = "";
+            return view('admin.sponsorships.show', compact('transaction', 'sponsorships', 'apartment'));
 
-        foreach ($result->errors->deepAll() as $error) {
-            $errorString .= 'Error: ' . $error->code . ": " . $error->message . "\n";
+            // return back()->with('success_message', 'Transaction successful. The ID is:'. $transaction->id);
+        } else {
+            $errorString = "";
+
+            foreach ($result->errors->deepAll() as $error) {
+                $errorString .= 'Error: ' . $error->code . ": " . $error->message . "\n";
+            }
+
+            // $_SESSION["errors"] = $errorString;
+            // header("Location: index.php");
+            return back()->withErrors('An error has occurred with the message: ' . $result->message);
         }
-
-        // $_SESSION["errors"] = $errorString;
-        // header("Location: index.php");
-        return back()->withErrors('An error occurred with the message: '.$result->message);
-    }
-
-        
     }
 
     /**
@@ -176,16 +170,16 @@ class SponsorshipController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($apartment,$id)
+    public function show($apartment, $id)
     {
-        
+
         $apartment = Apartment::all();
         $user_log = Auth::user();
 
 
         $user_id = $user_log['id'];
 
-        $sponsorship= Sponsorship::find($id);
+        $sponsorship = Sponsorship::find($id);
 
         dd($sponsorship);
 
@@ -193,15 +187,11 @@ class SponsorshipController extends Controller
             return abort(404);
         } elseif ($apartment != null && $apartment['user_id'] == $user_id) {
 
-            
-            return view('admin.sponsorships.show', compact('apartment', 'transaction','sponsorships'));
+
+            return view('admin.sponsorships.show', compact('apartment', 'transaction', 'sponsorships'));
         }
 
         abort(404);
-
-
-
-
     }
 
     /**
@@ -213,17 +203,18 @@ class SponsorshipController extends Controller
     public function edit($id)
     {
 
-        $apartment = Apartment::find($id);
+        $apartment = Apartment::with('sponsorships')->find($id);
+        // dd($apartment);
         $user_log = Auth::user();
         $sponsorships = Sponsorship::all();
 
         $user_id = $user_log['id'];
 
 
-        if ($apartment == null) {
-            return abort(404);
+        if ($apartment == null || count($apartment->sponsorships) > 0) {
+            return abort(403, 'Apartment does not exist or has already an active sponsorship.');
         } elseif ($apartment != null && $apartment['user_id'] == $user_id) {
-            return view('admin.sponsorships.edit', compact('apartment','sponsorships'));
+            return view('admin.sponsorships.edit', compact('apartment', 'sponsorships'));
         }
 
         abort(404);
@@ -238,61 +229,61 @@ class SponsorshipController extends Controller
      */
     public function update(Request $request, $id)
     {
-    //     $data =  $request->all();
-    //     $apartment = Apartment::find($id);
-    //     $user_log = Auth::user();
+        //     $data =  $request->all();
+        //     $apartment = Apartment::find($id);
+        //     $user_log = Auth::user();
 
-    //     $sponsorships = Sponsorship::find($_POST['Sponsorship']);
+        //     $sponsorships = Sponsorship::find($_POST['Sponsorship']);
 
-    //     $apartment->update($data);
-
-
-    //         $gateway = new Braintree\Gateway([
-    //         'environment' => 'sandbox',
-    //         'merchantId' => '6bzmxnhthw48jtq8',
-    //         'publicKey' => 'nqgtdy3vspxznd5r',
-    //         'privateKey' => 'f1cdb48bea89bfcfa8fc60941eb2aebd'
-    //         ]);
-
-            
-    //         $amount = $sponsorships->price ;
-
-    //         $nonce = $request->payment_method_nonce;
-
-    //         $result = $gateway->transaction()->sale([
-    //         'amount' => $amount,    
-    //         'paymentMethodNonce' => $nonce,
-    //         'customer' => [
-    //             'firstName' => $user_log['name'], // Dati statici da cambiare in base all'user
-    //             'lastName' => $user_log['surname'],
-    //             'email' => $user_log['email'],
-    //         ],
-    //         'options' => [
-    //             'submitForSettlement' => true
-    //         ]
-    // ]);
-
-        
-    // if ($result->success) {
-    //     $transaction = $result->transaction;
-    //     // header("Location: transaction.php?id=" . $transaction->id);
-
-    //     return view('admin.sponsorships.show', compact('apartment', 'transaction', 'sponsorships'));
-        
+        //     $apartment->update($data);
 
 
-    //     // return back()->with('success_message', 'Transaction successful. The ID is:'. $transaction->id);
-    // } else {
-    //     $errorString = "";
+        //         $gateway = new Braintree\Gateway([
+        //         'environment' => 'sandbox',
+        //         'merchantId' => '6bzmxnhthw48jtq8',
+        //         'publicKey' => 'nqgtdy3vspxznd5r',
+        //         'privateKey' => 'f1cdb48bea89bfcfa8fc60941eb2aebd'
+        //         ]);
 
-    //     foreach ($result->errors->deepAll() as $error) {
-    //         $errorString .= 'Error: ' . $error->code . ": " . $error->message . "\n";
-    //     }
 
-    //     // $_SESSION["errors"] = $errorString;
-    //     // header("Location: index.php");
-    //     return back()->withErrors('An error occurred with the message: '.$result->message);
-    // }
+        //         $amount = $sponsorships->price ;
+
+        //         $nonce = $request->payment_method_nonce;
+
+        //         $result = $gateway->transaction()->sale([
+        //         'amount' => $amount,    
+        //         'paymentMethodNonce' => $nonce,
+        //         'customer' => [
+        //             'firstName' => $user_log['name'], // Dati statici da cambiare in base all'user
+        //             'lastName' => $user_log['surname'],
+        //             'email' => $user_log['email'],
+        //         ],
+        //         'options' => [
+        //             'submitForSettlement' => true
+        //         ]
+        // ]);
+
+
+        // if ($result->success) {
+        //     $transaction = $result->transaction;
+        //     // header("Location: transaction.php?id=" . $transaction->id);
+
+        //     return view('admin.sponsorships.show', compact('apartment', 'transaction', 'sponsorships'));
+
+
+
+        //     // return back()->with('success_message', 'Transaction successful. The ID is:'. $transaction->id);
+        // } else {
+        //     $errorString = "";
+
+        //     foreach ($result->errors->deepAll() as $error) {
+        //         $errorString .= 'Error: ' . $error->code . ": " . $error->message . "\n";
+        //     }
+
+        //     // $_SESSION["errors"] = $errorString;
+        //     // header("Location: index.php");
+        //     return back()->withErrors('An error occurred with the message: '.$result->message);
+        // }
 
     }
 

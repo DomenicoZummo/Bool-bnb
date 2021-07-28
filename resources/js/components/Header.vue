@@ -56,19 +56,16 @@
                     </ul>
                     <div class="navbar-dark">
                         <ul class="navbar-nav">
-
-                            <li v-if="!userLog"
-                            class="nav-item ">
+                            <li v-if="!userLog" class="nav-item ">
                                 <a class="nav-link" id="host" href="/admin"
                                     >Become a host</a
                                 >
                             </li>
 
-                            <li v-else
-                            class="nav-item ">
-                                
+                            <li v-else class="nav-item ">
                                 <a class="nav-link" id="user" href="/admin"
-                                    ><i class="fas fa-user-circle mr-2"></i>{{nameUser}}</a
+                                    ><i class="fas fa-user-circle mr-2"></i
+                                    >{{ nameUser }}</a
                                 >
                             </li>
                         </ul>
@@ -80,17 +77,17 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 export default {
     name: "Header",
     data() {
         return {
             isFixed: false,
-            nameUser:'User',
-            userLog : false,
+            nameUser: "User",
+            userLog: false
         };
     },
-    created(){
+    created() {
         this.getUserName();
     },
     mounted() {
@@ -104,18 +101,18 @@ export default {
             }
         };
     },
-    methods:{
-        getUserName(){
-            this.userLog = false,
-            axios.get('http://127.0.0.1:8000/admin/user')
-            .then(res => {
-                this.userLog = true;
-                this.nameUser = res.data.name;
-            })
-            .catch(error => {
-                
-            });
-            
+    methods: {
+        getUserName() {
+            (this.userLog = false),
+                axios
+                    .get("http://127.0.0.1:8000/admin/user")
+                    .then(res => {
+                        this.userLog = true;
+                        this.nameUser = res.data.name;
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    });
         }
     }
 };
@@ -159,8 +156,8 @@ header {
     }
 }
 
-#user{
-    i{
+#user {
+    i {
         font-size: 30px;
     }
     font-size: 20px;
@@ -168,10 +165,10 @@ header {
     align-items: center;
     color: #fff;
     border-radius: 10px;
-    border-bottom:2px solid transparent;
+    border-bottom: 2px solid transparent;
     transition: border 0.3s;
 
-    &:hover{
+    &:hover {
         border-color: #fff;
     }
 }

@@ -38,7 +38,7 @@
 
         <!-- Styles -->
     </head>
-    <body class="body">
+    <body>
        <div id="root"></div>
     </body>
 </html>

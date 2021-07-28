@@ -1,5 +1,5 @@
 <template>
-    <div class="padding-header-fixed">
+    <div>
         <!-- Header -->
         <Header />
 
@@ -83,10 +83,6 @@ export default {
     background: #212529;
     border-radius: 10px;
 }
-
-// .padding-header-fixed {
-//     padding-top: 56px;
-// }
 
 #searchbox-front {
     margin: 0 20px 0 0;

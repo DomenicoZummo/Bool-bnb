@@ -173,7 +173,9 @@ export default {
 
 <style scoped lang="scss">
 .padding-header-fixed {
-    padding-top: 100px;
+    padding-top: 80px;
+    min-height: 100vh;
+    position: relative;
 }
 
 .my-container {

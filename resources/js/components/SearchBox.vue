@@ -2,13 +2,11 @@
     <div class="searchbox-container">
         <div class="d-flex align-items-center justify-content-center">
             <!-- Search-bar -->
-            <div id="searchbox-front" class="mb-3 "></div>
+            <div id="searchbox-front" class="mb-3"></div>
             <!-- Search button -->
-            <div @click="getApartmentFiltered">
+            <div @click="getApartmentFiltered" class="btn-custom">
                 <router-link
-                    @click="getApartmentFiltered"
                     :apartmentFiltered="apartmentsFilter"
-                    class="btn-custom"
                     :to="{ name: 'advancedsearch' }"
                     ><i class="fas fa-search"></i
                 ></router-link>
@@ -17,7 +15,7 @@
             <input
                 v-show="this.$route.name == 'advancedsearch'"
                 @click="clickFilter"
-                class=" ml-1  mr-3 btn-custom-white"
+                class="mr-3 btn-custom-white"
                 type="button"
                 value="Filtri"
             />
@@ -182,7 +180,9 @@ export default {
 
         // Axios call to get the apartments with filters if they exist
         getApartmentFiltered() {
-            console.log(`http://127.0.0.1:8000/api/filterapartments?address=${window.address}&lat=${window.lat}&lng=${window.lng}&range=${this.range}&rooms=${this.minRooms}&beds=${this.minBeds}&services=${this.servicesChecked}`);
+            console.log(
+                `http://127.0.0.1:8000/api/filterapartments?address=${window.address}&lat=${window.lat}&lng=${window.lng}&range=${this.range}&rooms=${this.minRooms}&beds=${this.minBeds}&services=${this.servicesChecked}`
+            );
             this.apartmentsFilter = [];
             this.apartamentFilterSponsor = [];
             this.$emit("isLoading", this.isLoading);
@@ -366,7 +366,7 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 .searchbox-container {
-    height: 650px;
+    height: 600px;
     background: url("https://a0.muscache.com/im/pictures/258b129d-d1cd-48b5-86d4-86206c13ebf7.jpg?im_w=1440");
     display: flex;
     justify-content: center;

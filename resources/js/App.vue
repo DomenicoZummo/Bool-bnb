@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="d-flex flex-column fake-body">
         <!-- Header -->
         <Header />
 
@@ -13,7 +13,7 @@
         />
 
         <!-- Main -->
-        <main>
+        <main class="flex-grow">
             <router-view :apartments="apartmentsFilter" :isLoading="isLoading">
             </router-view>
             <Maps
@@ -85,7 +85,7 @@ export default {
 }
 
 #searchbox-front {
-    margin: 0 20px 0 0;
+    margin: 0;
     width: 500px;
     .tt-search-box {
         border-radius: 50px;
@@ -103,21 +103,28 @@ export default {
 
 .btn-custom {
     background-color: #ff385c;
-    padding: 5px 8px;
+    padding: 5px 9px;
     border-radius: 50%;
-    color: #fff;
     border: 1px solid transparent;
-    transition: all 0.3s;
+    transition: all 0.4s;
     text-decoration: none;
     position: relative;
-    left: -70px;
+    left: -50px;
     bottom: 1px;
+    cursor: pointer;
 
     &:hover {
         background-color: #fff;
-        color: #ff385c;
         border-color: #ff385c;
+    }
+
+    a {
+        color: #fff;
         text-decoration: none;
+    }
+
+    &:hover a {
+        color: #ff385c;
     }
 }
 
@@ -160,5 +167,13 @@ export default {
 #text-header.active {
     color: #fff;
     border-bottom: 2px solid #fff;
+}
+
+.fake-body {
+    min-height: 100vh;
+}
+
+.flex-grow {
+    flex-grow: 1;
 }
 </style>

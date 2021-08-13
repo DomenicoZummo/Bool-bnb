@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div v-if="apartmentSponsored.length > 0" class="container">
         <h2 class="mt-5 mb-3 title">Featured Apartments</h2>
         <div class="container d-flex flex-wrap mt-3 mb-5">
             <div
@@ -150,20 +150,20 @@ export default {
     name: "Home",
     data() {
         return {
-            apartmentSponsored: [],
-            palermo: `http://127.0.0.1:8000/api/filterapartments?address=Palermo&lat=38.11566&lng=13.36147&range=20&rooms=1&beds=1&services=`,
-            puglia:
-                "http://127.0.0.1:8000/api/filterapartments?address=Canosa-di-Puglia&lat=41.2225&lng=16.06603&range=20&rooms=1&beds=1&services=",
-            catania:
-                "http://127.0.0.1:8000/api/filterapartments?address=Catania&lat=37.50248&lng=15.08783&range=20&rooms=1&beds=1&services=",
-            milano:
-                "http://127.0.0.1:8000/api/filterapartments?address=Milano&lat=45.46362&lng=9.18812&range=20&rooms=1&beds=1&services=",
-            bologna:
-                "http://127.0.0.1:8000/api/filterapartments?address=Bologna&lat=44.49419&lng=11.34652&range=20&rooms=1&beds=1&services=",
-            sardegna:
-                "http://127.0.0.1:8000/api/filterapartments?address=Sardegna&lat=40.08578&lng=9.03311&range=20&rooms=1&beds=1&services=",
-            napoli:
-                "http://127.0.0.1:8000/api/filterapartments?address=Napoli&lat=40.83998&lng=14.25254&range=20&rooms=1&beds=1&services="
+            apartmentSponsored: []
+            // palermo: `http://127.0.0.1:8000/api/filterapartments?address=Palermo&lat=38.11566&lng=13.36147&range=20&rooms=1&beds=1&services=`,
+            // puglia:
+            //     "http://127.0.0.1:8000/api/filterapartments?address=Canosa-di-Puglia&lat=41.2225&lng=16.06603&range=20&rooms=1&beds=1&services=",
+            // catania:
+            //     "http://127.0.0.1:8000/api/filterapartments?address=Catania&lat=37.50248&lng=15.08783&range=20&rooms=1&beds=1&services=",
+            // milano:
+            //     "http://127.0.0.1:8000/api/filterapartments?address=Milano&lat=45.46362&lng=9.18812&range=20&rooms=1&beds=1&services=",
+            // bologna:
+            //     "http://127.0.0.1:8000/api/filterapartments?address=Bologna&lat=44.49419&lng=11.34652&range=20&rooms=1&beds=1&services=",
+            // sardegna:
+            //     "http://127.0.0.1:8000/api/filterapartments?address=Sardegna&lat=40.08578&lng=9.03311&range=20&rooms=1&beds=1&services=",
+            // napoli:
+            //     "http://127.0.0.1:8000/api/filterapartments?address=Napoli&lat=40.83998&lng=14.25254&range=20&rooms=1&beds=1&services="
         };
     },
     created() {

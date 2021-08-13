@@ -5,11 +5,12 @@ window.Vue = require("vue");
 
 // Vue main instance
 import App from "./App.vue";
+
 // Router
 import router from "./routes";
 
 const root = new Vue({
     el: "#root",
-     router,
+    router,
     render: h => h(App)
 });
